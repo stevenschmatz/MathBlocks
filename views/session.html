@@ -90,7 +90,7 @@
 					
 					function sessionConnectedHandler(event) {
 						subscribeToStreams(event.streams);
-						session.publish("placeholder", {width:640, height:400});
+						session.publish();
 					}
 					
 					function subscribeToStreams(streams) {
