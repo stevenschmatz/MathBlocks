@@ -226,6 +226,9 @@
 								if(window.context == 'latex') {
 									var $latexEditor = $("<input type='text' id='latexInput' placeholder='Type your LaTeX here.'/>");
 									$(".boardRight").prepend($latexEditor);
+									$("#latexInput").keydown(function() {
+										$("#latexRender").text($(this).val());
+									});
 								}
 								$(".switchLink").removeClass('small');
 								$(".switchLink").removeClass('round');
@@ -237,6 +240,8 @@
 								$(this).css('color', 'white');
 							}
 						});
+						
+						
 						
 				    var aww = $('#wrapper').awwCanvas({ apiKey: 'I-7D1YJYK2TMD0' });
 				    /* if the canvas can be resized */
