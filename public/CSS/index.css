@@ -10,6 +10,9 @@
 			font-family:"Merriweather" !important;
             height: 100%;
 		}
+        body, html {
+            height:122%;
+        }
 		#content {
             float: right;
             width: 80%;
