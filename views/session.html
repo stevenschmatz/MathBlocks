@@ -4,10 +4,10 @@
     <title>MathApp</title>
 				<!-- jquery -->
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
-        <link rel="stylesheet" href="/js/jquery-tags-input-1.3.2/jquery.tagsinput.css">
+        <link rel="stylesheet" href="/js/jQuery-Tags-Input-1.3.2/jquery.tagsinput.css">
 				<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
 				<script src="/js/jquery-ui.js"></script>
-				<script src="/js/jquery-tags-input-1.3.2/jquery.tagsinput.js"></script>
+				<script src="/js/jQuery-Tags-Input-1.3.2/jquery.tagsinput.js"></script>
 				<!-- fonts -->
 				<link href='http://fonts.googleapis.com/css?family=Lato:100' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
@@ -22,7 +22,7 @@
 				<!-- our stylesheets and js -->
         <script src="/js/index.js"></script>
 				<link rel="stylesheet" href="/CSS/styles.css"/>
-				<link rel="stylesheet" type="text/css" href="/css/index.css"/>
+				<link rel="stylesheet" type="text/css" href="/CSS/index.css"/>
 				<!-- foundation -->
 				<link rel="stylesheet" type="text/css" href="/foundation-5.0.3/css/foundation.css"/>
 				<!-- mathjax -->
@@ -72,9 +72,16 @@
         </div>
 				<div class="row">
 	        <div class="draggable ui-widget-content large-8 medium-8 small-8 columns" id="board">
-	            <p class="minimize">_</p>
+						<div class="boardLeft">
 							<p><a class="switchLink" data-context="whiteboard" href="#">Whiteboard</a> &middot; <a class="switchLink" data-context="latex" href="#">LaTeX</a> &middot; <a class="switchLink" data-context="graph" href="#">Graph</a></p>
 							<div id="wrapper"></div>
+						</div>
+ 						 <div class="boardRight">
+ 							 <div id="latexRender">
+								 
+							 </div>
+ 						 </div>
+						 <p class="minimize">_</p>
 	        </div>
 	        <div class="draggable ui-widget-content large-4 medium-4 small-4 columns" id="chat">
 							<p class="minimize">_</p>
@@ -82,8 +89,8 @@
 	             <ul id="chat-msgs">
 	             </ul>
 	             <input type="text" id="msg"/>
+						 </div>
 	        </div>
-				</div>
 				<div class="row">
 					<div class="draggable ui-widget-content large-4 medium-4 small-4 columns" id="wolfram">
 						<p class="minimize">_</p>

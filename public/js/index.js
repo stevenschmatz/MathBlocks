@@ -1,5 +1,6 @@
         $(function() {
 					
+					window.context = "whiteboard";
 					window.name = "";
 					
 					$("#nameInput").keypress(function(e) {
@@ -223,6 +224,14 @@
 							if($(this).attr('data-selected') == 'true') {
 								// do nothing
 							} else {
+								window.context = $(this).attr('data-context');
+								if(window.context == 'latex') {
+									var $latexEditor = $("<input type='text' id='latexInput' placeholder='Type your LaTeX here.'/>");
+									$(".boardRight").prepend($latexEditor);
+									$("#latexInput").keydown(function() {
+										$("#latexRender").text($(this).val());
+									});
+								}
 								$(".switchLink").removeClass('small');
 								$(".switchLink").removeClass('round');
 								$(".switchLink").removeClass('button');
@@ -233,6 +242,8 @@
 								$(this).css('color', 'white');
 							}
 						});
+						
+						
 						
 				    var aww = $('#wrapper').awwCanvas({ apiKey: 'I-7D1YJYK2TMD0' });
 				    /* if the canvas can be resized */
