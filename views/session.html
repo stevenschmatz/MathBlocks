@@ -13,7 +13,17 @@
 		body {
 			font-family:"Merriweather" !important;
 		}
-		h1, h2, h3, h4, h5, h6 {
+		#content {
+            margin:0;
+            padding:0;
+            height:100%;
+        }
+
+        #bigHeader {
+            width:125%;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
 			font-family:"Merriweather" !important;
 		}
 
@@ -22,21 +32,31 @@
 		}
         .row {
             position: relative;
-            top: -50px;
+            top: 0;
+            width: 100%;
+            overflow: hidden;
         }
 
         #problem_text {
             text-align: center;
         }
 
-   	.draggable {
-        padding: 0.5em;
-        border: 1px solid #555555;
-        border-radius: 5px;
-        height:200px;
-        min-height:150px;
-        min-width:150px;
-     }
+        .draggable {
+            padding: 0.5em;
+            border: 1px solid #555555;
+            border-radius: 5px;
+            height:200px;
+            min-height:150px;
+            min-width:150px;
+            background: #ffffff;
+        }
+
+        .draggable #minimize {
+            font-weight:bold;
+            font-size: 10pt;
+            text-align: right;
+            margin: -10px;
+        }
 
 		</style>
 		<link rel="stylesheet" type="text/css" href="/foundation-5.0.3/css/foundation.css"/>
@@ -81,8 +101,8 @@
 
             $("#problem_text").fadeIn(500);
             $(".draggable").delay(500).fadeIn(500);
-            $( ".draggable" ).draggable();
-            $( ".draggable" ).resizable();
+            $(".draggable").draggable();
+            $(".draggable").resizable();
             $(".draggable").mouseover(function() {
                 $(this).animate({
                  "border-color": "#494949",
@@ -91,11 +111,28 @@
             });
             $(".draggable").mouseleave(function() {
                 $(this).animate({
-                            "border-color": "#9D9D9D",
-                            "border-width": "1px"
-                        }, 100);
-							});
-						$("#msg").keypress(function(e) {
+                    "border-color": "#9D9D9D",
+                    "border-width": "1px"
+                }, 100);
+				                    });
+
+            $("#minimize").click(function() {
+                $(this).parent().css({
+                      'min-height': '0px',
+                      'min-width': '0px',
+                       'position': 'fixed'
+                });
+
+                $(this).parent().animate({
+                    "height": "40px",
+                    "bottom": "0px",
+                    "background-color": "#9E9E9E"
+                }, 500);
+
+                $(this).parent().html("");
+            });
+
+            $("#msg").keypress(function(e) {
 								if(e.keyCode == 13) {
 									e.preventDefault();
 									if($(this).val() != '') {
@@ -104,22 +141,24 @@
 									}
 								}
 							});
-							socket.on('chatMessage', function(data) {
-								console.log('yippee!');
-								//var msgEl = $("<ul class='messageText'>"+"<b>"+data['user']+"</b>"+data['messageText']+"</ul>");
-								//$("#chat-msgs").append(msgEl);
-							});
+					    socket.on('chatMessage', function(data) {
+							console.log('yippee!');
+							//var msgEl = $("<ul class='messageText'>"+"<b>"+data['user']+"</b>"+data['messageText']+"</ul>");
+							//$("#chat-msgs").append(msgEl);
+						});
+
         });
 
     </script>
 </head>
 <body>
     <div id="content">
-        <div class="row panel">
+        <div class="row panel" id="bigHeader">
             <h3 id="problem_text"><%= problemText %></h3>
         </div>
 
         <div class="draggable ui-widget-content large-4 medium-4 small-4 columns">
+            <p id="minimize">_</p>
             <p>Drag me around</p>
         </div>
 
