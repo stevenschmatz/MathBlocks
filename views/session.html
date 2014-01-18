@@ -16,11 +16,11 @@
 		input[type='text'] {
 			font-family:"Merriweather";
 		}
-        #draggable {
+        .draggable {
             width: 150px;
             height: 150px;
             padding: 0.5em;
-            border: 1px solid black;
+            border: 1px solid #555555;
             border-radius: 5px;
         }
 
@@ -30,8 +30,17 @@
 		<script src="/js/jquery-ui.js"></script>
     <script>
         $(function() {
-            $( "#draggable" ).draggable();
+            $( ".draggable" ).draggable();
+            $(".draggable").hover(function() {
+                $(".draggable").animate({
+                 "border-color": "#000000",
+                 "border-width": "0.2em"
+                 }, 500, function() {
+                 }
+             );
+            });
         });
+
     </script>
 </head>
 <body>
@@ -39,7 +48,7 @@
 		<h3><%= problemText %></h3>
 	</div>
 
-    <div id="draggable" class="ui-widget-content">
+    <div class="draggable" class="ui-widget-content">
         <p>Drag me around</p>
     </div>
 
