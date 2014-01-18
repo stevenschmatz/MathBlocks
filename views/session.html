@@ -44,8 +44,10 @@
 		<script src="/js/jquery-ui.js"></script>
 		<script src="/socket.io/socket.io.js"></script>
     <script>
+
         $(function() {
-					
+            $("#content").hide();
+            $("#content").fadeIn(500);
             $( ".draggable" ).draggable();
             $( ".draggable" ).resizable();
             $(".draggable").mouseover(function() {
