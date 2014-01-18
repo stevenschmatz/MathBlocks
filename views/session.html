@@ -33,11 +33,26 @@
         $(function() {
             $( ".draggable" ).draggable();
             $(".draggable").hover(function() {
-                $(".draggable").animate({
+                $(this).animate({
                  "border-color": "#000000",
                  "border-width": "0.2em"
+<<<<<<< HEAD
 							 });
 					}, 500);
+=======
+                 }, 100, function() {
+                 }
+             );
+            });
+            $(".draggable").mouseleave(function() {
+                $(this).animate({
+                            "border-color": "#555555",
+                            "border-width": "1px"
+                        }, 100, function() {
+                        }
+                );
+            });
+>>>>>>> 22b0a23f65db36b3e572ced5d58c0c438bd3d407
         });
 
     </script>
