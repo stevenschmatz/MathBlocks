@@ -24,13 +24,22 @@
 	<div class="row">
 		<h3 class="overview">Welcome to MathApp.</h3>
 		<p class="overview">The best way to collaboratively tackle math problems.</p>
-		<p class="overview">Type a problem below to begin.</p>
+		<p class="overview" id="type_a_problem">Type a problem below to begin.</p>
 		<input type="text" class="overview" id="problem">
 	</div>
     <script>
         $(function() {
+            /*$(".overview").fadeOut(500)*/
+            $("#problem").keypress(function() {
+                $("#type_a_problem").text("Press enter to submit");
+            });
+
+            if ($("#problem").val().length == 1) {
+                $("#type_a_problem").text("Press enter to submit");
+            }
 
         });
+
     </script>
 </body>
 </html>
