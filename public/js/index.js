@@ -137,6 +137,10 @@
 
             })
 
+            $(".close").click(function() {
+                $(this).parent().parent().hide();
+            })
+
             $("#problem_text").hide();
             $(".draggable").hide();
             $("#sidebar").hide();
