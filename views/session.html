@@ -4,6 +4,7 @@
     <title>Mathelo</title>
 				<!-- jquery -->
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+         <link rel="shortcut icon" href="/images/iconmonstr-3d-view-icon-16.png"/>
         <link rel="stylesheet" href="/js/jQuery-Tags-Input-1.3.2/jquery.tagsinput.css">
 				<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
 				<script src="/js/jquery-ui.js"></script>
@@ -102,8 +103,9 @@
 							<p><a class="switchLink" data-context="whiteboard" href="#">Whiteboard</a> &middot; <a class="switchLink" data-context="latex" href="#">LaTeX</a> &middot; <a class="switchLink" data-context="graph" href="#">Graph</a></p>
 							<div id="wrapper"></div>
                             <script type="text/javascript">
-                                $('#wrapper').awwCanvas();
 
+                                var aww = $('#wrapper').awwCanvas({ apiKey: '010dc9ee-a1e7-4e74-9185-c5fee47ce47d' });
+                                /* if the canvas can be resized */
                                 $(window).resize(function() {
                                     $('#wrapper').awwCanvas().resize();
                                 });
