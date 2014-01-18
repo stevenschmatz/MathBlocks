@@ -1,7 +1,7 @@
 var express = require('express');
 var uuid = require('uuid');
 var app = express();
-var server = http.createServer(app);
+var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
 
 app.engine('html', require('ejs').renderFile);
@@ -24,7 +24,6 @@ app.post('/', function(req, res) {
 
 app.get('/session/:id', function(req, res) {
 	if(req.params.id == req.session.sessionID) {
-		res.render('session.html', {problemText: req.session.problemText});
 		io.sockets.on('connection', function(socket) {
 			socket.on('chatMessage', function(data) {
 				socket.broadcast.emit({'type': 'chatMessage', 'messageText': data['messageText'], 'sendingUser': data['sendingUser']});
@@ -35,8 +34,10 @@ app.get('/session/:id', function(req, res) {
 			socket.on('userLeft', function(data) {
 				socket.broadcast.emit({'type': 'systemMessage', 'messageText': 'has left the chat room', 'user': data['user']});
 			});
-			// specialized system messages
+			// specialized system messages later?
 		});
+		res.render('session.html', {problemText: req.session.problemText, sessionID: req.session.sessionID});
+	}
 });
 
 app.listen(3001);
