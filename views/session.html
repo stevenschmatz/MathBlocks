@@ -301,8 +301,14 @@
 
             $("#problem_text").hide();
             $(".draggable").hide();
+            $("#sidebar").hide();
+            $("#menu").hide();
+            $(".callout panel").hide();
 
             $("#problem_text").fadeIn(500);
+            $("#sidebar").fadeIn(500);
+            $("#menu").fadeIn(500);
+            $(".callout .panel").fadeIn(500);
             $(".draggable").delay(500).fadeIn(500);
             $(".draggable").draggable();
             $(".draggable").resizable();
@@ -394,7 +400,7 @@
 
         <div id="menu">
             <p style="text-align: right" id="sidebar_header">
-                Math App&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                Mathelo&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <img src="/images/iconmonstr-menu-icon-32.png" style="cursor:pointer;" alt="sidebar icon" id="icon"/>
             </p>
             <p>
