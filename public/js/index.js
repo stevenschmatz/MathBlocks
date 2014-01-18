@@ -57,8 +57,6 @@
 					
 					// chat websocket
 					
-					var socket = io.connect('http://'+document.domain);
-					
             $("#msg").keypress(function(e) {
 								if(e.keyCode == 13) {
 									e.preventDefault();
@@ -230,7 +228,7 @@
 							} else {
 								window.context = $(this).attr('data-context');
 								if(window.context == 'latex') {
-									var $latexEditor = $("<input type='text' id='latexInput' placeholder='Type your LaTeX here.'/>");
+									var $latexEditor = $("<input type='text' id='ylatexInput' placeholder='Type your LaTeX here.'/>");
 									$(".boardRight").prepend($latexEditor);
 									$("#latexInput").keydown(function() {
 										$("#latexRender").text($(this).val());

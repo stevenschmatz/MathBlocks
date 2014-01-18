@@ -27,11 +27,14 @@ app.post('/', function(req, res) {
 
 app.get('/session/:id', function(req, res) {
 		io.sockets.on('connection', function(socket) {
+			socket.on('room', function(room) {
+				socket.join(room);
+			});
 			socket.on('chatMessage', function(data) {
-				io.sockets.emit('chatMessage', {'messageText': data['messageText'], 'sendingUser': data['sendingUser']});
+				io.sockets.in(req.params.id).emit('chatMessage', {'messageText': data['messageText'], 'sendingUser': data['sendingUser']});
 			});
 			socket.on('valueCalculated', function(data) {
-				io.sockets.emit('valueCalculated', {'value': data['value'], 'sendingUser': data['sendingUser'], 'exp': data['exp']});
+				io.sockets.in(req.params.id).emit('valueCalculated', {'value': data['value'], 'sendingUser': data['sendingUser'], 'exp': data['exp']});
 			});
 		});
 		res.render('session.html', {problemText: req.session.problemText, sessionID: req.params.id});

@@ -19,6 +19,13 @@
 				<script src="http://static.opentok.com/v1.1/js/TB.min.js"></script>
 				<!-- socket.io -->
 				<script src="/socket.io/socket.io.js"></script>
+				<script>
+				var socket = io.connect('http://'+document.domain);
+				var roomID = "<%= sessionID %>";
+				socket.on('connect', function() {
+					socket.emit('room', roomID);
+				});
+				</script>
 				<!-- our stylesheets and js -->
         <script src="/js/index.js"></script>
 				<link rel="stylesheet" href="/CSS/styles.css"/>
@@ -72,6 +79,11 @@
         </div>
 				<div class="row">
 	        <div class="draggable ui-widget-content large-8 medium-8 small-8 columns" id="board">
+					 <p class="minimize">
+                            <img class = "miniz" src="/images/iconmonstr-minus-2-icon-16.png" alt="minus" height="10px" width="10px"/>
+                            <img class = "maxim" src="/images/iconmonstr-square-outline-icon-16.png" alt="square" height="10px" width="10px"/>
+                            <img class = "close" src="/images/iconmonstr-x-mark-icon-16.png" alt="x" height="10px" width="10px"/>
+					 </p>
 						<div class="boardLeft">
 							<p><a class="switchLink" data-context="whiteboard" href="#">Whiteboard</a> &middot; <a class="switchLink" data-context="latex" href="#">LaTeX</a> &middot; <a class="switchLink" data-context="graph" href="#">Graph</a></p>
 							<div id="wrapper"></div>
@@ -80,11 +92,7 @@
  							 <div id="latexRender">
 							 </div>
  						 </div>
-						 <p class="minimize">
-                             <img class = "miniz" src="/images/iconmonstr-minus-2-icon-16.png" alt="minus" height="10px" width="10px"/>
-                             <img class = "maxim" src="/images/iconmonstr-square-outline-icon-16.png" alt="square" height="10px" width="10px"/>
-                             <img class = "close" src="/images/iconmonstr-x-mark-icon-16.png" alt="x" height="10px" width="10px"/>
-						 </p>
+						 
 	        </div>
 	        <div class="draggable ui-widget-content large-4 medium-4 small-4 columns" id="chat">
 							<p class="minimize">
