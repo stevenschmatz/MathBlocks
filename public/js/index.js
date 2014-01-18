@@ -1,5 +1,7 @@
         $(function() {
-					
+
+            $("#draggable").css('z-index', '9999999999');
+            $("#content").css('height', '150%');
 					window.context = "whiteboard";
 					window.name = "";
 					
@@ -139,7 +141,6 @@
             $(".draggable").hide();
             $("#sidebar").hide();
             $("#menu").hide();
-            $(".callout panel").hide();
 
             $("#problem_text").fadeIn(500);
             $("#sidebar").fadeIn(500);
@@ -181,7 +182,12 @@
 
                 /*$(this).parent().html("");*/
             });
-						
+
+            $("#clear").click(function() {
+                $(".close").parent().parent().hide()
+            });
+
+
 						// wolframalpha
 						
 						$("#calc").keypress(function(e) {
