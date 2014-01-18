@@ -67,6 +67,7 @@
     <script>
 
         $(function() {
+					
 					// OpenTok
 					var session = TB.initSession("1sdemo00855f8290f8efa648d9347d718f7e06fd");
 					var API_KEY = "44618111";
@@ -95,7 +96,12 @@
 					session.connect(API_KEY, "Amit Mizrahi");
 					
 					
-					var socket = io.connect('http://'+document.domain+':3001/session/<%= sessionID %>')
+					// chat websocket
+					
+					var socket = io.connect('http://'+document.domain+':3001/session/<%= sessionID %>');
+					
+					// jquery animations
+					
             $("#problem_text").hide();
             $(".draggable").hide();
 
@@ -109,6 +115,7 @@
                  "border-width": "0.2em"
                  }, 100);
             });
+						
             $(".draggable").mouseleave(function() {
                 $(this).animate({
                     "border-color": "#9D9D9D",
@@ -131,6 +138,8 @@
 
                 $(this).parent().html("");
             });
+						
+						// chat socket.io
 
             $("#msg").keypress(function(e) {
 								if(e.keyCode == 13) {
@@ -145,6 +154,21 @@
 							console.log('yippee!');
 							//var msgEl = $("<ul class='messageText'>"+"<b>"+data['user']+"</b>"+data['messageText']+"</ul>");
 							//$("#chat-msgs").append(msgEl);
+						});
+						
+						// wolframalpha
+						
+						$("#calc").keypress(function(e) {
+							if(e.keyCode == 13) {
+								e.preventDefault();
+								if($(this).val() != '') {
+									$.post('/calc', {'exp': $(this).val()}, function(data) {
+										if(data['status'] == 'ok') {
+											$("#result").text(data['result']);
+										}
+									}
+								}
+							}
 						});
 
         });
@@ -162,11 +186,19 @@
             <p>Drag me around</p>
         </div>
 
-            <div class="draggable ui-widget-content large-4 medium-4 small-4 columns" id="chat">
-                <ul id="chat-msgs">
-                </ul>
-                <input type="text" id="msg"/>
-            </div>
+        <div class="draggable ui-widget-content large-4 medium-4 small-4 columns" id="chat">
+						<h4>Chat</h4>
+             <ul id="chat-msgs">
+             </ul>
+             <input type="text" id="msg"/>
+						 <p id="result"></div>
+        </div>
+				
+				<div class="draggable ui-widget-content large-4 medium-4 small-4 columns" id="wolfram">
+					<h4>Calculator</h4>
+					<input type="text" id="calc" placeholder="e.g. 2+2"/>
+				</div>
+				
     </div>
 </body>
 </html>
