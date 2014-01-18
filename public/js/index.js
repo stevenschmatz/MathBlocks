@@ -182,7 +182,12 @@
 
                 /*$(this).parent().html("");*/
             });
-						
+
+            $("#clear").click(function() {
+                $(".close").parent().parent().hide()
+            });
+
+
 						// wolframalpha
 						
 						$("#calc").keypress(function(e) {
