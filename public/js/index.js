@@ -256,11 +256,6 @@
 						});
 						
 						
-						
-				    var aww = $('#wrapper').awwCanvas({ apiKey: 'I-7D1YJYK2TMD0' });
-				    /* if the canvas can be resized */
-				    $(window).resize(function() {
-				        $('#wrapper').awwCanvas().resize();
-				    });
+
 						
         });
