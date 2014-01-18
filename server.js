@@ -25,17 +25,13 @@ app.post('/', function(req, res) {
 	res.redirect('/session/'+req.session.sessionID);
 });
 
-app.post('/invite', function(req, res) {
-	var emails = res
-});
-
 app.get('/session/:id', function(req, res) {
 		io.sockets.on('connection', function(socket) {
 			socket.on('chatMessage', function(data) {
 				io.sockets.emit('chatMessage', {'messageText': data['messageText'], 'sendingUser': data['sendingUser']});
 			});
 			socket.on('valueCalculated', function(data) {
-				io.sockets.emit('valueCalculated', {'value': data['value'], 'sendingUser': data['sendingUser']});
+				io.sockets.emit('valueCalculated', {'value': data['value'], 'sendingUser': data['sendingUser'], 'exp': data['exp']});
 			});
 		});
 		res.render('session.html', {problemText: req.session.problemText, sessionID: req.params.id});
@@ -43,7 +39,7 @@ app.get('/session/:id', function(req, res) {
 
 app.post('/calc', function(req, res) {
 	var math = req.body.exp;
-	request('http://api.wolframalpha.com/v2/query?input='+math+'&appid=8HLE69-6TAEVQ2637', function(err, resp, body) {
+	request('http://api.wolframalpha.com/v2/query?input='+encodeURIComponent(math)+'&appid=8HLE69-6TAEVQ2637', function(err, resp, body) {
 		if(!err && resp.statusCode == 200) {
 			var wolframXML = body;
 			xml2js.parseString(wolframXML, function(err, obj) {
@@ -51,7 +47,8 @@ app.post('/calc', function(req, res) {
 				if(xmlObj['queryresult']['pod'] != undefined) {
 					if(xmlObj['queryresult']['pod'][1] != undefined) {
 						if(xmlObj['queryresult']['pod'][1]['$']['title'] == 'Result') {
-							res.send('{"status": "ok", "result": ' + xmlObj['queryresult']['pod'][1]['subpod'][0]['plaintext'][0] + '}');
+							console.log('{"status": "ok", "result": ' + xmlObj['queryresult']['pod'][1]['subpod'][0]['plaintext'][0] + ', "exp": ' + math + '}');
+							res.send('{"status": "ok", "result": ' + xmlObj['queryresult']['pod'][1]['subpod'][0]['plaintext'][0] + ', "exp": "' + math + '"}');
 						}
 						else {
 							res.send('{"status": "bad", "error": "You must enter a valid numerical expression."}');
