@@ -92,6 +92,7 @@
         #menu {
             padding: 10px;
             padding-left:0px;
+            border: 0;
         }
 
         .menuList {
@@ -148,3 +149,9 @@
 					font-weight:bold;
 					font-family:"Merriweather Bold";
 				}
+
+        .menuList {
+            width:191px;
+            margin-left:6px;
+            margin-right:auto;
+        }
