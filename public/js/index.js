@@ -66,11 +66,7 @@
 										socket.emit('chatMessage', {"messageText": messageText, "sendingUser": window.name});
 									}
 								}
-					    socket.on('chatMessage', function(data) {
-							var msgEl = $("<ul class='messageText'>"+"<b>"+data['sendingUser']+"</b>: "+data['messageText']+"</ul>");
-							$("#chat-msgs").append(msgEl);
 						});
-					});
 					
 					// jquery animations
             // sidebar animations
@@ -214,6 +210,11 @@
 							var logEl = $("<ul class='messageText'>"+"<b>"+data['sendingUser']+"</b>: "+data['exp']+"="+data['value']+"</ul>");
 							$("#calc-log").prepend(logEl);
 						});
+						
+						socket.on('chatMessage', function(data) {
+							var msgEl = $("<ul class='messageText'>"+"<b>"+data['sendingUser']+"</b>: "+data['messageText']+"</ul>");
+							$("#chat-msgs").prepend(msgEl);
+						});
 
 						$("#invite").click(function() {
 							var $emailBar = $("<div class='callout panel'><p>Type each email, separated by commas.</p><input type='text' id='emails' placeholder='Emails, separated by commas...'/></div>");
@@ -228,22 +229,24 @@
 							} else {
 								window.context = $(this).attr('data-context');
 								if(window.context == 'latex') {
-									var $latexEditor = $("<input type='text' id='ylatexInput' placeholder='Type your LaTeX here.'/>");
-									$(".boardRight").prepend($latexEditor);
-									$("#latexInput").keydown(function() {
-										$("#latexRender").text($(this).val());
-										MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
-									});
+									if($("#latexInput").length == 0) {
+										var $latexEditor = $("<input type='text' id='latexInput' placeholder='Type your LaTeX here.'/>");
+										$(".boardRight").prepend($latexEditor);
+										$("#latexInput").keydown(function() {
+												$("#latexRender").text($(this).val());
+												MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+											});
+										}
+									}
+									$(".switchLink").removeClass('small');
+									$(".switchLink").removeClass('round');
+									$(".switchLink").removeClass('button');
+									$(".switchLink").css("color", "");
+									$(this).addClass('small');
+									$(this).addClass('round');
+									$(this).addClass('button');
+									$(this).css('color', 'white');
 								}
-								$(".switchLink").removeClass('small');
-								$(".switchLink").removeClass('round');
-								$(".switchLink").removeClass('button');
-								$(".switchLink").css("color", "");
-								$(this).addClass('small');
-								$(this).addClass('round');
-								$(this).addClass('button');
-								$(this).css('color', 'white');
-							}
 						});
 						
 						
