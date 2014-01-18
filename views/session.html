@@ -46,8 +46,11 @@
     <script>
 
         $(function() {
-            $("#content").hide();
-            $("#content").fadeIn(500);
+            $("#problem_text").hide();
+            $(".draggable").hide();
+
+            $("#problem_text").fadeIn(500);
+            $(".draggable").delay(500).fadeIn(500);
             $( ".draggable" ).draggable();
             $( ".draggable" ).resizable();
             $(".draggable").mouseover(function() {
