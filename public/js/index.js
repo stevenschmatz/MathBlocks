@@ -77,6 +77,7 @@
 					// jquery animations
             // sidebar animations
             $("#icon").click(function(){
+                $(".menuList").hide();
                 $("#menu").css( {
                     "padding": "0"
                 })
@@ -107,6 +108,7 @@
             });
 
             $("#open_panel_icon").click(function() {
+                $(".menuList").show();
                 $("#open_panel_icon").animate({
                     "left":'-400px'
                 },{ duration: 500, queue: false })

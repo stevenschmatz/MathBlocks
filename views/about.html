@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mathelo</title>
+    <style>
+        @font-face {
+            font-family:"Merriweather";
+            src:url("/font/merriweather/Merriweather-Light.ttf");
+        }
+        body {
+            font-family:"Merriweather" !important;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family:"Merriweather" !important;
+        }
+        input[type='text'] {
+            font-family:"Merriweather";
+        }
+        #content {
+            margin: 50px;
+        }
+        .credits {
+            color:#AAAAAA;
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="/foundation-5.0.3/css/foundation.css"/>
+    <link rel="stylesheet" href="/CSS/styles.css"/>
+    <script src="/js/jquery.js"></script>
+</head>
+<body>
+<div id="content">
+    <div class="row">
+        <form action="" method="post" id="problemForm">
+            <h3 class="overview">About Mathelo</h3>
+            <p class="overview">The best way to collaboratively tackle math problems.</p>
+            <p class="overview" id="type_a_problem">Type a problem below to begin.</p>
+            <input type="text" class="overview" id="problem" name="problemText">
+        </form>
+    </div>
+    <div class="row">
+        <p class="overview credits">Designed and developed by <a href="http://www.amizrahi.com/">Amit Mizrahi</a> and <a
+                href="http://www.stevenschmatz.com/">Steven Schmatz</a> for MHacks 2014.</p>
+        <script>
+            $(function() {
+                /*$(".overview").fadeOut(500)*/
+                $("#problem").keydown(function(e) {
+                    if ($(this).val().length == 1) {
+                        $("#type_a_problem").text("Press enter to submit");
+                    }
+                    if (e.keyCode == 13) {
+                        e.preventDefault();
+                        $(".overview").fadeOut(500);
+                        setTimeout(function() { $("#problemForm").submit() }, 500);
+                    }
+                });
+            });
+
+        </script>
+    </div>
+</body>
+</html>
