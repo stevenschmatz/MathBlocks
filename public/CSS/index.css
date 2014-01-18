@@ -17,7 +17,9 @@
             padding:0;
             height:100%;
         }
-
+        .bottom {
+            height:600px;
+        }
         #bigHeader {
             width:125%;
         }
