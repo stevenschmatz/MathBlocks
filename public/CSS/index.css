@@ -1,0 +1,139 @@
+		@font-face {
+			font-family:"Merriweather";
+			src:url("/font/merriweather/Merriweather-Light.ttf");
+		}
+		body {
+			font-family:"Merriweather" !important;
+            height: 100%;
+		}
+		#content {
+            float: right;
+            width: 80%;
+            margin:0;
+            padding:0;
+            height:100%;
+        }
+
+        #bigHeader {
+            width:125%;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+			font-family:"Merriweather" !important;
+		}
+
+		input[type='text'] {
+			font-family:"Merriweather";
+		}
+        .row {
+            position: relative;
+            top: 0;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        #problem_text {
+            text-align: center;
+        }
+
+        .draggable {
+            padding: 0.5em;
+            border: 1px solid #555555;
+            border-radius: 5px;
+            height:200px;
+            min-height:150px;
+            min-width:150px;
+            width:200px;
+            background: #ffffff;
+						overflow:scroll;
+        }
+
+        .draggable .minimize {
+            font-weight:bold;
+            font-size: 10pt;
+            text-align: right;
+            margin: -10px;
+        }
+				
+        #error {
+            font-weight:bold;
+            color:red;
+        }
+
+        #sidebar {
+            float: left;
+            width: 16%;
+            position: absolute;
+            height: 100%;
+            padding-right: 0;
+            padding-bottom: 0;
+            min-height: 700px;
+        }
+
+        #menu {
+            background-color: rgb(46, 46, 46);
+            position: absolute;
+            height:100%;
+            width:100%;
+            color: #46a9b2;
+            font-family: 'Lato', sans-serif;
+        }
+
+        #icon {
+            margin-left:auto;
+            margin-right:auto;
+        }
+
+        #menu {
+            padding: 10px;
+        }
+
+        .menuList {
+            list-style-type:none;
+        }
+        .menuList li {
+            border-bottom: 1px solid white;
+            padding-top:20px;
+            padding-bottom:20px;
+            font-size:18px;
+        }
+				#dialog {
+					opacity:1.0;
+					z-index:999;
+				}
+        #sidebar_header {
+            font-family: 'Montserrat', sans-serif;
+            color: white;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 16pt;
+					}
+
+        .menuList li:first-of-type {
+            border-top: 1px solid white;
+        }
+
+        #open_panel_icon {
+            height: 50px;
+            width: 50px;
+            position: relative;
+            left: -400px;
+            background-color: rgb(46, 46, 46);
+            padding: 10px;
+            border:2px solid;
+            border-top-right-radius:2em;
+            border-bottom-right-radius:2em;
+            z-index: 1;
+        }
+
+				#output {
+					background-color:#CCCCCC;
+				}
+				#emails_tagsinput {
+					width:100% !important;
+					font-family:"Merriweather" !important;
+					height:70% !important;
+				}
+				.button {
+					padding:15px !important;
+				}
