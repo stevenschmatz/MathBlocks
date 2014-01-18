@@ -26,7 +26,6 @@ app.post('/', function(req, res) {
 });
 
 app.get('/session/:id', function(req, res) {
-	if(req.params.id == req.session.sessionID) {
 		io.sockets.on('connection', function(socket) {
 			socket.on('chatMessage', function(data) {
 				console.log(data);
@@ -40,8 +39,7 @@ app.get('/session/:id', function(req, res) {
 			});*/
 			// specialized system messages later?
 		});
-		res.render('session.html', {problemText: req.session.problemText, sessionID: req.session.sessionID});
-	}
+		res.render('session.html', {problemText: req.session.problemText, sessionID: req.params.id});
 });
 
 app.post('/calc', function(req, res) {
