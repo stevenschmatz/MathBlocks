@@ -31,7 +31,6 @@ app.post('/invite', function(req, res) {
 
 app.get('/session/:id', function(req, res) {
 		io.sockets.on('connection', function(socket) {
-			socket.emit('hello', {'foo': 'bar'});
 			socket.on('chatMessage', function(data) {
 				io.sockets.emit('chatMessage', {'messageText': data['messageText'], 'sendingUser': data['sendingUser']});
 			});
@@ -65,6 +64,12 @@ app.post('/calc', function(req, res) {
 			});
 		}
 	});
+});
+
+// assuming io is the Socket.IO server object
+io.configure(function () { 
+  io.set("transports", ["xhr-polling"]); 
+  io.set("polling duration", 10); 
 });
 
 server.listen(process.env.PORT || 80);
