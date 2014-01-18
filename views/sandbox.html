@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sandbox</title>
+    <script src="/public/js/TB.min.js" ></script>
+</head>
+<body>
+
+<script type="text/javascript">
+    var apiKey    = "44618172";
+    var sessionId = "1_MX40NDYxODE3Mn5-U2F0IEphbiAxOCAwMDowMjoxNCBQU1QgMjAxNH4wLjU2MTYxNjg0fg";
+    var token     = "T1==cGFydG5lcl9pZD00NDYxODE3MiZzZGtfdmVyc2lvbj10YnJ1YnktdGJyYi12MC45MS4yMDExLTAyLTE3JnNpZz01MmM0ZjJlZTY2NmZjYjg5NTNjMTgwZWJkNzMzOWFjOGY5YTZjZDVlOnJvbGU9cHVibGlzaGVyJnNlc3Npb25faWQ9MV9NWDQwTkRZeE9ERTNNbjUtVTJGMElFcGhiaUF4T0NBd01Eb3dNam94TkNCUVUxUWdNakF4Tkg0d0xqVTJNVFl4TmpnMGZnJmNyZWF0ZV90aW1lPTEzOTAwMzIxODEmbm9uY2U9MC4wMTgwMjM1MDEwOTE0NTQ0NTImZXhwaXJlX3RpbWU9MTM5MDYzNjk4MSZjb25uZWN0aW9uX2RhdGE9";
+
+    function sessionConnectedHandler (event) {
+        session.publish( publisher );
+        subscribeToStreams(event.streams);
+    }
+    function subscribeToStreams(streams) {
+        for (var i = 0; i < streams.length; i++) {
+            var stream = streams[i];
+            if (stream.connection.connectionId
+                    != session.connection.connectionId) {
+                session.subscribe(stream);
+            }
+        }
+    }
+    function streamCreatedHandler(event) {
+        subscribeToStreams(event.streams);
+    }
+
+    var publisher = TB.initPublisher(apiKey);
+    var session   = TB.initSession(sessionId);
+
+    session.connect(apiKey, token);
+    session.addEventListener("sessionConnected",
+            sessionConnectedHandler);
+
+    session.addEventListener("streamCreated",
+            streamCreatedHandler);
+</script>
+
+</body>
+</html>
