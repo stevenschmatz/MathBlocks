@@ -40,6 +40,13 @@
 
         });
 
+        $('#problem').live("keypress", function(e) {
+            if (e.keyCode == 13) {
+                alert("Enter pressed");
+                return false; // prevent the button click from happening
+            }
+        });
+
     </script>
 </body>
 </html>
