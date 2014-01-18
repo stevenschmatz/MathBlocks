@@ -27,17 +27,10 @@ app.post('/', function(req, res) {
 
 app.get('/session/:id', function(req, res) {
 		io.sockets.on('connection', function(socket) {
+			socket.emit('hello', {'foo': 'bar'});
 			socket.on('chatMessage', function(data) {
-				console.log(data);
 				io.sockets.emit('chatMessage', {'messageText': data['messageText'], 'sendingUser': data['sendingUser']});
 			});
-			/*socket.on('userEntered', function(data) {
-				socket.broadcast.emit({'type': 'systemMessage', 'messageText': 'has entered the chat room', 'user': data['user']});
-			});
-			socket.on('userLeft', function(data) {
-				socket.broadcast.emit({'type': 'systemMessage', 'messageText': 'has left the chat room', 'user': data['user']});
-			});*/
-			// specialized system messages later?
 		});
 		res.render('session.html', {problemText: req.session.problemText, sessionID: req.params.id});
 });
@@ -61,9 +54,10 @@ app.post('/calc', function(req, res) {
 					else {
 						res.send('{"status": "bad", "error": "You must enter a valid numerical expression."}');
 					}
-					else {
-						res.send('{"status": "bad", "error": "You must enter a valid numerical expression."}');
-					}
+				}
+				else {
+					res.send('{"status": "bad", "error": "You must enter a valid numerical expression."}');
+				}
 			});
 		}
 	});
