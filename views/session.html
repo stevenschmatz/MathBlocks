@@ -5,7 +5,7 @@
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
         <link rel="stylesheet" href="/CSS/styles.css"/>
         <link rel="stylesheet" type="text/css" href="/CSS/aww.css"/>
-		<script src="http://static.opentok.com/v1.1/js/TB.min.js" ></script>
+				<script src="http://static.opentok.com/v1.1/js/TB.min.js" ></script>
 		<style>
 		@font-face {
 			font-family:"Merriweather";
@@ -167,10 +167,11 @@
 								e.preventDefault();
 								if($(this).val() != '') {
 									$.post('/calc', {'exp': $(this).val()}, function(data) {
-										if(data['status'] == 'ok') {
-											$("#result").text(data['result']);
+										var parsed = JSON.parse(data);
+										if(parsed['status'] == 'ok') {
+											$("#result").text(parsed['result']);
 										}
-									}
+									});
 								}
 							}
 						});
@@ -209,12 +210,12 @@
              <ul id="chat-msgs">
              </ul>
              <input type="text" id="msg"/>
-						 <p id="result"></div>
         </div>
 				
 				<div class="draggable ui-widget-content large-4 medium-4 small-4 columns" id="wolfram">
 					<h4>Calculator</h4>
 					<input type="text" id="calc" placeholder="e.g. 2+2"/>
+					<div id="result"></div>
 				</div>
 				
     </div>

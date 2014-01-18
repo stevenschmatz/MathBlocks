@@ -3,6 +3,9 @@ var uuid = require('uuid');
 var app = express();
 var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
+var http = require('http');
+var xml2js = require('xml2js');
+var request = require('request');
 
 app.engine('html', require('ejs').renderFile);
 app.use(express.bodyParser());
@@ -39,6 +42,23 @@ app.get('/session/:id', function(req, res) {
 		});
 		res.render('session.html', {problemText: req.session.problemText, sessionID: req.session.sessionID});
 	}
+});
+
+app.post('/calc', function(req, res) {
+	var math = req.body.exp;
+	request('http://api.wolframalpha.com/v2/query?input='+math+'&appid=8HLE69-6TAEVQ2637', function(err, resp, body) {
+		if(!err && resp.statusCode == 200) {
+			var wolframXML = body;
+			xml2js.parseString(wolframXML, function(err, obj) {
+				var xmlObj = obj;
+				if(xmlObj['queryresult']['pod'][1] != undefined) {
+					if(xmlObj['queryresult']['pod'][1]['$']['title'] == 'Result') {
+						res.send('{"status": "ok", "result": ' + xmlObj['queryresult']['pod'][1]['subpod'][0]['plaintext'][0] + '}')
+					}
+				}
+			});
+		}
+	});
 });
 
 server.listen(3001);
