@@ -20,8 +20,8 @@
             width: 150px;
             height: 150px;
             padding: 0.5em;
-            border: 1px solid #555555;
-            border-radius: 5px;
+            border: 1px solid #dcdcdc;
+            border-radius: 7px;
         }
 
 		</style>
@@ -33,7 +33,7 @@
             $( ".draggable" ).draggable();
             $(".draggable").hover(function() {
                 $(this).animate({
-                 "border-color": "#000000",
+                 "border-color": "#494949",
                  "border-width": "0.2em"
                  }, 100, function() {
                  }
@@ -41,7 +41,7 @@
             });
             $(".draggable").mouseleave(function() {
                 $(this).animate({
-                            "border-color": "#555555",
+                            "border-color": "#9D9D9D",
                             "border-width": "1px"
                         }, 100, function() {
                         }
