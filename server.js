@@ -24,11 +24,11 @@ app.post('/', function(req, res) {
 app.get('/session/:id', function(req, res) {
 	if(req.params.id == req.session.sessionID) {
 		res.render('session.html', {problemText: req.session.problemText});
-		var ws = new WebSocket('ws://localhost:3000/path'); // change in deployment
-		ws.on('message', function(data) {
-			console.log('yay');
-		});
+		//var ws = new WebSocket('ws://localhost:3000/path'); // change in deployment
+		//ws.on('message', function(data) {
+			//console.log('yay');
+			//});
 	}
 });
 
-app.listen(3000);
+app.listen(3001);
