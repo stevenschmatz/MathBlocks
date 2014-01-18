@@ -33,30 +33,20 @@
     <div class="row">
         <form action="" method="post" id="problemForm">
             <h3 class="overview">About Mathelo</h3>
-            <p class="overview">The best way to collaboratively tackle math problems.</p>
-            <p class="overview" id="type_a_problem">Type a problem below to begin.</p>
-            <input type="text" class="overview" id="problem" name="problemText">
+            <p class="overview">Mathelo was created at MHacks spring 2014 by Steven Schmatz and Amit Mizrahi, two high school students from the International Academy. It aims to be a free space for collaboration on problems of a mathematical or scientific nature.</p>
+            <h4>Features</h4>
+						<ul>
+							<li>Real-time chat functionality</li>
+							<li>Freely movable and resizable windows for distraction-free working</li>
+							<li>Arithmetic calculations and function plotting via the Wolfram|Alpha API</li>
+							<li>LaTeX equation editor</li>
+							<li>Live video chatting</li>
+							<li>A whiteboard for drawing in real time</li>
+							<li>A minimalist, clutter-free design</li>
+						</ul>
+            <h4>Contact us</h4>
+						<p>Feel free to email us: <a href="mailto:amit@amizrahi.com">Amit</a> &middot; <a href="mailto:stevenschmatz@gmail.com">Steven</a>. We are also on Twitter: <a href="http://twitter.com/amtmz">@amtmz</a> &middot; <a href="http://twitter.com/stevenschmatz">@stevenschmatz</a>
         </form>
-    </div>
-    <div class="row">
-        <p class="overview credits">Designed and developed by <a href="http://www.amizrahi.com/">Amit Mizrahi</a> and <a
-                href="http://www.stevenschmatz.com/">Steven Schmatz</a> for MHacks 2014.</p>
-        <script>
-            $(function() {
-                /*$(".overview").fadeOut(500)*/
-                $("#problem").keydown(function(e) {
-                    if ($(this).val().length == 1) {
-                        $("#type_a_problem").text("Press enter to submit");
-                    }
-                    if (e.keyCode == 13) {
-                        e.preventDefault();
-                        $(".overview").fadeOut(500);
-                        setTimeout(function() { $("#problemForm").submit() }, 500);
-                    }
-                });
-            });
-
-        </script>
     </div>
 </body>
 </html>
