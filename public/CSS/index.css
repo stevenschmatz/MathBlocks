@@ -146,3 +146,7 @@
 					font-weight:bold;
 					font-family:"Merriweather Bold";
 				}
+				.boardLeft, .boardRight {
+					float:left;
+					width:50%;
+				}

@@ -1,5 +1,6 @@
         $(function() {
 					
+					window.context = "whiteboard";
 					window.name = "";
 					
 					$("#nameInput").keypress(function(e) {
@@ -221,6 +222,11 @@
 							if($(this).attr('data-selected') == 'true') {
 								// do nothing
 							} else {
+								window.context = $(this).attr('data-context');
+								if(window.context == 'latex') {
+									var $latexEditor = $("<input type='text' id='latexInput' placeholder='Type your LaTeX here.'/>");
+									$(".boardRight").prepend($latexEditor);
+								}
 								$(".switchLink").removeClass('small');
 								$(".switchLink").removeClass('round');
 								$(".switchLink").removeClass('button');
