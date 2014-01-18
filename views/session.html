@@ -20,11 +20,10 @@
 			font-family:"Merriweather";
 		}
    	.draggable {
-        width: 500px;
-        height: 500px;
         padding: 0.5em;
         border: 1px solid #555555;
         border-radius: 5px;
+        height:200px;
      }
 
 		</style>
@@ -57,11 +56,11 @@
             <h3><%= problemText %></h3>
         </div>
 
-        <div class="draggable ui-widget-content">
+        <div class="draggable ui-widget-content large-4 medium-4 small-4 columns">
             <p>Drag me around</p>
         </div>
 
-            <div class="draggable ui-widget-content" id="chat">
+            <div class="draggable ui-widget-content large-4 medium-4 small-4 columns" id="chat">
                 <ul class="chat-msgs">
                 </ul>
                 <input type="text" id="msg"/>
