@@ -208,12 +208,16 @@
 						
 						socket.on('valueCalculated', function(data) {
 							var logEl = $("<ul class='messageText'>"+"<b>"+data['sendingUser']+"</b>: "+data['exp']+"="+data['value']+"</ul>");
-							$("#calc-log").prepend(logEl);
+							if($("#calc-log").html().indexOf(logEl.html()) == -1) {
+								$("#calc-log").prepend(logEl);
+							}
 						});
 						
 						socket.on('chatMessage', function(data) {
 							var msgEl = $("<ul class='messageText'>"+"<b>"+data['sendingUser']+"</b>: "+data['messageText']+"</ul>");
-							$("#chat-msgs").prepend(msgEl);
+							if($("#chat-msgs").html().indexOf(msgEl.html()) == -1) {
+								$("#chat-msgs").prepend(msgEl);
+							}
 						});
 
 						$("#invite").click(function() {
