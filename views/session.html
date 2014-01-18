@@ -157,7 +157,6 @@
 					
 					var socket = io.connect('http://'+document.domain);
 					
-					socket.on('hello', function(data) {
             $("#msg").keypress(function(e) {
 								if(e.keyCode == 13) {
 									e.preventDefault();
@@ -167,9 +166,7 @@
 										socket.emit('chatMessage', {"messageText": messageText, "sendingUser": 'Amit Mizrahi'});
 									}
 								}
-							});
 					    socket.on('chatMessage', function(data) {
-							console.log('yippee!');
 							var msgEl = $("<ul class='messageText'>"+"<b>"+data['sendingUser']+"</b>: "+data['messageText']+"</ul>");
 							$("#chat-msgs").append(msgEl);
 						});
