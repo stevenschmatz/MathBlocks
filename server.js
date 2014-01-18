@@ -57,10 +57,10 @@ app.post('/calc', function(req, res) {
 					else {
 						res.send('{"status": "bad", "error": "You must enter a valid numerical expression."}');
 					}
-				}
-				else {
-					res.send('{"status": "bad", "error": "You must enter a valid numerical expression."}');
-				}
+                     }
+					else {
+						res.send('{"status": "bad", "error": "You must enter a valid numerical expression."}');
+					}
 			});
 		}
 	});
