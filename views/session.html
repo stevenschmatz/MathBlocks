@@ -12,6 +12,7 @@
 		}
 		body {
 			font-family:"Merriweather" !important;
+            height: 100%;
 		}
 		#content {
             float: right;
@@ -61,14 +62,23 @@
             margin: -10px;
         }
 				
-				#error {
-					font-weight:bold;
-					color:red;
-				}
+        #error {
+            font-weight:bold;
+            color:red;
+        }
 
         #sidebar {
             float: left;
             width: 13%;
+            position: absolute;
+            height: 100%;
+            padding: 10px;
+        }
+
+        #menu {
+            background-color: red;
+            position: absolute;
+            height:100%;
         }
 
 		</style>
@@ -120,7 +130,9 @@
 					var socket = io.connect('http://'+document.domain+':3001/session/<%= sessionID %>');
 					
 					// jquery animations
-					
+
+
+
             $("#problem_text").hide();
             $(".draggable").hide();
 
@@ -206,7 +218,11 @@
 <body>
     <div id="sidebar">
         <img src="/images/iconmonstr-menu-icon-32.png" alt="sidebar icon"/>
-        
+        <div id="menu">
+            <p>
+                This is <br/> some content <br/> and it should be <br/> on the menu
+            </p>
+        </div>
     </div>
     <div id="content">
         <div class="row panel" id="bigHeader">
