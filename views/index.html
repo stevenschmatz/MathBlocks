@@ -30,21 +30,16 @@
     <script>
         $(function() {
             /*$(".overview").fadeOut(500)*/
-            $("#problem").keypress(function() {
-                $("#type_a_problem").text("Press enter to submit");
+            $("#problem").keydown(function(e) {
+                if ($(this).val().length == 1) {
+                    $("#type_a_problem").text("Press enter to submit");
+                }
+                if (e.keyCode == 13) {
+                    e.preventDefault();
+                    $(".overview").fadeOut(500)
+                }
             });
 
-            if ($("#problem").val().length == 1) {
-                $("#type_a_problem").text("Press enter to submit");
-            }
-
-        });
-
-        $('#problem').live("keypress", function(e) {
-            if (e.keyCode == 13) {
-                alert("Enter pressed");
-                return false; // prevent the button click from happening
-            }
         });
 
     </script>
