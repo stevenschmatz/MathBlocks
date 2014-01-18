@@ -13,15 +13,16 @@ app.get('/', function(req, res) {
 });
 
 app.post('/', function(req, res) {
-	var problem = req.body.problemText;
+	var problemText = req.body.problemText;
 	var sessionID = uuid.v4();
 	req.session.sessionID = sessionID;
-	res.redirect('/session/'+sessionID);
+	req.session.problemText = problemText;
+	res.redirect('/session/'+req.session.sessionID);
 });
 
 app.get('/session/:id', function(req, res) {
 	if(req.params.id == req.session.sessionID) {
-		res.render('session.html');
+		res.render('session.html', {problemText: req.session.problemText});
 	}
 });
 
