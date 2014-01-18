@@ -19,11 +19,22 @@
 		input[type='text'] {
 			font-family:"Merriweather";
 		}
+        .row {
+            position: relative;
+            top: -50px;
+        }
+
+        #problem_text {
+            text-align: center;
+        }
+
    	.draggable {
         padding: 0.5em;
         border: 1px solid #555555;
         border-radius: 5px;
         height:200px;
+        min-height:150px;
+        min-width:150px;
      }
 
 		</style>
@@ -33,9 +44,16 @@
 		<script src="/js/jquery-ui.js"></script>
 		<script src="/socket.io/socket.io.js"></script>
     <script>
+
         $(function() {
 					var socket = io.connect('http://'+document.domain+':3001/session/<%= sessionID %>')
+            $("#problem_text").hide();
+            $(".draggable").hide();
+
+            $("#problem_text").fadeIn(500);
+            $(".draggable").delay(500).fadeIn(500);
             $( ".draggable" ).draggable();
+            $( ".draggable" ).resizable();
             $(".draggable").mouseover(function() {
                 $(this).animate({
                  "border-color": "#494949",
@@ -68,8 +86,8 @@
 </head>
 <body>
     <div id="content">
-        <div class="row">
-            <h3><%= problemText %></h3>
+        <div class="row panel">
+            <h3 id="problem_text"><%= problemText %></h3>
         </div>
 
         <div class="draggable ui-widget-content large-4 medium-4 small-4 columns">
