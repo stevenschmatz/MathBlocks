@@ -123,6 +123,20 @@
         .menuList li:first-of-type {
             border-top: 1px solid white;
         }
+
+        #open_panel_icon {
+            height: 50px;
+            width: 50px;
+            position: relative;
+            left: -400px;
+            background-color: rgb(46, 46, 46);
+            padding: 10px;
+            border:2px solid;
+            border-top-right-radius:2em;
+            border-bottom-right-radius:2em;
+            z-index: 1;
+        }
+
 				#output {
 					background-color:#CCCCCC;
 				}
@@ -225,17 +239,54 @@
                 }, { duration: 250, queue: false })
 
                 $("#content").animate( {
-                    "width": "100%",
-                    "overflow": "hidden"
+                    "width": "100%"
+
                 })
 
-                $("li a").animate({
-                    "color":"white"
+                $("#sidebar_header").animate({
+                    "color": "white",
+                    "z-index":"-1"
                 }, { duration: 150, queue: false })
 
-                
+                $("li a").css({
+                    "color": "white"
+                })
 
+
+
+                $("#open_panel_icon").animate({
+                    "left":'0px'
+                },{ duration: 500, queue: false })
             });
+
+            $("#open_panel_icon").click(function() {
+                $("#open_panel_icon").animate({
+                    "left":'-400px'
+                },{ duration: 500, queue: false })
+
+                $("li a").css({
+                    "color": "#46a9b2"
+                })
+
+                $("#sidebar_header").animate({
+                    "color": "white",
+                    "z-index":"-1"
+                }, { duration: 150, queue: false })
+
+                $("#content").animate( {
+                    "width": "84%"
+
+                })
+
+                $("#sidebar").animate( {
+                    "width": "16%"
+                }, { duration: 250, queue: false })
+
+                $("#menu").css( {
+                    "padding": "10px"
+                })
+
+            })
 
             $("#problem_text").hide();
             $(".draggable").hide();
@@ -339,6 +390,7 @@
         </div>
     </div>
     <div id="content">
+        <span><img src="/images/iconmonstr-menu-icon-32.png" alt="open menu" id="open_panel_icon"/></span>
         <div class="row panel" id="bigHeader">
             <h3 id="problem_text"><%= problemText %></h3>
         </div>
