@@ -54,6 +54,7 @@
             min-width:150px;
             width:200px;
             background: #ffffff;
+						overflow:scroll;
         }
 
         .draggable .minimize {
@@ -108,6 +109,7 @@
 		</style>
 		<link rel="stylesheet" type="text/css" href="/foundation-5.0.3/css/foundation.css"/>
 
+		<script src="http://static.opentok.com/v1.1/js/TB.min.js"></script>
 		<script src="/js/jquery.js"></script>
 		<script src="/js/jquery-ui.js"></script>
 		<script src="/socket.io/socket.io.js"></script>
@@ -153,7 +155,25 @@
 					
 					// chat websocket
 					
-					var socket = io.connect('http://'+document.domain+':3001/session/<%= sessionID %>');
+					var socket = io.connect('http://'+document.domain);
+					
+					socket.on('hello', function(data) {
+            $("#msg").keypress(function(e) {
+								if(e.keyCode == 13) {
+									e.preventDefault();
+									if($(this).val() != '') {
+										var messageText = $(this).val();
+										$(this).val('');
+										socket.emit('chatMessage', {"messageText": messageText, "sendingUser": 'Amit Mizrahi'});
+									}
+								}
+							});
+					    socket.on('chatMessage', function(data) {
+							console.log('yippee!');
+							var msgEl = $("<ul class='messageText'>"+"<b>"+data['sendingUser']+"</b>: "+data['messageText']+"</ul>");
+							$("#chat-msgs").append(msgEl);
+						});
+					});
 					
 					// jquery animations
 
@@ -202,21 +222,6 @@
 
             
 						// chat socket.io
-
-            $("#msg").keypress(function(e) {
-								if(e.keyCode == 13) {
-									e.preventDefault();
-									if($(this).val() != '') {
-										var messageText = $(this).val();
-										socket.emit('chatMessage', {"messageText": messageText, "sendingUser": 'Amit Mizrahi'});
-									}
-								}
-							});
-					    socket.on('chatMessage', function(data) {
-							console.log('yippee!');
-							//var msgEl = $("<ul class='messageText'>"+"<b>"+data['user']+"</b>"+data['messageText']+"</ul>");
-							//$("#chat-msgs").append(msgEl);
-						});
 						
 						// wolframalpha
 						
@@ -269,12 +274,7 @@
 
         <div class="draggable ui-widget-content large-4 medium-4 small-4 columns">
             <p class="minimize">_</p>
-            <p>Drag me around</p>
-        </div>
-
-        <div class="draggable ui-widget-content large-4 medium-4 small-4 columns">
-            <p class="minimize">_</p>
-						<h4>Whiteboard</h4>
+						<p>Whiteboard</p>
             <div id="wrapper"></div> <script type="text/javascript">
                 $(function() { $('#wrapper').awwCanvas(); });
             </script>
@@ -282,7 +282,7 @@
 
         <div class="draggable ui-widget-content large-4 medium-4 small-4 columns" id="chat">
 						<p class="minimize">_</p>
-						 <h4>Chat</h4>
+						 <p>Chat</p>
              <ul id="chat-msgs">
              </ul>
              <input type="text" id="msg"/>
@@ -290,7 +290,7 @@
 				
 				<div class="draggable ui-widget-content large-4 medium-4 small-4 columns" id="wolfram">
 					<p class="minimize">_</p>
-					<h4>Calculator</h4>
+					<p>Calculator</p>
 					<input type="text" id="calc" placeholder="e.g. 2+2"/>
 					<div id="result"></div>
 					<div id="error"></div>
@@ -298,7 +298,7 @@
 				
 				<div class="draggable ui-widget-content large-4 medium-4 small-4 columns" id="tokbox">
 					<p class="minimize">_</p>
-					<h4>Video chat</h4>
+					<p>Video chat</p>
 					<div id="placeholder">
 					</div>
 				</div>
