@@ -11,7 +11,8 @@
 		"uuid": "~1.4.1",
 		"socket.io": "~0.9.16",
 		"xml2js": "~0.4.1",
-		"request": "~2.33.0"
+		"request": "~2.33.0",
+		"sendgrid": "~1.0.0"
   },
   "engines": {
     "node": "0.10.x",
