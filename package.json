@@ -1,0 +1,25 @@
+{
+  "name": "mathblocks",
+  "version": "0.0.1",
+  "description": "mathematical collaboration",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "~3.3.4",
+		"uuid": "~1.4.1",
+		"socket.io": "~0.9.16",
+		"xml2js": "~0.4.1",
+		"request": "~2.33.0"
+  },
+  "engines": {
+    "node": "0.10.x",
+    "npm": "1.3.x"
+  },
+  "keywords": [
+    "math"
+  ],
+  "author": "Amit Mizrahi",
+  "license": "MIT"
+}

@@ -26,7 +26,6 @@ app.post('/', function(req, res) {
 });
 
 app.get('/session/:id', function(req, res) {
-	if(req.params.id == req.session.sessionID) {
 		io.sockets.on('connection', function(socket) {
 			socket.on('chatMessage', function(data) {
 				console.log(data);
@@ -40,8 +39,7 @@ app.get('/session/:id', function(req, res) {
 			});*/
 			// specialized system messages later?
 		});
-		res.render('session.html', {problemText: req.session.problemText, sessionID: req.session.sessionID});
-	}
+		res.render('session.html', {problemText: req.session.problemText, sessionID: req.params.id});
 });
 
 app.post('/calc', function(req, res) {
@@ -53,12 +51,18 @@ app.post('/calc', function(req, res) {
 				var xmlObj = obj;
 				if(xmlObj['queryresult']['pod'][1] != undefined) {
 					if(xmlObj['queryresult']['pod'][1]['$']['title'] == 'Result') {
-						res.send('{"status": "ok", "result": ' + xmlObj['queryresult']['pod'][1]['subpod'][0]['plaintext'][0] + '}')
+						res.send('{"status": "ok", "result": ' + xmlObj['queryresult']['pod'][1]['subpod'][0]['plaintext'][0] + '}');
 					}
+					else {
+						res.send('{"status": "bad", "error": "You must enter a valid numerical expression."}');
+					}
+				}
+				else {
+					res.send('{"status": "bad", "error": "You must enter a valid numerical expression."}')
 				}
 			});
 		}
 	});
 });
 
-server.listen(3001);
+server.listen(process.env.PORT || 3001);
