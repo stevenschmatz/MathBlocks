@@ -59,6 +59,11 @@
             text-align: right;
             margin: -10px;
         }
+				
+				#error {
+					font-weight:bold;
+					color:red;
+				}
 
 		</style>
 		<link rel="stylesheet" type="text/css" href="/foundation-5.0.3/css/foundation.css"/>
@@ -166,10 +171,17 @@
 							if(e.keyCode == 13) {
 								e.preventDefault();
 								if($(this).val() != '') {
-									$.post('/calc', {'exp': $(this).val()}, function(data) {
+									var exp = $(this).val();
+									$(this).val('');
+									$("#result").text('');
+									$("#error").text('');
+									$.post('/calc', {'exp': exp}, function(data) {
 										var parsed = JSON.parse(data);
 										if(parsed['status'] == 'ok') {
 											$("#result").text(parsed['result']);
+										}
+										else {
+											$("#error").text(parsed['error'])
 										}
 									});
 								}
@@ -216,6 +228,7 @@
 					<h4>Calculator</h4>
 					<input type="text" id="calc" placeholder="e.g. 2+2"/>
 					<div id="result"></div>
+					<div id="error"></div>
 				</div>
 				
     </div>
