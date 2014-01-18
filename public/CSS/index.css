@@ -2,6 +2,10 @@
 			font-family:"Merriweather";
 			src:url("/font/merriweather/Merriweather-Light.ttf");
 		}
+		@font-face {
+			font-family:"Merriweather Bold";
+			src:url("/font/merriweather/Merriweather-Bold.ttf");
+		}
 		body {
 			font-family:"Merriweather" !important;
             height: 100%;
@@ -136,4 +140,9 @@
 				}
 				.button {
 					padding:15px !important;
+				}
+				#result {
+					margin-bottom:10px;
+					font-weight:bold;
+					font-family:"Merriweather Bold";
 				}

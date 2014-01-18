@@ -194,8 +194,8 @@
 									$.post('/calc', {'exp': exp}, function(data) {
 										var parsed = JSON.parse(data);
 										if(parsed['status'] == 'ok') {
-											$("#result").text(parsed['result']);
-											socket.emit('valueCalculated', {'sendingUser': window.name, 'value': parsed['result']});
+											$("#result").text(parsed['exp'] + '=' + parsed['result']);
+											socket.emit('valueCalculated', {'sendingUser': window.name, 'value': parsed['result'], 'exp': parsed['exp']});
 										}
 										else {
 											$("#error").text(parsed['error'])
@@ -206,7 +206,7 @@
 						});
 						
 						socket.on('valueCalculated', function(data) {
-							var logEl = $("<ul class='messageText'>"+"<b>"+data['sendingUser']+"</b>: "+data['value']+"</ul>");
+							var logEl = $("<ul class='messageText'>"+"<b>"+data['sendingUser']+"</b>: "+data['exp']+"="+data['value']+"</ul>");
 							$("#calc-log").prepend(logEl);
 						});
 

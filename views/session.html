@@ -25,6 +25,12 @@
 				<link rel="stylesheet" type="text/css" href="/css/index.css"/>
 				<!-- foundation -->
 				<link rel="stylesheet" type="text/css" href="/foundation-5.0.3/css/foundation.css"/>
+				<!-- mathjax -->
+		    <script type="text/x-mathjax-config">
+		  	MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+				</script>
+		    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+		    </script>
 </head>
 <body>
 	<div class="overlay">
@@ -54,7 +60,7 @@
 				<div class="row">
 	        <div class="draggable ui-widget-content large-8 medium-8 small-8 columns" id="board">
 	            <p class="minimize">_</p>
-							<p><a class="switchLink" href="#">Whiteboard</a> &middot; <a class="switchLink" href="#">LaTeX</a> &middot; <a class="switchLink" href="#">Graph</a></p>
+							<p><a class="switchLink" data-context="whiteboard" href="#">Whiteboard</a> &middot; <a class="switchLink" data-context="latex" href="#">LaTeX</a> &middot; <a class="switchLink" data-context="graph" href="#">Graph</a></p>
 							<div id="wrapper"></div>
 	        </div>
 	        <div class="draggable ui-widget-content large-4 medium-4 small-4 columns" id="chat">
