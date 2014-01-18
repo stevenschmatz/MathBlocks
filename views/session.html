@@ -4,6 +4,7 @@
     <title>MathApp</title>
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
         <link rel="stylesheet" href="/CSS/styles.css"/>
+        <link rel="stylesheet" type="text/css" href="/CSS/aww.css"/>
 		<style>
 		@font-face {
 			font-family:"Merriweather";
@@ -47,6 +48,7 @@
             height:200px;
             min-height:150px;
             min-width:150px;
+            width:200px;
             background: #ffffff;
         }
 
@@ -63,6 +65,7 @@
 		<script src="/js/jquery.js"></script>
 		<script src="/js/jquery-ui.js"></script>
 		<script src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="/js/aww.min.js"></script>
     <script>
 
         $(function() {
@@ -91,16 +94,17 @@
                 $(this).parent().css({
                       'min-height': '0px',
                       'min-width': '0px',
-                       'position': 'fixed'
+                      'position': 'fixed'
                 });
 
                 $(this).parent().animate({
                     "height": "40px",
-                    "bottom": "0px",
-                    "background-color": "#9E9E9E"
+                    "width": "200px",
+                    "background-color": "#9E9E9E",
+                    "bottom": "0px"
                 }, 500);
 
-                $(this).parent().html("");
+                /*$(this).parent().html("");*/
             });
 
             $("#msg").keypress(function(e) {
@@ -133,7 +137,15 @@
             <p>Drag me around</p>
         </div>
 
+        <div class="draggable ui-widget-content large-4 medium-4 small-4 columns">
+            <p id="minimize">_</p>
+            <div id="wrapper"></div> <script type="text/javascript">
+                $(function() { $('#wrapper').awwCanvas(); });
+            </script>
+        </div>
+
             <div class="draggable ui-widget-content large-4 medium-4 small-4 columns" id="chat">
+                <p id="minimize">_</p>
                 <ul id="chat-msgs">
                 </ul>
                 <input type="text" id="msg"/>
