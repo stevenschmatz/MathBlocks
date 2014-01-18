@@ -25,10 +25,6 @@ app.post('/', function(req, res) {
 	res.redirect('/session/'+req.session.sessionID);
 });
 
-app.post('/invite', function(req, res) {
-	var emails = res
-});
-
 app.get('/session/:id', function(req, res) {
 		io.sockets.on('connection', function(socket) {
 			socket.on('chatMessage', function(data) {
