@@ -97,7 +97,7 @@
 						for(var i = 0; i < streams.length; i++) {
 							var stream = streams[i];
 							if(stream.connection.connectionId != session.connection.connectionId) {
-								session.subscribe(stream);
+								session.subscribe(stream, "placeholder", {width: 640, height: 480});
 							}
 						}
 					}
@@ -234,6 +234,12 @@
 					<input type="text" id="calc" placeholder="e.g. 2+2"/>
 					<div id="result"></div>
 					<div id="error"></div>
+				</div>
+				
+				<div class="draggable ui-widget-content large-4 medium-4 small-4 columns" id="tokbox">
+					<h4>Video chat</h4>
+					<div id="placeholder">
+					</div>
 				</div>
 				
     </div>
