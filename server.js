@@ -26,18 +26,19 @@ app.get('/session/:id', function(req, res) {
 	if(req.params.id == req.session.sessionID) {
 		io.sockets.on('connection', function(socket) {
 			socket.on('chatMessage', function(data) {
-				socket.broadcast.emit({'type': 'chatMessage', 'messageText': data['messageText'], 'sendingUser': data['sendingUser']});
+				console.log(data);
+				io.sockets.emit('chatMessage', {'messageText': data['messageText'], 'sendingUser': data['sendingUser']});
 			});
-			socket.on('userEntered', function(data) {
+			/*socket.on('userEntered', function(data) {
 				socket.broadcast.emit({'type': 'systemMessage', 'messageText': 'has entered the chat room', 'user': data['user']});
 			});
 			socket.on('userLeft', function(data) {
 				socket.broadcast.emit({'type': 'systemMessage', 'messageText': 'has left the chat room', 'user': data['user']});
-			});
+			});*/
 			// specialized system messages later?
 		});
 		res.render('session.html', {problemText: req.session.problemText, sessionID: req.session.sessionID});
 	}
 });
 
-app.listen(3001);
+server.listen(3001);

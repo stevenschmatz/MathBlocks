@@ -65,6 +65,7 @@
     <script>
 
         $(function() {
+					var socket = io.connect('http://'+document.domain+':3001/session/<%= sessionID %>')
             $("#problem_text").hide();
             $(".draggable").hide();
 
@@ -92,6 +93,21 @@
                 }, 500);
             });
 
+							});
+						$("#msg").keypress(function(e) {
+								if(e.keyCode == 13) {
+									e.preventDefault();
+									if($(this).val() != '') {
+										var messageText = $(this).val();
+										socket.emit('chatMessage', {"messageText": messageText, "sendingUser": 'Amit Mizrahi'});
+									}
+								}
+							});
+							socket.on('chatMessage', function(data) {
+								console.log('yippee!');
+								//var msgEl = $("<ul class='messageText'>"+"<b>"+data['user']+"</b>"+data['messageText']+"</ul>");
+								//$("#chat-msgs").append(msgEl);
+							});
 
         });
 
@@ -109,7 +125,7 @@
         </div>
 
             <div class="draggable ui-widget-content large-4 medium-4 small-4 columns" id="chat">
-                <ul class="chat-msgs">
+                <ul id="chat-msgs">
                 </ul>
                 <input type="text" id="msg"/>
             </div>
