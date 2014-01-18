@@ -259,7 +259,9 @@
 								}
 						});
 						
-						
-
+						$("#save").click(function(e) {
+							e.preventDefault();
+							window.open('/render/?problem='+encodeURIComponent($("#problem_text").text())+'&solution='+encodeURIComponent($("#solution").val()));
+						});
 						
         });

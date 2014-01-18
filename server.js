@@ -76,6 +76,12 @@ app.get('/about', function(req, res) {
 	res.render('about.html');
 });
 
+app.get('/render', function(req, res) {
+	var solution = req.query.solution;
+	var problem = req.query.problem;
+	res.render('rendered.html', {'solution': solution, 'problem': problem});
+});
+
 // assuming io is the Socket.IO server object
 io.configure(function () { 
   io.set("transports", ["xhr-polling"]); 
