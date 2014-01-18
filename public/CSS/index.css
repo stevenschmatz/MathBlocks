@@ -51,7 +51,15 @@
             min-width:150px;
             width:200px;
             background: #ffffff;
-						overflow:scroll;
+			overflow:hidden;
+        }
+
+        #board, #wolfram, #chat {
+            overflow:scroll !important;
+        }
+
+        #board, #output {
+            height: 420px;
         }
 
         .draggable .minimize {
