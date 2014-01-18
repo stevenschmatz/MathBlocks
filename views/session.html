@@ -67,7 +67,7 @@
 				
         #error {
             font-weight:bold;
-            color:darkgrey;
+            color:red;
         }
 
         #sidebar {
@@ -118,6 +118,7 @@
             text-transform: uppercase;
             font-size: 16pt;
         }
+	
 		</style>
 		<link rel="stylesheet" type="text/css" href="/foundation-5.0.3/css/foundation.css"/>
 
@@ -301,36 +302,48 @@
             <h3 id="problem_text"><%= problemText %></h3>
         </div>
 
-        <div class="draggable ui-widget-content large-4 medium-4 small-4 columns">
-            <p class="minimize">_</p>
-						<p>Whiteboard</p>
-            <div id="wrapper"></div> <script type="text/javascript">
-                $(function() { $('#wrapper').awwCanvas(); });
-            </script>
-        </div>
+				<div class="row">
+	        <div class="draggable ui-widget-content large-8 medium-8 small-8 columns" id="board">
+	            <p class="minimize">_</p>
+							<p>Whiteboard</p>
+	            <div id="wrapper"></div> <script type="text/javascript">
+	                $(function() { $('#wrapper').awwCanvas(); });
+	            </script>
+	        </div>
 
-        <div class="draggable ui-widget-content large-4 medium-4 small-4 columns" id="chat">
+	        <div class="draggable ui-widget-content large-4 medium-4 small-4 columns" id="chat">
+							<p class="minimize">_</p>
+							 <p>Chat</p>
+	             <ul id="chat-msgs">
+	             </ul>
+	             <input type="text" id="msg"/>
+	        </div>
+				</div>
+				
+				<div class="row">
+				
+					<div class="draggable ui-widget-content large-4 medium-4 small-4 columns" id="wolfram">
 						<p class="minimize">_</p>
-						 <p>Chat</p>
-             <ul id="chat-msgs">
-             </ul>
-             <input type="text" id="msg"/>
-        </div>
-				
-				<div class="draggable ui-widget-content large-4 medium-4 small-4 columns" id="wolfram">
-					<p class="minimize">_</p>
-					<p>Calculator</p>
-					<input type="text" id="calc" placeholder="e.g. 2+2"/>
-					<div id="result"></div>
-					<div id="error"></div>
-				</div>
-				
-				<div class="draggable ui-widget-content large-4 medium-4 small-4 columns" id="tokbox">
-					<p class="minimize">_</p>
-					<p>Video chat</p>
-					<div id="placeholder">
+						<p>Calculator</p>
+						<input type="text" id="calc" placeholder="e.g. 2+2"/>
+						<div id="result"></div>
+						<div id="error"></div>
 					</div>
+				
+					<div class="draggable ui-widget-content large-4 medium-4 small-4 columns" id="tokbox">
+						<p class="minimize">_</p>
+						<p>Video chat</p>
+						<div id="placeholder">
+						</div>
+					</div>
+					
+					<div class="large-4 medium-4 small-4 columns">
+						&nbsp;
+					</div>
+					
 				</div>
+				
+				
 				
     </div>
 	</div>
