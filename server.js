@@ -49,17 +49,21 @@ app.post('/calc', function(req, res) {
 			var wolframXML = body;
 			xml2js.parseString(wolframXML, function(err, obj) {
 				var xmlObj = obj;
-				if(xmlObj['queryresult']['pod'][1] != undefined) {
-					if(xmlObj['queryresult']['pod'][1]['$']['title'] == 'Result') {
-						res.send('{"status": "ok", "result": ' + xmlObj['queryresult']['pod'][1]['subpod'][0]['plaintext'][0] + '}');
+				if(xmlObj['queryresult']['pod'] != undefined) {
+					if(xmlObj['queryresult']['pod'][1] != undefined) {
+						if(xmlObj['queryresult']['pod'][1]['$']['title'] == 'Result') {
+							res.send('{"status": "ok", "result": ' + xmlObj['queryresult']['pod'][1]['subpod'][0]['plaintext'][0] + '}');
+						}
+						else {
+							res.send('{"status": "bad", "error": "You must enter a valid numerical expression."}');
+						}
 					}
 					else {
 						res.send('{"status": "bad", "error": "You must enter a valid numerical expression."}');
 					}
-				}
-				else {
-					res.send('{"status": "bad", "error": "You must enter a valid numerical expression."}')
-				}
+					else {
+						res.send('{"status": "bad", "error": "You must enter a valid numerical expression."}');
+					}
 			});
 		}
 	});

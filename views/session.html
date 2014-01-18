@@ -53,7 +53,7 @@
             background: #ffffff;
         }
 
-        .draggable #minimize {
+        .draggable .minimize {
             font-weight:bold;
             font-size: 10pt;
             text-align: right;
@@ -76,6 +76,8 @@
 
         $(function() {
 					
+					window.wasAlreadyMinimized = 0;
+					
 			    var apiKey    = "44618172";
 			    var sessionId = "1_MX40NDYxODE3Mn5-U2F0IEphbiAxOCAwMDowMjoxNCBQU1QgMjAxNH4wLjU2MTYxNjg0fg";
 			    var token     = "T1==cGFydG5lcl9pZD00NDYxODE3MiZzZGtfdmVyc2lvbj10YnJ1YnktdGJyYi12MC45MS4yMDExLTAyLTE3JnNpZz01MmM0ZjJlZTY2NmZjYjg5NTNjMTgwZWJkNzMzOWFjOGY5YTZjZDVlOnJvbGU9cHVibGlzaGVyJnNlc3Npb25faWQ9MV9NWDQwTkRZeE9ERTNNbjUtVTJGMElFcGhiaUF4T0NBd01Eb3dNam94TkNCUVUxUWdNakF4Tkg0d0xqVTJNVFl4TmpnMGZnJmNyZWF0ZV90aW1lPTEzOTAwMzIxODEmbm9uY2U9MC4wMTgwMjM1MDEwOTE0NTQ0NTImZXhwaXJlX3RpbWU9MTM5MDYzNjk4MSZjb25uZWN0aW9uX2RhdGE9";
@@ -97,7 +99,7 @@
 						for(var i = 0; i < streams.length; i++) {
 							var stream = streams[i];
 							if(stream.connection.connectionId != session.connection.connectionId) {
-								session.subscribe(stream, "placeholder", {width: 640, height: 400});
+								session.subscribe(stream, "placeholder", {width: 400, height: 400});
 							}
 						}
 					}
@@ -136,7 +138,7 @@
                 }, 100);
 				                    });
 
-            $("#minimize").click(function() {
+            $(".minimize").click(function() {
                 $(this).parent().css({
                       'min-height': '0px',
                       'min-width': '0px',
@@ -147,8 +149,11 @@
                     "height": "40px",
                     "width": "200px",
                     "background-color": "#9E9E9E",
-                    "bottom": "0px"
+                    "bottom": "0px",
+										"left": 200*window.alreadyMinimized+"px"
                 }, 500);
+								
+								window.alreadyMinimized++;
 
                 /*$(this).parent().html("");*/
             });
@@ -204,32 +209,28 @@
         </div>
 
         <div class="draggable ui-widget-content large-4 medium-4 small-4 columns">
-            <p id="minimize">_</p>
+            <p class="minimize">_</p>
             <p>Drag me around</p>
         </div>
 
         <div class="draggable ui-widget-content large-4 medium-4 small-4 columns">
-            <p id="minimize">_</p>
+            <p class="minimize">_</p>
+						<h4>Whiteboard</h4>
             <div id="wrapper"></div> <script type="text/javascript">
                 $(function() { $('#wrapper').awwCanvas(); });
             </script>
         </div>
 
-            <div class="draggable ui-widget-content large-4 medium-4 small-4 columns" id="chat">
-                <p id="minimize">_</p>
-                <ul id="chat-msgs">
-                </ul>
-                <input type="text" id="msg"/>
-            </div>
-
         <div class="draggable ui-widget-content large-4 medium-4 small-4 columns" id="chat">
-						<h4>Chat</h4>
+						<p class="minimize">_</p>
+						 <h4>Chat</h4>
              <ul id="chat-msgs">
              </ul>
              <input type="text" id="msg"/>
         </div>
 				
 				<div class="draggable ui-widget-content large-4 medium-4 small-4 columns" id="wolfram">
+					<p class="minimize">_</p>
 					<h4>Calculator</h4>
 					<input type="text" id="calc" placeholder="e.g. 2+2"/>
 					<div id="result"></div>
@@ -237,6 +238,7 @@
 				</div>
 				
 				<div class="draggable ui-widget-content large-4 medium-4 small-4 columns" id="tokbox">
+					<p class="minimize">_</p>
 					<h4>Video chat</h4>
 					<div id="placeholder">
 					</div>
