@@ -90,14 +90,14 @@
 					
 					function sessionConnectedHandler(event) {
 						subscribeToStreams(event.streams);
-						session.publish();
+						session.publish("placeholder", {width:640, height:400});
 					}
 					
 					function subscribeToStreams(streams) {
 						for(var i = 0; i < streams.length; i++) {
 							var stream = streams[i];
 							if(stream.connection.connectionId != session.connection.connectionId) {
-								session.subscribe(stream, "placeholder", {width: 640, height: 480});
+								session.subscribe(stream, "placeholder", {width: 640, height: 400});
 							}
 						}
 					}
