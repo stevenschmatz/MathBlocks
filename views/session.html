@@ -155,7 +155,7 @@
 					
 					// chat websocket
 					
-					var socket = io.connect('http://'+document.domain+':3001');
+					var socket = io.connect('http://'+document.domain);
 					
 					socket.on('hello', function(data) {
             $("#msg").keypress(function(e) {
