@@ -1,6 +1,7 @@
 var express = require('express');
 var uuid = require('uuid');
 var app = express();
+var WebSocket = require('ws');
 
 app.engine('html', require('ejs').renderFile);
 app.use(express.bodyParser());
@@ -23,6 +24,10 @@ app.post('/', function(req, res) {
 app.get('/session/:id', function(req, res) {
 	if(req.params.id == req.session.sessionID) {
 		res.render('session.html', {problemText: req.session.problemText});
+		var ws = new WebSocket('ws://localhost:3000/path'); // change in deployment
+		ws.on('message', function(data) {
+			console.log('yay');
+		});
 	}
 });
 
