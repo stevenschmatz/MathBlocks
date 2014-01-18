@@ -2,7 +2,10 @@
 <html>
 <head>
     <title>MathApp</title>
+<<<<<<< HEAD
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+=======
+>>>>>>> 14f0fb0bfff55403f67a6bbf0075f4b54750dea4
 		<style>
 		@font-face {
 			font-family:"Merriweather";
@@ -17,28 +20,39 @@
 		input[type='text'] {
 			font-family:"Merriweather";
 		}
-        #draggable {
+        .draggable {
             width: 150px;
             height: 150px;
             padding: 0.5em;
+            border: 1px solid #555555;
+            border-radius: 5px;
         }
 
 		</style>
-        <script>
-            $(function() {
-                $( "#draggable" ).draggable();
-            });
-        </script>
 		<link rel="stylesheet" type="text/css" href="/foundation-5.0.3/css/foundation.css"/>
 		<script src="/js/jquery.js"></script>
 		<script src="/js/jquery-ui.js"></script>
+    <script>
+        $(function() {
+            $( ".draggable" ).draggable();
+            $(".draggable").hover(function() {
+                $(".draggable").animate({
+                 "border-color": "#000000",
+                 "border-width": "0.2em"
+                 }, 500, function() {
+                 }
+             );
+            });
+        });
+
+    </script>
 </head>
 <body>
 	<div class="row">
 		<h3><%= problemText %></h3>
 	</div>
 
-    <div id="draggable" class="ui-widget-content">
+    <div class="draggable" class="ui-widget-content">
         <p>Drag me around</p>
     </div>
 
