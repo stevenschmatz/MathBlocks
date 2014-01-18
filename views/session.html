@@ -76,8 +76,13 @@
 
         $(function() {
 					
+			    var apiKey    = "44618172";
+			    var sessionId = "1_MX40NDYxODE3Mn5-U2F0IEphbiAxOCAwMDowMjoxNCBQU1QgMjAxNH4wLjU2MTYxNjg0fg";
+			    var token     = "T1==cGFydG5lcl9pZD00NDYxODE3MiZzZGtfdmVyc2lvbj10YnJ1YnktdGJyYi12MC45MS4yMDExLTAyLTE3JnNpZz01MmM0ZjJlZTY2NmZjYjg5NTNjMTgwZWJkNzMzOWFjOGY5YTZjZDVlOnJvbGU9cHVibGlzaGVyJnNlc3Npb25faWQ9MV9NWDQwTkRZeE9ERTNNbjUtVTJGMElFcGhiaUF4T0NBd01Eb3dNam94TkNCUVUxUWdNakF4Tkg0d0xqVTJNVFl4TmpnMGZnJmNyZWF0ZV90aW1lPTEzOTAwMzIxODEmbm9uY2U9MC4wMTgwMjM1MDEwOTE0NTQ0NTImZXhwaXJlX3RpbWU9MTM5MDYzNjk4MSZjb25uZWN0aW9uX2RhdGE9";
+					
+					
 					// OpenTok
-					var session = TB.initSession("1sdemo00855f8290f8efa648d9347d718f7e06fd");
+					var session = TB.initSession(sessionId);
 					var API_KEY = "44618111";
 					
 					session.addEventListener("sessionConnected", sessionConnectedHandler);
@@ -101,7 +106,7 @@
 						subscribeToStreams(event.streams);
 					}
 					
-					session.connect(API_KEY, "Amit Mizrahi");
+					session.connect(API_KEY, token);
 					
 					
 					// chat websocket
