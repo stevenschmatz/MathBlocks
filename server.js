@@ -6,6 +6,7 @@ var io = require('socket.io').listen(server);
 var http = require('http');
 var xml2js = require('xml2js');
 var request = require('request');
+var sendgrid = require('sendgrid');
 
 app.engine('html', require('ejs').renderFile);
 app.use(express.bodyParser());
@@ -80,6 +81,18 @@ app.get('/render', function(req, res) {
 	var solution = req.query.solution;
 	var problem = req.query.problem;
 	res.render('rendered.html', {'solution': solution, 'problem': problem});
+});
+
+app.post('/invite', function(req, res) {
+	var emails = req.query.emails.split(",");
+	var psetter = req.query.psetter;
+	var pName = req.query.problemName;
+	var link = req.query.link;
+	sendgrid.send({
+		to: emails,
+		subject: 'Your invitation to ' + psetter + '\'s Mathelo problem',
+		html: require('ejs').renderFile('./views/mail.html', {'problemSetter': problemSetter, 'problemName': pName, 'link': link});
+	});
 });
 
 // assuming io is the Socket.IO server object

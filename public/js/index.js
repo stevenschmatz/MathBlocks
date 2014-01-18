@@ -227,9 +227,11 @@
 						});
 
 						$("#invite").click(function() {
-							var $emailBar = $("<div class='callout panel'><p>Type each email, separated by commas.</p><input type='text' id='emails' placeholder='Emails, separated by commas...'/></div>");
-							$("body").prepend($emailBar);
-							$("#emails").tagsInput();
+							var $emailBar = $("<div class='callout panel' id='emailBar'><p>Type each email, separated by commas.</p><input type='text' id='emails' placeholder='Emails, separated by commas...'/></div>");
+							if($("#emailBar").length == 0) {
+								$("body").prepend($emailBar);
+								$("#emails").tagsInput();
+							}
 						});
 						
 						$(".switchLink").click(function(e) {
