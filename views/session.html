@@ -5,6 +5,7 @@
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
         <link rel="stylesheet" href="/CSS/styles.css"/>
         <link rel="stylesheet" type="text/css" href="/CSS/aww.css"/>
+        <link href='http://fonts.googleapis.com/css?family=Lato:100' rel='stylesheet' type='text/css'>
 		<style>
 		@font-face {
 			font-family:"Merriweather";
@@ -12,10 +13,11 @@
 		}
 		body {
 			font-family:"Merriweather" !important;
+            height: 100%;
 		}
 		#content {
             float: right;
-            width: 87%;
+            width: 80%;
             margin:0;
             padding:0;
             height:100%;
@@ -61,16 +63,48 @@
             margin: -10px;
         }
 				
-				#error {
-					font-weight:bold;
-					color:red;
-				}
+        #error {
+            font-weight:bold;
+            color:darkgrey;
+        }
 
         #sidebar {
             float: left;
-            width: 13%;
+            width: 16%;
+            position: absolute;
+            height: 100%;
+            padding-right: 10px;
+            padding-bottom: 0;
+            min-height: 700px;
         }
 
+        #menu {
+            background-color: rgb(46, 46, 46);
+            position: absolute;
+            height:100%;
+            width:100%;
+            color: #46a9b2;
+            font-family: 'Lato', sans-serif;
+        }
+
+        #icon {
+            margin-left:auto;
+            margin-right:auto;
+        }
+
+        #menu {
+            padding: 10px;
+        }
+
+        .menuList {
+            list-style-type:none;
+        }
+        .menuList li {
+            border-bottom: 1px solid white;
+            padding-top:20px;
+            padding-bottom:20px;
+            font-size:18px;
+        }
 		</style>
 		<link rel="stylesheet" type="text/css" href="/foundation-5.0.3/css/foundation.css"/>
 
@@ -140,7 +174,9 @@
 					});
 					
 					// jquery animations
-					
+
+
+
             $("#problem_text").hide();
             $(".draggable").hide();
 
@@ -213,8 +249,20 @@
 </head>
 <body>
     <div id="sidebar">
-        <img src="/images/iconmonstr-menu-icon-32.png" alt="sidebar icon"/>
-        
+
+        <div id="menu">
+            <p style="text-align: right">
+                <img src="/images/iconmonstr-menu-icon-32.png" style="cursor:pointer;" alt="sidebar icon" id="icon"/>
+            </p>
+            <hr/>
+            <p>
+                <ul class="menuList">
+                    <li><a href="#" id="invite">Invite collaborators</a></li>
+                    <li><a href="#" id="save">Save solution</a></li>
+                    <li><a href="#" id="clear">Clear workspace</a></li>
+                </ul>
+            </p>
+        </div>
     </div>
     <div id="content">
         <div class="row panel" id="bigHeader">
