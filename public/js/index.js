@@ -234,6 +234,7 @@
 									$(".boardRight").prepend($latexEditor);
 									$("#latexInput").keydown(function() {
 										$("#latexRender").text($(this).val());
+										MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
 									});
 								}
 								$(".switchLink").removeClass('small');

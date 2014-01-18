@@ -66,6 +66,10 @@ app.post('/calc', function(req, res) {
 	});
 });
 
+app.get('/about', function(req, res) {
+	res.render('about.html');
+});
+
 // assuming io is the Socket.IO server object
 io.configure(function () { 
   io.set("transports", ["xhr-polling"]); 
