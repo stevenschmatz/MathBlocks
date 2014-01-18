@@ -5,7 +5,6 @@
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
         <link rel="stylesheet" href="/CSS/styles.css"/>
         <link rel="stylesheet" type="text/css" href="/CSS/aww.css"/>
-				<script src="http://static.opentok.com/v1.1/js/TB.min.js" ></script>
 		<style>
 		@font-face {
 			font-family:"Merriweather";
@@ -15,6 +14,8 @@
 			font-family:"Merriweather" !important;
 		}
 		#content {
+            float: right;
+            width: 87%;
             margin:0;
             padding:0;
             height:100%;
@@ -58,6 +59,11 @@
             font-size: 10pt;
             text-align: right;
             margin: -10px;
+        }
+
+        #sidebar {
+            float: left;
+            width: 13%;
         }
 
 		</style>
@@ -181,6 +187,10 @@
     </script>
 </head>
 <body>
+    <div id="sidebar">
+        <img src="/images/iconmonstr-menu-icon-32.png" alt="sidebar icon"/>
+        
+    </div>
     <div id="content">
         <div class="row panel" id="bigHeader">
             <h3 id="problem_text"><%= problemText %></h3>
