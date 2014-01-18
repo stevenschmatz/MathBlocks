@@ -32,12 +32,20 @@
         $(function() {
             $( ".draggable" ).draggable();
             $(".draggable").hover(function() {
-                $(".draggable").animate({
+                $(this).animate({
                  "border-color": "#000000",
                  "border-width": "0.2em"
-                 }, 500, function() {
+                 }, 100, function() {
                  }
              );
+            });
+            $(".draggable").mouseleave(function() {
+                $(this).animate({
+                            "border-color": "#555555",
+                            "border-width": "1px"
+                        }, 100, function() {
+                        }
+                );
             });
         });
 
