@@ -5,7 +5,8 @@
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
         <link rel="stylesheet" href="/CSS/styles.css"/>
         <link rel="stylesheet" type="text/css" href="/CSS/aww.css"/>
-        <link href='http://fonts.googleapis.com/css?family=Lato:100' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/js/jquery-tags-input-1.3.2/jquery.tagsinput.css">
+				<link href='http://fonts.googleapis.com/css?family=Lato:100' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
 		<style>
 		@font-face {
@@ -136,6 +137,14 @@
             z-index: 1;
         }
 
+				#output {
+					background-color:#CCCCCC;
+				}
+				#emails_tagsinput {
+					width:100% !important;
+					font-family:"Merriweather" !important;
+					height:70% !important;
+				}
 		</style>
 		<link rel="stylesheet" type="text/css" href="/foundation-5.0.3/css/foundation.css"/>
 
@@ -143,6 +152,7 @@
 		<script src="/js/jquery.js"></script>
 		<script src="/js/jquery-ui.js"></script>
 		<script src="/socket.io/socket.io.js"></script>
+		<script src="/js/jquery-tags-input-1.3.2/jquery.tagsinput.js"></script>
         <script type="text/javascript" src="/js/aww.min.js"></script>
         <script>
 
@@ -318,9 +328,6 @@
 
                 /*$(this).parent().html("");*/
             });
-
-            
-						// chat socket.io
 						
 						// wolframalpha
 						
@@ -336,6 +343,7 @@
 										var parsed = JSON.parse(data);
 										if(parsed['status'] == 'ok') {
 											$("#result").text(parsed['result']);
+											socket.emit('valueCalculated', {'sendingUser': window.name, 'value': parsed['result']});
 										}
 										else {
 											$("#error").text(parsed['error'])
@@ -344,7 +352,18 @@
 								}
 							}
 						});
+						
+						socket.on('valueCalculated', function(data) {
+							var logEl = $("<ul class='messageText'>"+"<b>"+data['sendingUser']+"</b>: "+data['value']+"</ul>");
+							$("#calc-log").prepend(logEl);
+						});
 
+						$("#invite").click(function() {
+							var $emailBar = $("<div class='callout panel'><p>Type each email, separated by commas.</p><input type='text' id='emails' placeholder='Emails, separated by commas...'/></div>");
+							$("body").prepend($emailBar);
+							$("#emails").tagsInput();
+						});
+						
         });
 
     </script>
@@ -402,6 +421,9 @@
 						<input type="text" id="calc" placeholder="e.g. 2+2"/>
 						<div id="result"></div>
 						<div id="error"></div>
+						<b>Recent calculations:</b>
+						<ul id="calc-log">
+						</ul>
 					</div>
 				
 					<div class="draggable ui-widget-content large-4 medium-4 small-4 columns" id="tokbox">
@@ -411,8 +433,11 @@
 						</div>
 					</div>
 					
-					<div class="large-4 medium-4 small-4 columns">
-						&nbsp;
+					<div class="draggable ui-widget-content large-4 medium-4 small-4 columns" id="output">
+						<p class="minimize">_</p>
+						<p>Output</p>
+						<textarea id="solution">
+						</textarea>
 					</div>
 					
 				</div>

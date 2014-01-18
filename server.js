@@ -34,6 +34,9 @@ app.get('/session/:id', function(req, res) {
 			socket.on('chatMessage', function(data) {
 				io.sockets.emit('chatMessage', {'messageText': data['messageText'], 'sendingUser': data['sendingUser']});
 			});
+			socket.on('valueCalculated', function(data) {
+				io.sockets.emit('valueCalculated', {'value': data['value'], 'sendingUser': data['sendingUser']});
+			});
 		});
 		res.render('session.html', {problemText: req.session.problemText, sessionID: req.params.id});
 });
