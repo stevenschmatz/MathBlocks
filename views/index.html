@@ -4,11 +4,27 @@
     <title>Math collaboration thing</title>
 		<style>
 		@font-face {
-			
+			font-family:"Merriweather";
+			src:url("/font/merriweather/Merriweather-Light.ttf");
+		}
+		body {
+			font-family:"Merriweather" !important;
+		}
+		h1, h2, h3, h4, h5, h6 {
+			font-family:"Merriweather" !important;
+		}
+		input[type='text'] {
+			font-family:"Merriweather";
 		}
 		</style>
+		<link rel="stylesheet" type="text/css" href="/foundation-5.0.3/css/foundation.css"/>
 </head>
 <body>
-	<input type="text" id="problem">
+	<div class="row">
+		<h3>Welcome to MathApp.</h3>
+		<p>The best way to collaboratively tackle math problems.</p>
+		<p>Type a problem below to begin.</p>
+		<input type="text" id="problem">
+	</div>
 </body>
 </html>
