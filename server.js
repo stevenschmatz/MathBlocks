@@ -32,7 +32,7 @@ app.post('/invite', function(req, res) {
 app.get('/session/:id', function(req, res) {
 		io.sockets.on('connection', function(socket) {
 			socket.on('chatMessage', function(data) {
-				socket.emit.broadcast('chatMessage', {'messageText': data['messageText'], 'sendingUser': data['sendingUser']});
+				socket.broadcast.emit('chatMessage', {'messageText': data['messageText'], 'sendingUser': data['sendingUser']});
 			});
 		});
 		res.render('session.html', {problemText: req.session.problemText, sessionID: req.params.id});
