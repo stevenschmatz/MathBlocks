@@ -3,6 +3,7 @@
 <head>
     <title>MathApp</title>
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+        <link rel="stylesheet" href="/CSS/styles.css"/>
 		<style>
 		@font-face {
 			font-family:"Merriweather";
@@ -14,19 +15,20 @@
 		h1, h2, h3, h4, h5, h6 {
 			font-family:"Merriweather" !important;
 		}
+
 		input[type='text'] {
 			font-family:"Merriweather";
 		}
    	.draggable {
-        width: 500px;
-        height: 500px;
         padding: 0.5em;
         border: 1px solid #555555;
         border-radius: 5px;
+        height:200px;
      }
 
 		</style>
 		<link rel="stylesheet" type="text/css" href="/foundation-5.0.3/css/foundation.css"/>
+
 		<script src="/js/jquery.js"></script>
 		<script src="/js/jquery-ui.js"></script>
 		<script src="/socket.io/socket.io.js"></script>
@@ -51,19 +53,20 @@
     </script>
 </head>
 <body>
-	<div class="row">
-		<h3><%= problemText %></h3>
-	</div>
+    <div id="content">
+        <div class="row">
+            <h3><%= problemText %></h3>
+        </div>
 
-    <div class="draggable ui-widget-content">
-        <p>Drag me around</p>
+        <div class="draggable ui-widget-content large-4 medium-4 small-4 columns">
+            <p>Drag me around</p>
+        </div>
+
+            <div class="draggable ui-widget-content large-4 medium-4 small-4 columns" id="chat">
+                <ul class="chat-msgs">
+                </ul>
+                <input type="text" id="msg"/>
+            </div>
     </div>
-		
-		<div class="draggable ui-widget-content" id="chat">
-			<ul class="chat-msgs">
-			</ul>
-			<input type="text" id="msg"/>
-		</div>
-
 </body>
 </html>
