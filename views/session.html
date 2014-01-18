@@ -4,6 +4,7 @@
     <title>MathApp</title>
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
         <link rel="stylesheet" href="/CSS/styles.css"/>
+				<script src="http://static.opentok.com/v1.1/js/TB.min.js" ></script>
 		<style>
 		@font-face {
 			font-family:"Merriweather";
@@ -46,6 +47,34 @@
     <script>
 
         $(function() {
+					// OpenTok
+					var session = TB.initSession("1sdemo00855f8290f8efa648d9347d718f7e06fd");
+					var API_KEY = "44618111";
+					
+					session.addEventListener("sessionConnected", sessionConnectedHandler);
+					session.addEventListener("streamCreated", streamCreatedHandler);
+					
+					function sessionConnectedHandler(event) {
+						subscribeToStreams(event.streams);
+						session.publish();
+					}
+					
+					function subscribeToStreams(streams) {
+						for(var i = 0; i < streams.length; i++) {
+							var stream = streams[i];
+							if(stream.connection.connectionId != session.connection.connectionId) {
+								session.subscribe(stream);
+							}
+						}
+					}
+					
+					function streamCreatedHandler(event) {
+						subscribeToStreams(event.streams);
+					}
+					
+					session.connect(API_KEY, "Amit Mizrahi");
+					
+					
 					var socket = io.connect('http://'+document.domain+':3001/session/<%= sessionID %>')
             $("#problem_text").hide();
             $(".draggable").hide();
