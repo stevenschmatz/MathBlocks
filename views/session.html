@@ -34,7 +34,7 @@
 		<script src="/socket.io/socket.io.js"></script>
     <script>
         $(function() {
-					
+					var socket = io.connect('http://'+document.domain+':3001/session/<%= sessionID %>')
             $( ".draggable" ).draggable();
             $(".draggable").mouseover(function() {
                 $(this).animate({
@@ -47,7 +47,21 @@
                             "border-color": "#9D9D9D",
                             "border-width": "1px"
                         }, 100);
-											});
+							});
+						$("#msg").keypress(function(e) {
+								if(e.keyCode == 13) {
+									e.preventDefault();
+									if($(this).val() != '') {
+										var messageText = $(this).val();
+										socket.emit('chatMessage', {"messageText": messageText, "sendingUser": 'Amit Mizrahi'});
+									}
+								}
+							});
+							socket.on('chatMessage', function(data) {
+								console.log('yippee!');
+								//var msgEl = $("<ul class='messageText'>"+"<b>"+data['user']+"</b>"+data['messageText']+"</ul>");
+								//$("#chat-msgs").append(msgEl);
+							});
         });
 
     </script>
@@ -63,7 +77,7 @@
         </div>
 
             <div class="draggable ui-widget-content large-4 medium-4 small-4 columns" id="chat">
-                <ul class="chat-msgs">
+                <ul id="chat-msgs">
                 </ul>
                 <input type="text" id="msg"/>
             </div>
