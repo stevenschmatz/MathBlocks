@@ -57,6 +57,7 @@ app.get('/session/:id', function(req, res) {
 			socket.on('graphChanged', function(data) {
 				idsToHistories[req.params.id]['graph'].push(data);
 				socket.broadcast.to(req.params.id).emit('graphChanged', {'graphSource': data['graphSource'], 'funct': data['funct'], 'sendingUser': data['sendingUser'], 'graphHistory': idsToHistories[req.params.id]['graph']});
+				console.log(idsToHistories);
 			});
 		});
 		
