@@ -292,6 +292,7 @@
 										$("#latexInput").keydown(function() {
 												$("#latexRender").text($(this).val());
 												MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+												socket.emit('latexChanged', {'rawText': $("#latexInput").text(), 'sendingUser': window.name});
 											});
 										}
 									}
@@ -314,7 +315,7 @@
 														parsed = JSON.parse(data);
 														if(parsed['status'] == 'ok') {
 															$("#graph").html('<img src="' + parsed['result'] + '"></img>');
-															//socket.emit('valueCalculated', {'sendingUser': window.name, 'value': parsed['result'], 'exp': parsed['exp']});
+															socket.emit('graphChanged', {'graphSource': parsed['result'], 'sendingUser': window.name});
 														}
 														else {
 															$("#error").text(parsed['error']);
@@ -325,6 +326,12 @@
 										});
 									}
 								}
+						});
+						
+						// solution stuff
+						
+						$("#solution").keypress(function() {
+							socket.emit("solutionChanged", {'solutionText': $(this).val(), 'sendingUser': this.name});
 						});
 						
 						$("#save").click(function(e) {

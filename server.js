@@ -35,11 +35,27 @@ app.get('/session/:id', function(req, res) {
 			socket.on('room', function(room) {
 				socket.join(room);
 			});
+			// every event has a value and a sending user, and sometimes a third data point
 			socket.on('chatMessage', function(data) {
 					io.sockets.in(req.params.id).emit('chatMessage', {'messageText': data['messageText'], 'sendingUser': data['sendingUser']});
 			});
 			socket.on('valueCalculated', function(data) {
 					io.sockets.in(req.params.id).emit('valueCalculated', {'value': data['value'], 'sendingUser': data['sendingUser'], 'exp': data['exp']});
+			});
+			socket.on('latexChanged', function(data) {
+				io.sockets.in(req.params.id).emit('latexChanged', {'rawText': data['rawText'], 'sendingUser': data['sendingUser']});
+			});
+			socket.on('solutionChanged', function(data) {
+				io.sockets.in(req.params.id).emit('solutionChanged', {'solutionText': data['solutionText'], 'sendingUser': data['sendingUser']});
+			});
+			socket.on('graphChanged', function(data) {
+				io.sockets.in(req.params.id).emit('graphChanged', {'graphSource': data['graphSource'], 'sendingUser': data['sendingUser']});
+			});
+			socket.on('fileUploaded', function(data) {
+				io.sockets.in(req.params.id).emit('fileUploaded', {'fileSource': data['fileSource'], 'sendingUser': data['sendingUser']});
+			});
+			socket.on('codeChanged', function(data) {
+				io.sockets.in(req.params.id).emit('codeChanged', {'code': data['code'], 'sendingUser': data['sendingUser']});
 			});
 		});
 		
