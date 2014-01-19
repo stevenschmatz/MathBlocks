@@ -1,11 +1,10 @@
-        $(function() {
-					
-					$("#graph").hide();
-					$("#plot").hide();
-            $("#draggable").css('z-index', '9999999999');
-            $("#content").css('height', '150%');
-					window.context = "whiteboard";
-					window.name = "";
+ $(function() {
+	 $("#graph").hide();
+		$("#plot").hide();
+    $("#draggable").css('z-index', '9999999999');
+    $("#content").css('height', '150%');
+		window.context = "whiteboard";
+		window.name = "";
 					
 					$("#nameInput").keypress(function(e) {
 						if(e.keyCode == 13) {
@@ -342,7 +341,10 @@
 										});
 									}
 								}
+							}
+						});
 						
+							
 						// solution stuff
 						
 						$("#solution").keypress(function() {
