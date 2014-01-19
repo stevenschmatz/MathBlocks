@@ -362,21 +362,41 @@
 							window.open('/render/?problem='+encodeURIComponent($("#problem_text").text())+'&solution='+encodeURIComponent($("#solution").val()));
 						});
 
-                window.corners = {}
+                //window.corners = {}
                 $(".maxim").click(function(){
                     ids = ["wolfram", "tokbox", "chat", "board", "output"];
                     for(var i = 0; i < ids.length; i++) {
-                        var ith_rectangle =  document.getElementById(ids[i]).getBoundingClientRect();
-                        window.corners[ids[i]] = ith_rectangle[0], ith_rectangle[1], ith_rectangle[2], ith_rectangle[3];
-                        if (!($.contains(document.getElementById(ids[i]), this))) {
+                        //var ith_rectangle =  document.getElementById(ids[i]).getBoundingClientRect();
+                        //window.corners[ids[i]] = ith_rectangle[0], ith_rectangle[1], ith_rectangle[2], ith_rectangle[3];
+                        window.originalWidth = $(this).parent().parent().width();
+                        window.originalHeight = $(this).parent().parent().height();
+                        window.idBeingMaximized = $(this).parent().parent().attr('id');
+                        if (!($(this).parent().parent().attr('id') == ids[i])) {
                             $("#"+ids[i]).hide();
                         }
                     }
 
-                    $(this).parent().animate({
+                    $(this).parent().parent().animate({
                         "width": "100%",
                         "height": "100%"
                     }, 500)
+                });
+
+                $(".minim").click(function() {
+                    if(window.idBeingMaximized = $(this).parent().parent().attr('id')) {
+                        ids = ["wolfram", "tokbox", "chat", "board", "output"];
+                        for(var i = 0; i < ids.length; i++) {
+                            if(!($.contains(document.getElementById(ids[i]), this))) {
+                                $("#"+id[i]).show();
+                            }
+                        }
+
+
+                        $(this).parent().parent().animate({
+                           "width": window.originalWidth,
+                           "height": window.originalHeight
+                        }, 500);
+                    }
                 });
 
 
