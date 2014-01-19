@@ -92,7 +92,7 @@ app.post('/invite', function(req, res) {
 		to: emails,
 		from: 'amit@amizrahi.com',
 		subject: 'Your invitation to ' + psetter + '\'s Mathelo problem',
-		html: require('ejs').render(require('fs').readFileSync(__dirname+'/views/mail.html'), {'problemSetter': psetter, 'problemName': pName, 'link': link})
+		html: require('ejs').render(require('fs').readFileSync(__dirname+'/views/mail.html').toString()), {'problemSetter': psetter, 'problemName': pName, 'link': link})
 	}, function(err, json) {
   if (err) { 
 		return console.error(err); 
