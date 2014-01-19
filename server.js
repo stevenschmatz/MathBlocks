@@ -52,6 +52,9 @@ app.get('/session/:id', function(req, res) {
 			socket.on('graphChanged', function(data) {
 				socket.broadcast.to(req.params.id).emit('graphChanged', {'graphSource': data['graphSource'], 'funct': data['funct'], 'sendingUser': data['sendingUser']});
 			});
+			socket.on('newUser', function(data) {
+				socket.broadcast.to(req.params.id).emit('newUser', {'name': data['name']});
+			});
 		});
 		
 		var id = req.params.id;
