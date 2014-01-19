@@ -28,28 +28,20 @@
 					
 					
 					var session = TB.initSession(sessionId);
-					var API_KEY = "44618111";
 					
 					session.addEventListener("sessionConnected", sessionConnectedHandler);
 					session.addEventListener("streamCreated", streamCreatedHandler);
 					
 					function sessionConnectedHandler(event) {
-						subscribeToStreams(event.streams);
-						var publisher = TB.initPublisher(API_KEY, "placeholder");
 						session.publish(publisher);
-					}
-					
-					function resizePublisher() {
-						var pubElement = document.getElementById(publisher.id);
-						pubElement.style.width = ($("#tokbox").width())-20;
-						pubElement.style.height = ($("#tokbox").height()/2)-20;
+						subscribeToStreams(event.streams);
 					}
 					
 					function subscribeToStreams(streams) {
 						for(var i = 0; i < streams.length; i++) {
 							var stream = streams[i];
 							if(stream.connection.connectionId != session.connection.connectionId) {
-								session.subscribe(stream, "placeholder", {width: $("#tokbox").width()-20, ($("#tokbox").height()/2)-20});
+								session.subscribe(stream, "placeholder");
 							}
 						}
 					}
@@ -58,7 +50,20 @@
 						subscribeToStreams(event.streams);
 					}
 					
-					session.connect(API_KEY, token);
+					var publisher = TB.initPublisher(apiKey, "placeholder");
+					var session = TB.initSession(sessionId);
+					
+					
+					session.connect(apiKey, token);
+					session.addEventListener("sessionConnected", sessionConnectedHandler);
+					session.addEventListener("streamCreated", streamCreatedHandler);
+					resizePublisher();
+					
+					function resizePublisher() {
+						var pubElement = document.getElementById(publisher.id);
+						pubElement.style.width = ($("#tokbox").width())-20;
+						pubElement.style.height = $("#tokbox").height()/3-20;
+					}
 
 					// chat websocket
 					
