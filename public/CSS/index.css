@@ -57,7 +57,7 @@
 			overflow:hidden;
         }
 
-        #board, #wolfram, #chat {
+        #board, #wolfram, #chat, #tokbox {
             overflow:scroll !important;
         }
 

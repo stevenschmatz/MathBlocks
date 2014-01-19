@@ -61,8 +61,8 @@
 					
 					function resizePublisher() {
 						var pubElement = document.getElementById(publisher.id);
-						pubElement.style.width = ($("#tokbox").width())-20;
-						pubElement.style.height = $("#tokbox").height()/3-20;
+						//pubElement.width = ($("#tokbox").width())-20;
+						//pubElement.height = $("#tokbox").height()/3-20;
 					}
 
 					// chat websocket
