@@ -6,6 +6,7 @@ var io = require('socket.io').listen(server);
 var http = require('http');
 var xml2js = require('xml2js');
 var request = require('request');
+var sendgrid = require('sendgrid')('amitmhacks', 'stuff123');
 
 app.engine('html', require('ejs').renderFile);
 app.use(express.bodyParser());
@@ -53,7 +54,6 @@ app.post('/calc', function(req, res) {
 				if(xmlObj['queryresult']['pod'] != undefined) {
 					if(xmlObj['queryresult']['pod'][1] != undefined) {
 						if(xmlObj['queryresult']['pod'][1]['$']['title'] == 'Result') {
-							console.log('{"status": "ok", "result": ' + xmlObj['queryresult']['pod'][1]['subpod'][0]['plaintext'][0] + ', "exp": ' + math + '}');
 							res.send('{"status": "ok", "result": ' + xmlObj['queryresult']['pod'][1]['subpod'][0]['plaintext'][0] + ', "exp": "' + math + '"}');
 						}
 						else {
@@ -63,10 +63,42 @@ app.post('/calc', function(req, res) {
 					else {
 						res.send('{"status": "bad", "error": "You must enter a valid numerical expression."}');
 					}
-                     }
+          }
 					else {
 						res.send('{"status": "bad", "error": "You must enter a valid numerical expression."}');
 					}
+			});
+		}
+	});
+});
+
+app.post('/plot', function(req, res) {
+	var funct = req.body.funct;
+	request('http://api.wolframalpha.com/v2/query?input=plot+'+encodeURIComponent(funct)+'&appid=8HLE69-6TAEVQ2637', function(err, resp, body) {
+		if(!err && resp.statusCode == 200) {
+			var wolframXML = body;
+			xml2js.parseString(wolframXML, function(err, obj) {
+				var xmlObj = obj;
+				//console.dir(xmlObj);
+				if(xmlObj['queryresult']['pod'] != undefined) {
+					if(xmlObj['queryresult']['pod'][1] != undefined) {
+						console.dir(xmlObj['queryresult']['pod'][1])
+						if(xmlObj['queryresult']['pod'][1]['$']['title'] == 'Plots' || xmlObj['queryresult']['pod'][1]['$']['title'] == 'Plot') {
+							console.dir(xmlObj['queryresult']['pod'][1]['subpod'][0]['img'][0]);
+							console.log('{"status": "ok", "result": ' + xmlObj['queryresult']['pod'][1]['subpod'][0]['img'][0]['$']['src'] + ', "funct": "' + funct + '"}')
+							res.send('{"status": "ok", "result": "' + xmlObj['queryresult']['pod'][1]['subpod'][0]['img'][0]['$']['src'] + '", "funct": "' + funct + '"}');
+						}
+						else {
+							res.send('{"status": "bad", "error": "You must enter a valid function."');
+						}
+					}
+					else {
+						res.send('{"status": "bad", "error": "You must enter a valid function."');
+					}
+				}
+				else {
+					res.send('{"status": "bad", "error": "You must enter a valid function."');
+				}
 			});
 		}
 	});
@@ -80,6 +112,25 @@ app.get('/render', function(req, res) {
 	var solution = req.query.solution;
 	var problem = req.query.problem;
 	res.render('rendered.html', {'solution': solution, 'problem': problem});
+});
+
+app.post('/invite', function(req, res) {
+	var emails = req.body.emails.split(",");
+	var psetter = req.body.psetter;
+	var pName = req.body.problemName;
+	var link = req.body.link;
+	sendgrid.send({
+		to: emails,
+		from: 'amit@amizrahi.com',
+		subject: 'Your invitation to ' + psetter + '\'s Mathelo problem',
+		html: require('ejs').render(require('fs').readFileSync(__dirname+'/views/mail.html').toString(), {'problemSetter': psetter, 'problemName': pName, 'link': link})
+	}, function(err, json) {
+  if (err) { 
+		return console.error(err); 
+	}
+  console.log(json);
+	});
+	return 'ok';
 });
 
 // assuming io is the Socket.IO server object

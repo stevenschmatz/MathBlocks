@@ -1,5 +1,7 @@
         $(function() {
-
+					
+					$("#graph").hide();
+					$("#plot").hide();
             $("#draggable").css('z-index', '9999999999');
             $("#content").css('height', '150%');
 					window.context = "whiteboard";
@@ -25,8 +27,7 @@
 			    var token     = "T1==cGFydG5lcl9pZD00NDYxODE3MiZzZGtfdmVyc2lvbj10YnJ1YnktdGJyYi12MC45MS4yMDExLTAyLTE3JnNpZz01MmM0ZjJlZTY2NmZjYjg5NTNjMTgwZWJkNzMzOWFjOGY5YTZjZDVlOnJvbGU9cHVibGlzaGVyJnNlc3Npb25faWQ9MV9NWDQwTkRZeE9ERTNNbjUtVTJGMElFcGhiaUF4T0NBd01Eb3dNam94TkNCUVUxUWdNakF4Tkg0d0xqVTJNVFl4TmpnMGZnJmNyZWF0ZV90aW1lPTEzOTAwMzIxODEmbm9uY2U9MC4wMTgwMjM1MDEwOTE0NTQ0NTImZXhwaXJlX3RpbWU9MTM5MDYzNjk4MSZjb25uZWN0aW9uX2RhdGE9";
 					
 					
-					// OpenTok
-					/*var session = TB.initSession(sessionId);
+					var session = TB.initSession(sessionId);
 					var API_KEY = "44618111";
 					
 					session.addEventListener("sessionConnected", sessionConnectedHandler);
@@ -50,13 +51,8 @@
 						subscribeToStreams(event.streams);
 					}
 					
-					session.connect(API_KEY, token);*/
-					
-					// white board
-					
-					
-					
-					
+					session.connect(API_KEY, token);
+
 					// chat websocket
 					
             $("#msg").keypress(function(e) {
@@ -228,10 +224,34 @@
 						});
 
 						$("#invite").click(function() {
-							var $emailBar = $("<div class='callout panel'><p>Type each email, separated by commas.</p><input type='text' id='emails' placeholder='Emails, separated by commas...'/></div>");
-							$("body").prepend($emailBar);
-							$("#emails").tagsInput();
+							var $emailBar = $("<div class='callout panel' id='emailBar'><form id='emailForm'><p>Type each email, separated by a comma.</p><input type='text' id='emails' placeholder='Emails, separated by commas...'/></form></div>");
+							if($("#emailBar").length == 0) {
+								$("body").prepend($emailBar);
+								$("#emails").tagsInput();
+								var $inputButton = $("<input type='submit' id='submitButton' value='Submit' class='small round button'>");
+								$("#emailForm").append($inputButton);
+								$("#emailForm").submit(function(e) {
+									e.preventDefault();
+										var emails = $("#emails").val();
+										if(window.name != '') {
+											var psetter = window.name;
+										}
+										else {
+											psetter = 'A user';
+										}
+										var pName = $("#problem_text").text();
+										var link = document.URL;
+										$.post('/invite', {'emails': emails, 'psetter': psetter, 'pName': pName, 'link': link}, function(err, data) {
+											
+										});
+										$("#emailBar").html("");
+										$("#emailBar").text("Email sent.");
+										$("#emailBar").fadeOut(500);
+								});
+							}
 						});
+						
+						
 						
 						$(".switchLink").click(function(e) {
 							e.preventDefault();
@@ -241,6 +261,7 @@
 								window.context = $(this).attr('data-context');
 								if(window.context == 'latex') {
 									if($("#latexInput").length == 0) {
+										$("#graphInput").remove();
 										var $latexEditor = $("<input type='text' id='latexInput' placeholder='Type your LaTeX here.'/>");
 										$(".boardRight").prepend($latexEditor);
 										$("#latexInput").keydown(function() {
@@ -257,6 +278,35 @@
 									$(this).addClass('round');
 									$(this).addClass('button');
 									$(this).css('color', 'white');
+								}
+								if(window.context == 'graph') {
+									$("#latexInput").remove();
+									$("#wrapper").remove();
+									$("#graph").show();
+									if($("#graphInput").length == 0) {
+										var $graphEditor = $("<input type='text' id='graphInput' placeholder='Type your function here.'/>");
+										$(".boardRight").prepend($graphEditor);
+										var $graph = $("<div id='graph'></p>");
+										$(".boardRight").append($graph);
+										$graphEditor.ready(function() {
+											$("#graphInput").keydown(function(e) {
+												if(e.keyCode == 13) {
+													e.preventDefault();
+													var funct = $("#graphInput").val();
+													$.post('/plot', {'funct': funct}, function(data) {
+														parsed = JSON.parse(data);
+														if(parsed['status'] == 'ok') {
+															$("#graph").html('<img src="' + parsed['result'] + '"></img>');
+															//socket.emit('valueCalculated', {'sendingUser': window.name, 'value': parsed['result'], 'exp': parsed['exp']});
+														}
+														else {
+															$("#error").text(parsed['error']);
+														}
+													});
+												}
+											});
+										});
+									}
 								}
 						});
 
