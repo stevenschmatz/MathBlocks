@@ -330,7 +330,7 @@
 										}
 									}
 								else if(window.context == 'graph') {
-									$("#latexInput").hide();
+									$("#latexInput").remove();
 									$("#latexRender").hide();
 									$("#graph").show();
 									if($("#graphInput").length == 0) {
