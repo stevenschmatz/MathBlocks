@@ -347,7 +347,7 @@
 														parsed = JSON.parse(data);
 														if(parsed['status'] == 'ok') {
 															$("#graph").html('<img src="' + parsed['result'] + '"></img>');
-															socket.emit('graphChanged', {'graphSource': parsed['result'], 'sendingUser': window.name});
+															socket.emit('graphChanged', {'graphSource': parsed['result'], 'funct': funct, 'sendingUser': window.name});
 														}
 														else {
 															$("#error").text(parsed['error']);

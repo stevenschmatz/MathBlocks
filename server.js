@@ -49,7 +49,7 @@ app.get('/session/:id', function(req, res) {
 				socket.broadcast.to(req.params.id).emit('solutionChanged', {'solutionText': data['solutionText'], 'sendingUser': data['sendingUser']});
 			});
 			socket.on('graphChanged', function(data) {
-				socket.broadcast.to(req.params.id).emit('graphChanged', {'graphSource': data['graphSource'], 'sendingUser': data['sendingUser']});
+				socket.broadcast.to(req.params.id).emit('graphChanged', {'graphSource': data['graphSource'], 'funct': data['funct'], 'sendingUser': data['sendingUser']});
 			});
 		});
 		
