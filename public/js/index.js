@@ -245,12 +245,11 @@
 										var pName = $("#problem_text").text();
 										var link = document.URL;
 										$.post('/invite', {'emails': emails, 'psetter': psetter, 'pName': pName, 'link': link}, function(err, data) {
-											if(data == 'ok') {
-												$("#emailBar").html("");
-												$("#emailBar").text("Email sent.");
-												$("#emailBar").fadeOut(500);
-											}
+											
 										});
+										$("#emailBar").html("");
+										$("#emailBar").text("Email sent.");
+										$("#emailBar").fadeOut(500);
 								});
 							}
 						});
