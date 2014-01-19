@@ -330,8 +330,8 @@
 										}
 									}
 								else if(window.context == 'graph') {
-									$("#latexInput").remove();
-									$("#latexRender").remove();
+									$("#latexInput").hide();
+									$("#latexRender").hide();
 									$("#graph").show();
 									if($("#graphInput").length == 0) {
 										var $graphEditor = $("<input type='text' id='graphInput' placeholder='Type your function here.'/>");
