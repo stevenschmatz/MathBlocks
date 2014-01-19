@@ -24,7 +24,7 @@
 					});
 					
 					socket.on('newUser', function(data) {
-						if($("#newUserBar").length() == 0) {
+						if($("#newUserBar").length == 0) {
 							var $newUserBar = $("<div class='callout panel' id='newUserBar'>"+data['name']+" has joined.</div>");
 							$("body").prepend($newUserBar);
 						}
