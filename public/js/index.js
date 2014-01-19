@@ -5,7 +5,7 @@
     $("#content").css('height', '150%');
 		window.context = "whiteboard";
 		window.name = "";
-					
+		
 					$("#nameInput").keypress(function(e) {
 						if(e.keyCode == 13) {
 							e.preventDefault();
@@ -260,6 +260,10 @@
 								window.graphSource = data['graphSource'];
 								window.funct = data['funct'];
 							}
+							var history = data['graphHistory'];
+							var mostRecentHistory = history[history.length-1];
+							var $item = $("<li id='history'><b>"+mostRecentHistory['sendingUser']+"</b>: "+mostRecentHistory['funct']+"</li>");
+							$("#graphHistory").append($item);
 						});
 						
 						socket.on('')

@@ -213,3 +213,7 @@
             padding: 0px;
             margin: 0px;
         }
+				
+				.graphHistory li {
+					list-style-type:none;
+				}
