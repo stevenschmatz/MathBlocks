@@ -158,6 +158,12 @@ app.post('/invite', function(req, res) {
 	return 'ok';
 });
 
+app.post('/upload', function(req, res) {
+	var sessionID = req.body.sessionID;
+	var binaryData = req.body.binaryData;
+	
+});
+
 // assuming io is the Socket.IO server object
 io.configure(function () { 
   io.set("transports", ["xhr-polling"]); 
