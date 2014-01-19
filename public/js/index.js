@@ -314,6 +314,7 @@
 								window.context = $(this).attr('data-context');
 								if(window.context == 'latex') {
 									$("#graph").hide();
+									$("#graphInput").hide();
 									if($("#latexInput").length == 0) {
 										$("#graphInput").remove();
 										var $latexEditor = $("<input type='text' id='latexInput' placeholder='Type your LaTeX here.'/>");
@@ -330,13 +331,16 @@
 									}
 								else if(window.context == 'graph') {
 									$("#latexInput").remove();
+									$("#latexRender").remove();
 									$("#graph").show();
 									if($("#graphInput").length == 0) {
 										var $graphEditor = $("<input type='text' id='graphInput' placeholder='Type your function here.'/>");
 										$(".boardRight").prepend($graphEditor);
 										var $graph = $("<div id='graph'></p>");
 										$(".boardRight").append($graph);
-										$("#graph").html('<img src="' + window.graphSource + '"></img>');
+										if(window.graphSource != undefined) {
+											$("#graph").html('<img src="' + window.graphSource + '"></img>');
+										}
 										$("#graphInput").val(window.funct);
 										$graphEditor.ready(function() {
 											$("#graphInput").keydown(function(e) {
