@@ -252,6 +252,18 @@
 							}
 						});
 						
+						socket.on('graphChanged', function(data) {
+							if(window.context == 'graph') {
+								$("#graph").html('<img src="' + data['graphSource'] + '"></img>');
+							}
+							else {
+								window.graphSource = data['graphSource'];
+								window.funct = data['funct'];
+							}
+						});
+						
+						socket.on('')
+						
 						socket.on('solutionChanged', function(data) {
 							$("#solution").val(data['solutionText']);
 						});
@@ -324,6 +336,8 @@
 										$(".boardRight").prepend($graphEditor);
 										var $graph = $("<div id='graph'></p>");
 										$(".boardRight").append($graph);
+										$("#graph").html('<img src="' + window.graphSource + '"></img>');
+										$("#graphInput").val(window.funct);
 										$graphEditor.ready(function() {
 											$("#graphInput").keydown(function(e) {
 												if(e.keyCode == 13) {
