@@ -73,7 +73,7 @@
 					// remove duplicate opentok instances
 					
 					for(var i = 0; i < window.highestStream;i++) {
-						if($("#placeholder"+i).find("video").attr('src') == $("#placeholder"+i-1).find("video").attr('src'))) {
+						if($("#placeholder"+i).find("video").attr('src') == $("#placeholder"+i-1).find("video").attr('src')) {
 							$("#placeholder"+i).hide();
 						}
 					}
