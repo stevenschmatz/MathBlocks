@@ -83,7 +83,7 @@ app.get('/render', function(req, res) {
 	res.render('rendered.html', {'solution': solution, 'problem': problem});
 });
 
-app.postt('/invite', function(req, res) {
+app.post('/invite', function(req, res) {
 	var emails = req.body.emails.split(",");
 	var psetter = req.body.psetter;
 	var pName = req.body.problemName;
