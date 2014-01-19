@@ -242,6 +242,7 @@
 						socket.on('latexChanged', function(data) {
 							if(window.context == 'latex') {
 								$("#latexRender").text(data['rawText']);
+								$("#latexInput").val(data['rawText']);
 								MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
 							}
 							else {
@@ -302,7 +303,7 @@
 										$("#latexInput").keydown(function() {
 												$("#latexRender").text($(this).val());
 												MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
-												socket.emit('latexChanged', {'rawText': $("#latexInput").text(), 'sendingUser': window.name});
+												socket.emit('latexChanged', {'rawText': $("#latexInput").val(), 'sendingUser': window.name});
 											});
 										}
 									}
