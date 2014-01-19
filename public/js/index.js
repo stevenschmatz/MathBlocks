@@ -24,8 +24,13 @@
 					});
 					
 					socket.on('newUser', function(data) {
-						var $newUserBar = $("<div class='callout panel'>"+data['name']+" has joined.</div>");
-						$("body").prepend($newUserBar);
+						if($("#newUserBar").length() == 0) {
+							var $newUserBar = $("<div class='callout panel' id='newUserBar'>"+data['name']+" has joined.</div>");
+							$("body").prepend($newUserBar);
+						}
+						setTimeout(function() {
+							$newUserBar.fadeOut(500);
+						}, 1000);
 					});
 					
 					window.highestStream = 0;
