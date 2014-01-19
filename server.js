@@ -142,6 +142,10 @@ app.post('/invite', function(req, res) {
 	return 'ok';
 });
 
+app.get('/help', function(req, res) {
+    res.render("help.html")
+})
+
 // assuming io is the Socket.IO server object
 io.configure(function () { 
   io.set("transports", ["xhr-polling"]); 
