@@ -238,6 +238,16 @@
 								$("#chat-msgs").append(msgEl);
 							}
 						});
+						
+						socket.on('latexChanged', function(data) {
+							if(window.context == 'latex') {
+								$("#latexRender").text(data['rawText']);
+								MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+							}
+							else {
+								window.latexContent = data['rawText'];
+							}
+						});
 
 						$("#invite").click(function() {
 							var $emailBar = $("<div class='callout panel' id='emailBar'><form id='emailForm'><p>Type each email, separated by a comma.</p><input type='text' id='emails' placeholder='Emails, separated by commas...'/></form></div>");
