@@ -20,6 +20,7 @@
 						}
 					});
 					
+					window.highestStream = 0;
 					window.wasAlreadyMinimized = 0;
 					
 			    var apiKey    = "44618172";
@@ -41,7 +42,11 @@
 						for(var i = 0; i < streams.length; i++) {
 							var stream = streams[i];
 							if(stream.connection.connectionId != session.connection.connectionId) {
-								session.subscribe(stream, "placeholder");
+								var videoBoxId = "placeholder"+window.highestStream;
+								var $videoBox = $("<div id='" + videoBoxId + "'></div>");
+								window.highestStream++;
+								$("#tokbox").append($videoBox);
+								session.subscribe(stream, videoBoxId);
 							}
 						}
 					}
