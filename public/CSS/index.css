@@ -180,7 +180,8 @@
             margin-left:5px;
         }
 				.minimize {
-					float:right;
+					text-align:right;
+                    float:right;
 					width:100%;
 					margin:10px;
 					margin-top:12px;
@@ -197,3 +198,18 @@
 				#submitButton {
 					margin-top:10px;
 				}
+
+        #editor {
+            position: absolute;
+            top: 50%;
+            bottom: 0;
+            left: 50%;
+            right: 0;
+            margin:10px;
+
+        }
+
+        .boardLeft {
+            padding: 20px;
+            margin: 20px;
+        }

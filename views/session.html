@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Mathelo</title>
+
 				<!-- jquery -->
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
          <link rel="shortcut icon" href="/images/iconmonstr-3d-view-icon-16.png"/>
@@ -122,24 +123,15 @@
 	        </div>
 				<div class="row bottom">
 
-                    <div class="draggable ui-widget-content large-8 medium-8 small-8 columns" id="board">
+                    <div class="ui-widget-content large-8 medium-8 small-8 columns" id="board">
 					 <p class="minimize">
                             <img class = "miniz" src="/images/iconmonstr-minus-2-icon-16.png" alt="minus" height="10px" width="10px"/>
                             <img class = "maxim" src="/images/iconmonstr-square-outline-icon-16.png" alt="square" height="10px" width="10px"/>
                             <img class = "close" src="/images/iconmonstr-x-mark-icon-16.png" alt="x" height="10px" width="10px"/>
 					 </p>
 						<div class="boardLeft">
-							<p><a class="switchLink" data-context="code" href="#">Code</a> &middot; <a class="switchLink" data-context="latex" href="#">LaTeX</a> &middot; <a class="switchLink" data-context="graph" href="#">Graphing</a></p>
-
-
+							<p><a class="switchLink" data-context="latex" href="#">LaTeX</a> &middot; <a class="switchLink" data-context="graph" href="#">Graphing</a></p>
 						</div>
- 						 <div class="boardRight">
- 							 <div id="latexRender">
-							 </div>
-							 <input type="text" id="plot"/>
-							 <div id="graph">
-							 </div>
- 						 </div>
 						</div>
 					<div class="draggable ui-widget-content large-4 medium-4 small-4 columns" id="output">
 						<p class="minimize">
