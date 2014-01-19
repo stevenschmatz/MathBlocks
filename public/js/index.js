@@ -1,12 +1,11 @@
-        $(function() {
-					
-					$("#graph").hide();
-					$("#plot").hide();
-            $("#draggable").css('z-index', '9999999999');
-            $("#content").css('height', '150%');
-					window.context = "whiteboard";
-					window.name = "";
-					
+ $(function() {
+	 $("#graph").hide();
+		$("#plot").hide();
+    $("#draggable").css('z-index', '9999999999');
+    $("#content").css('height', '150%');
+		window.context = "whiteboard";
+		window.name = "";
+		
 					$("#nameInput").keypress(function(e) {
 						if(e.keyCode == 13) {
 							e.preventDefault();
@@ -241,6 +240,37 @@
 								$("#chat-msgs").append(msgEl);
 							}
 						});
+						
+						socket.on('latexChanged', function(data) {
+							if(window.context == 'latex') {
+								$("#latexRender").text(data['rawText']);
+								$("#latexInput").val(data['rawText']);
+								MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+							}
+							else {
+								window.latexContent = data['rawText'];
+							}
+						});
+						
+						socket.on('graphChanged', function(data) {
+							if(window.context == 'graph') {
+								$("#graph").html('<img src="' + data['graphSource'] + '"></img>');
+							}
+							else {
+								window.graphSource = data['graphSource'];
+								window.funct = data['funct'];
+							}
+							var history = data['graphHistory'];
+							var mostRecentHistory = history[history.length-1];
+							var $item = $("<li id='history'><b>"+mostRecentHistory['sendingUser']+"</b>: "+mostRecentHistory['funct']+"</li>");
+							$("#graphHistory").append($item);
+						});
+						
+						socket.on('')
+						
+						socket.on('solutionChanged', function(data) {
+							$("#solution").val(data['solutionText']);
+						});
 
 						$("#invite").click(function() {
 							var $emailBar = $("<div class='callout panel' id='emailBar'><form id='emailForm'><p>Type each email, separated by a comma.</p><input type='text' id='emails' placeholder='Emails, separated by commas...'/></form></div>");
@@ -288,24 +318,35 @@
 								window.context = $(this).attr('data-context');
 								if(window.context == 'latex') {
 									$("#graph").hide();
+									$("#graphInput").hide();
+									$("#latexRender").show();
 									if($("#latexInput").length == 0) {
 										$("#graphInput").remove();
 										var $latexEditor = $("<input type='text' id='latexInput' placeholder='Type your LaTeX here.'/>");
 										$(".boardRight").prepend($latexEditor);
+										$("#latexInput").val(window.latexContent);
+										$("#latexRender").text(window.latexContent);
+										MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
 										$("#latexInput").keydown(function() {
 												$("#latexRender").text($(this).val());
 												MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+												socket.emit('latexChanged', {'rawText': $("#latexInput").val(), 'sendingUser': window.name});
 											});
 										}
 									}
 								else if(window.context == 'graph') {
 									$("#latexInput").remove();
+									$("#latexRender").hide();
 									$("#graph").show();
 									if($("#graphInput").length == 0) {
 										var $graphEditor = $("<input type='text' id='graphInput' placeholder='Type your function here.'/>");
 										$(".boardRight").prepend($graphEditor);
 										var $graph = $("<div id='graph'></p>");
 										$(".boardRight").append($graph);
+										if(window.graphSource != undefined) {
+											$("#graph").html('<img src="' + window.graphSource + '"></img>');
+										}
+										$("#graphInput").val(window.funct);
 										$graphEditor.ready(function() {
 											$("#graphInput").keydown(function(e) {
 												if(e.keyCode == 13) {
@@ -315,7 +356,7 @@
 														parsed = JSON.parse(data);
 														if(parsed['status'] == 'ok') {
 															$("#graph").html('<img src="' + parsed['result'] + '"></img>');
-															//socket.emit('valueCalculated', {'sendingUser': window.name, 'value': parsed['result'], 'exp': parsed['exp']});
+															socket.emit('graphChanged', {'graphSource': parsed['result'], 'funct': funct, 'sendingUser': window.name});
 														}
 														else {
 															$("#error").text(parsed['error']);
@@ -326,26 +367,16 @@
 										});
 									}
 								}
-                                else if(window.context == 'code') {
-                                    $("#graphInput").remove();
-                                    $("#latexInput").remove();
-                                    $(this).parent().append("")
-                                   }
-                            }
-						    });
-
-
-
-
-                        $("#latexRender").draggable();
-                        $("#latexRender").resizable();
-                        $("#latexRender").click(function() {
-                            $("#board").css({
-                                "z-value":"-100"
-                            })
-                        })
-
-
+							}
+						});
+						
+							
+						// solution stuff
+						
+						$("#solution").keypress(function() {
+							socket.emit("solutionChanged", {'solutionText': $(this).val(), 'sendingUser': this.name});
+						});
+						
 						$("#save").click(function(e) {
 							e.preventDefault();
 							window.open('/render/?problem='+encodeURIComponent($("#problem_text").text())+'&solution='+encodeURIComponent($("#solution").val()));
