@@ -35,14 +35,21 @@
 					
 					function sessionConnectedHandler(event) {
 						subscribeToStreams(event.streams);
-						session.publish();
+						var publisher = TB.initPublisher(API_KEY, "placeholder");
+						session.publish(publisher);
+					}
+					
+					function resizePublisher() {
+						var pubElement = document.getElementById(publisher.id);
+						pubElement.style.width = ($("#tokbox").width())-20;
+						pubElement.style.height = ($("#tokbox").height()/2)-20;
 					}
 					
 					function subscribeToStreams(streams) {
 						for(var i = 0; i < streams.length; i++) {
 							var stream = streams[i];
 							if(stream.connection.connectionId != session.connection.connectionId) {
-								session.subscribe(stream, "placeholder", {width: 400, height: 400});
+								session.subscribe(stream, "placeholder", {width: $("#tokbox").width()-20, ($("#tokbox").height()/2)-20});
 							}
 						}
 					}

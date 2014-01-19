@@ -2,7 +2,7 @@ var express = require('express');
 var uuid = require('uuid');
 var app = express();
 var server = require('http').createServer(app);
-var io = require('socket.io').listen(server);
+var io = require('socket.io').listen(server, {log: false});
 var http = require('http');
 var xml2js = require('xml2js');
 var request = require('request');
@@ -63,11 +63,14 @@ app.post('/calc', function(req, res) {
 					else {
 						res.send('{"status": "bad", "error": "You must enter a valid numerical expression."}');
 					}
-          }
-					else {
-						res.send('{"status": "bad", "error": "You must enter a valid numerical expression."}');
-					}
+         }
+				else {
+					res.send('{"status": "bad", "error": "You must enter a valid numerical expression."}');
+				}
 			});
+		}
+		else {
+			res.send('{"status": "bad", "error": "There was an error."}');
 		}
 	});
 });
@@ -82,14 +85,14 @@ app.post('/plot', function(req, res) {
 				//console.dir(xmlObj);
 				if(xmlObj['queryresult']['pod'] != undefined) {
 					if(xmlObj['queryresult']['pod'][1] != undefined) {
-						console.dir(xmlObj['queryresult']['pod'][1])
+						console.dir(xmlObj['queryresult']['pod'][1]);
 						if(xmlObj['queryresult']['pod'][1]['$']['title'] == 'Plots' || xmlObj['queryresult']['pod'][1]['$']['title'] == 'Plot') {
 							console.dir(xmlObj['queryresult']['pod'][1]['subpod'][0]['img'][0]);
 							console.log('{"status": "ok", "result": ' + xmlObj['queryresult']['pod'][1]['subpod'][0]['img'][0]['$']['src'] + ', "funct": "' + funct + '"}')
 							res.send('{"status": "ok", "result": "' + xmlObj['queryresult']['pod'][1]['subpod'][0]['img'][0]['$']['src'] + '", "funct": "' + funct + '"}');
 						}
 						else {
-							res.send('{"status": "bad", "error": "You must enter a valid function."');
+							console.dir(xmlObj['queryresult']['pod'][1]);
 						}
 					}
 					else {
@@ -100,6 +103,9 @@ app.post('/plot', function(req, res) {
 					res.send('{"status": "bad", "error": "You must enter a valid function."');
 				}
 			});
+		}
+		else {
+			res.send('{"status": "bad", "error": "You must enter a valid function."');
 		}
 	});
 });
