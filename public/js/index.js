@@ -1,6 +1,7 @@
  $(function() {
 	 $("#graph").hide();
 		$("#plot").hide();
+		$("#saveLatex").hide();
     $("#draggable").css('z-index', '9999999999');
     $("#content").css('height', '150%');
 		window.context = "whiteboard";
@@ -240,13 +241,21 @@
 								window.graphSource = data['graphSource'];
 								window.funct = data['funct'];
 							}
-							var history = data['graphHistory'];
-							var mostRecentHistory = history[history.length-1];
-							var $item = $("<li id='history'><b>"+mostRecentHistory['sendingUser']+"</b>: "+mostRecentHistory['funct']+"</li>");
-							$("#graphHistory").append($item);
+					});
+							
+							socket.on('graphHistoryChanged', function(data) {
+								var history = data['graphHistory'];
+								var mostRecentHistory = history[history.length-1];
+								var $item = $("<li id='history'><b>"+mostRecentHistory['sendingUser']+"</b>: "+mostRecentHistory['funct']+"</li>");
+								$("#graphHistory").append($item);
 						});
 						
-						socket.on('')
+						socket.on('latexHistoryChanged', function(data) {
+							var history = data['latexHistory'];
+							var mostRecentHistory = history[history.length-1];
+							var $item = $("<li id='history'><b>"+mostRecentHistory['sendingUser']+"</b>: "+mostRecentHistory['funct']+"</li>");
+							$("#graphHistory").append(item);
+						});
 						
 						socket.on('solutionChanged', function(data) {
 							$("#solution").val(data['solutionText']);
@@ -297,6 +306,7 @@
 								$(this).css('color', 'white');
 								window.context = $(this).attr('data-context');
 								if(window.context == 'latex') {
+									$("#saveLatex").show();
 									$("#graph").hide();
 									$("#graphInput").hide();
 									$("#latexRender").show();
@@ -406,6 +416,11 @@
                         }, 500);
                     }
                 });
+								
+								$("#saveLatex").click(function(e) {
+									e.preventDefault();
+									socket.emit('latexSaved', {'rawText': $("#latexInput").val(), 'sendingUser': window.name});
+								});
 
 
 						

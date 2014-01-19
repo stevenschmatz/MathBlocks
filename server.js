@@ -14,8 +14,8 @@ app.use(express.static(__dirname+'/public'));
 app.use(express.cookieParser());
 app.use(express.session({secret: 'f15463f8-7ff1-11e3-9b32-28cfe9511e3f'}));
 
-var idsToNames = {};
-var idsToHistories = {};
+global.idsToNames = {};
+global.idsToHistories = {};
 
 app.get('/', function(req, res) {
 	res.render('index.html');
@@ -26,8 +26,7 @@ app.post('/', function(req, res) {
 	var sessionID = uuid.v4();
 	req.session.sessionID = sessionID;
 	req.session.problemText = problemText;
-	idsToNames[req.session.sessionID] = problemText;
-	idsToHistories[req.session.sessionID] = {"chat": [], "calc": [], "latex": [], "solution": [], "graph": []};
+	global.idsToNames[req.session.sessionID] = problemText;
 	res.redirect('/session/'+req.session.sessionID);
 });
 
@@ -39,30 +38,29 @@ app.get('/session/:id', function(req, res) {
 			});
 			// every event has a value and a sending user, and sometimes a third data point
 			socket.on('chatMessage', function(data) {
-					idsToHistories[req.params.id]['chat'].push(data);
 					io.sockets.in(req.params.id).emit('chatMessage', {'messageText': data['messageText'], 'sendingUser': data['sendingUser']});
 			});
 			socket.on('valueCalculated', function(data) {
-				idsToHistories[req.params.id]['calc'].push(data);
-					io.sockets.in(req.params.id).emit('valueCalculated', {'value': data['value'], 'sendingUser': data['sendingUser'], 'exp': data['exp']});
+				io.sockets.in(req.params.id).emit('valueCalculated', {'value': data['value'], 'sendingUser': data['sendingUser'], 'exp': data['exp']});
 			});
 			socket.on('latexChanged', function(data) {
-				idsToHistories[req.params.id]['latex'].push(data);
 				socket.broadcast.to(req.params.id).emit('latexChanged', {'rawText': data['rawText'], 'sendingUser': data['sendingUser']});
 			});
 			socket.on('solutionChanged', function(data) {
-				idsToHistories[req.params.id]['solution'].push(data);
 				socket.broadcast.to(req.params.id).emit('solutionChanged', {'solutionText': data['solutionText'], 'sendingUser': data['sendingUser']});
 			});
 			socket.on('graphChanged', function(data) {
-				idsToHistories[req.params.id]['graph'].push(data);
-				socket.broadcast.to(req.params.id).emit('graphChanged', {'graphSource': data['graphSource'], 'funct': data['funct'], 'sendingUser': data['sendingUser'], 'graphHistory': idsToHistories[req.params.id]['graph']});
-				console.log(idsToHistories);
+				socket.broadcast.to(req.params.id).emit('graphChanged', {'graphSource': data['graphSource'], 'funct': data['funct'], 'sendingUser': data['sendingUser']});
 			});
 		});
 		
-		var id = req.params.id
-		res.render('session.html', {problemText: idsToNames[id], sessionID: id, graphHistory: idsToHistories[req.params.id]['graph']});
+		var id = req.params.id;
+		if(global.idsToNames[id] == undefined) {
+			res.send("No session exists with that name.");
+		}
+		else {
+			res.render('session.html', {problemText: global.idsToNames[id], sessionID: id});
+		}
 });
 
 app.post('/calc', function(req, res) {
