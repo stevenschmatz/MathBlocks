@@ -21,7 +21,7 @@
             height:100%;
         }
         .bottom {
-            height:600px;
+            height:350px;
         }
         #bigHeader {
             width:125%;
@@ -64,8 +64,10 @@
             overflow:scroll !important;
         }
 
+
         #board, #output {
-            height: 420px;
+            height: 350px;
+            margin-top: 15px;
         }
 
         .draggable .minimize {
@@ -217,3 +219,7 @@
 				.graphHistory li {
 					list-style-type:none;
 				}
+
+        .row {
+            height:40% !important;
+        }

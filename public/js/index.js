@@ -370,11 +370,16 @@
                         //window.corners[ids[i]] = ith_rectangle[0], ith_rectangle[1], ith_rectangle[2], ith_rectangle[3];
                         window.originalWidth = $(this).parent().parent().width();
                         window.originalHeight = $(this).parent().parent().height();
+                        window.originalRowHeight = $(this).parent().parent().parent().height();
                         window.idBeingMaximized = $(this).parent().parent().attr('id');
                         if (!($(this).parent().parent().attr('id') == ids[i])) {
                             $("#"+ids[i]).hide();
                         }
                     }
+
+                    $(this).parent().parent().parent().css({
+                        "height": "100% !important"
+                    });
 
                     $(this).parent().parent().animate({
                         "width": "100%",
@@ -382,15 +387,18 @@
                     }, 500)
                 });
 
-                $(".minim").click(function() {
+                $(".miniz").click(function() {
                     if(window.idBeingMaximized = $(this).parent().parent().attr('id')) {
                         ids = ["wolfram", "tokbox", "chat", "board", "output"];
                         for(var i = 0; i < ids.length; i++) {
                             if(!($.contains(document.getElementById(ids[i]), this))) {
-                                $("#"+id[i]).show();
+                                $("#"+ids[i]).show();
                             }
                         }
 
+                        $(this).parent().parent().parent().animate({
+                            "height": originalRowHeight
+                        }, 500);
 
                         $(this).parent().parent().animate({
                            "width": window.originalWidth,
