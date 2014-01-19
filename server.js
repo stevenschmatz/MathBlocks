@@ -91,7 +91,7 @@ app.post('/invite', function(req, res) {
 	sendgrid.send({
 		to: emails,
 		subject: 'Your invitation to ' + psetter + '\'s Mathelo problem',
-		html: require('ejs').renderFile('./views/mail.html', {'problemSetter': problemSetter, 'problemName': pName, 'link': link})
+		html: require('ejs').renderFile('./views/mail.html', {'problemSetter': psetter, 'problemName': pName, 'link': link})
 	}, function(err, json) {
   if (err) { 
 		return console.error(err); 
