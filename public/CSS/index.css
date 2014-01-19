@@ -150,6 +150,9 @@
 				#output {
 					background-color:#CCCCCC;
 				}
+				.tagsinput {
+					width:80% !important;
+				}
 				#emails_tagsinput {
 					width:100% !important;
 					font-family:"Merriweather" !important;
@@ -178,4 +181,7 @@
 					width:100%;
 					margin:10px;
 					margin-top:12px;
+				}
+				#submitButton {
+					margin-top:10px;
 				}

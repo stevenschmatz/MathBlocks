@@ -92,7 +92,13 @@ app.post('/invite', function(req, res) {
 		to: emails,
 		subject: 'Your invitation to ' + psetter + '\'s Mathelo problem',
 		html: require('ejs').renderFile('./views/mail.html', {'problemSetter': problemSetter, 'problemName': pName, 'link': link})
+	}, function(err, json) {
+  if (err) { 
+		return console.error(err); 
+	}
+  console.log(json);
 	});
+	return 'ok';
 });
 
 // assuming io is the Socket.IO server object
