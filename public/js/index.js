@@ -144,7 +144,7 @@
             $("#menu").fadeIn(500);
             $(".callout .panel").fadeIn(500);
             $(".draggable").delay(500).fadeIn(500);
-            $(".draggable").draggable();
+            /*$(".draggable").draggable();*/
             $(".draggable").resizable();
             $(".draggable").mouseover(function() {
                 $(this).animate({
@@ -313,8 +313,14 @@
 
 
 
-                        $('#board').draggable('disable');
-                        $("#latexRender").find(".MathJax").draggable('enable');
+                        $("#latexRender").draggable();
+                        $("#latexRender").resizable();
+                        $("#latexRender").click(function() {
+                            $("#board").css({
+                                "z-value":"-100"
+                            })
+                        })
+
 
 						$("#save").click(function(e) {
 							e.preventDefault();
