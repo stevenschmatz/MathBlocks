@@ -69,6 +69,14 @@
 						//pubElement.width = ($("#tokbox").width())-20;
 						//pubElement.height = $("#tokbox").height()/3-20;
 					}
+					
+					// remove duplicate opentok instances
+					
+					for(var i = 0; i < window.highestStream;i++) {
+						if($("#placeholder"+i).find("video").attr('src') == $("#placeholder"+i-1).find("video").attr('src'))) {
+							$("#placeholder"+i).hide();
+						}
+					}
 
 					// chat websocket
 					
