@@ -14,6 +14,8 @@ app.use(express.static(__dirname+'/public'));
 app.use(express.cookieParser());
 app.use(express.session({secret: 'f15463f8-7ff1-11e3-9b32-28cfe9511e3f'}));
 
+var idsToNames = {};
+
 app.get('/', function(req, res) {
 	res.render('index.html');
 });
@@ -23,6 +25,7 @@ app.post('/', function(req, res) {
 	var sessionID = uuid.v4();
 	req.session.sessionID = sessionID;
 	req.session.problemText = problemText;
+	idsToNames[req.session.sessionID] = problemText;
 	res.redirect('/session/'+req.session.sessionID);
 });
 
@@ -40,8 +43,8 @@ app.get('/session/:id', function(req, res) {
 			});
 		});
 		
-		
-		res.render('session.html', {problemText: req.session.problemText, sessionID: req.params.id});
+		var id = req.params.id
+		res.render('session.html', {problemText: idsToNames[id], sessionID: id});
 });
 
 app.post('/calc', function(req, res) {

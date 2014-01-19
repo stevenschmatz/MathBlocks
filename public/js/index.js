@@ -235,7 +235,7 @@
 						socket.on('chatMessage', function(data) {
 							var msgEl = $("<ul class='messageText'>"+"<b>"+data['sendingUser']+"</b>: "+data['messageText']+"</ul>");
 							if($("#chat-msgs").html().indexOf(msgEl.html()) == -1) {
-								$("#chat-msgs").prepend(msgEl);
+								$("#chat-msgs").append(msgEl);
 							}
 						});
 
@@ -284,6 +284,7 @@
 								$(this).css('color', 'white');
 								window.context = $(this).attr('data-context');
 								if(window.context == 'latex') {
+									$("#graph").hide();
 									if($("#latexInput").length == 0) {
 										$("#graphInput").remove();
 										var $latexEditor = $("<input type='text' id='latexInput' placeholder='Type your LaTeX here.'/>");
