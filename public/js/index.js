@@ -306,6 +306,8 @@
 										$("#graphInput").remove();
 										var $latexEditor = $("<input type='text' id='latexInput' placeholder='Type your LaTeX here.'/>");
 										$(".boardRight").prepend($latexEditor);
+										$("#latexInput").val(window.currentLatex);
+										$("#latexRender").text(window.currentLatex);
 										$("#latexInput").keydown(function() {
 												$("#latexRender").text($(this).val());
 												MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
