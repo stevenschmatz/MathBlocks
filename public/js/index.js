@@ -251,7 +251,7 @@
 						});
 						
 						socket.on('solutionChanged', function(data) {
-							$("#solution").val(data['summaryText']);
+							$("#solution").val(data['solutionText']);
 						});
 
 						$("#invite").click(function() {
