@@ -20,6 +20,7 @@
 						}
 					});
 					
+					window.highestStream = 0;
 					window.wasAlreadyMinimized = 0;
 					
 			    var apiKey    = "44618172";
@@ -28,21 +29,24 @@
 					
 					
 					var session = TB.initSession(sessionId);
-					var API_KEY = "44618111";
 					
 					session.addEventListener("sessionConnected", sessionConnectedHandler);
 					session.addEventListener("streamCreated", streamCreatedHandler);
 					
 					function sessionConnectedHandler(event) {
+						session.publish(publisher);
 						subscribeToStreams(event.streams);
-						session.publish();
 					}
 					
 					function subscribeToStreams(streams) {
 						for(var i = 0; i < streams.length; i++) {
 							var stream = streams[i];
 							if(stream.connection.connectionId != session.connection.connectionId) {
-								session.subscribe(stream, "placeholder", {width: 400, height: 400});
+								var videoBoxId = "placeholder"+window.highestStream;
+								var $videoBox = $("<div id='" + videoBoxId + "'></div>");
+								window.highestStream++;
+								$("#tokbox").append($videoBox);
+								session.subscribe(stream, videoBoxId);
 							}
 						}
 					}
@@ -51,7 +55,20 @@
 						subscribeToStreams(event.streams);
 					}
 					
-					session.connect(API_KEY, token);
+					var publisher = TB.initPublisher(apiKey, "placeholder");
+					var session = TB.initSession(sessionId);
+					
+					
+					session.connect(apiKey, token);
+					session.addEventListener("sessionConnected", sessionConnectedHandler);
+					session.addEventListener("streamCreated", streamCreatedHandler);
+					resizePublisher();
+					
+					function resizePublisher() {
+						var pubElement = document.getElementById(publisher.id);
+						//pubElement.width = ($("#tokbox").width())-20;
+						//pubElement.height = $("#tokbox").height()/3-20;
+					}
 
 					// chat websocket
 					
@@ -144,7 +161,7 @@
             $("#menu").fadeIn(500);
             $(".callout .panel").fadeIn(500);
             $(".draggable").delay(500).fadeIn(500);
-            /*$(".draggable").draggable();*/
+            $(".draggable").draggable();
             $(".draggable").resizable();
             $(".draggable").mouseover(function() {
                 $(this).animate({
@@ -219,7 +236,7 @@
 						socket.on('chatMessage', function(data) {
 							var msgEl = $("<ul class='messageText'>"+"<b>"+data['sendingUser']+"</b>: "+data['messageText']+"</ul>");
 							if($("#chat-msgs").html().indexOf(msgEl.html()) == -1) {
-								$("#chat-msgs").prepend(msgEl);
+								$("#chat-msgs").append(msgEl);
 							}
 						});
 
@@ -258,8 +275,17 @@
 							if($(this).attr('data-selected') == 'true') {
 								// do nothing
 							} else {
+								$(".switchLink").removeClass('small');
+								$(".switchLink").removeClass('round');
+								$(".switchLink").removeClass('button');
+								$(".switchLink").css("color", "");
+								$(this).addClass('small');
+								$(this).addClass('round');
+								$(this).addClass('button');
+								$(this).css('color', 'white');
 								window.context = $(this).attr('data-context');
 								if(window.context == 'latex') {
+									$("#graph").hide();
 									if($("#latexInput").length == 0) {
 										$("#graphInput").remove();
 										var $latexEditor = $("<input type='text' id='latexInput' placeholder='Type your LaTeX here.'/>");
@@ -270,14 +296,6 @@
 											});
 										}
 									}
-									$(".switchLink").removeClass('small');
-									$(".switchLink").removeClass('round');
-									$(".switchLink").removeClass('button');
-									$(".switchLink").css("color", "");
-									$(this).addClass('small');
-									$(this).addClass('round');
-									$(this).addClass('button');
-									$(this).css('color', 'white');
 								}
 								if(window.context == 'graph') {
 									$("#latexInput").remove();
