@@ -6,7 +6,7 @@ var io = require('socket.io').listen(server);
 var http = require('http');
 var xml2js = require('xml2js');
 var request = require('request');
-var sendgrid = require('sendgrid');
+var sendgrid = require('sendgrid')('amitmhacks', 'stuff123');
 
 app.engine('html', require('ejs').renderFile);
 app.use(express.bodyParser());
