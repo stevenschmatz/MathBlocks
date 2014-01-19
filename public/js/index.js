@@ -315,6 +315,7 @@
 								if(window.context == 'latex') {
 									$("#graph").hide();
 									$("#graphInput").hide();
+									$("#latexRender").show();
 									if($("#latexInput").length == 0) {
 										$("#graphInput").remove();
 										var $latexEditor = $("<input type='text' id='latexInput' placeholder='Type your LaTeX here.'/>");
