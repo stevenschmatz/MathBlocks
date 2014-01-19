@@ -176,27 +176,7 @@
                 }, 100);
 				    });
 
-            $(".minimize").click(function() {
-                $(this).parent().css({
-                      'min-height': '0px',
-                      'min-width': '0px',
-                      'position': 'fixed'
-                });
 
-
-
-                $(this).parent().animate({
-                    "height": "40px",
-                    "width": "200px",
-                    "background-color": "#9E9E9E",
-                    "bottom": "0px",
-										"left": 200*window.alreadyMinimized+"px"
-                }, 500);
-								
-								window.alreadyMinimized++;
-
-                /*$(this).parent().html("");*/
-            });
 
             $("#clear").click(function() {
                 $(".close").parent().parent().hide()
@@ -381,5 +361,24 @@
 							e.preventDefault();
 							window.open('/render/?problem='+encodeURIComponent($("#problem_text").text())+'&solution='+encodeURIComponent($("#solution").val()));
 						});
+
+                window.corners = {}
+                $(".maxim").click(function(){
+                    ids = ["wolfram", "tokbox", "chat", "board", "output"];
+                    for(var i = 0; i < ids.length; i++) {
+                        var ith_rectangle =  document.getElementById(ids[i]).getBoundingClientRect();
+                        window.corners[ids[i]] = ith_rectangle[0], ith_rectangle[1], ith_rectangle[2], ith_rectangle[3];
+                        if (!($.contains(document.getElementById(ids[i]), this))) {
+                            $("#"+ids[i]).hide();
+                        }
+                    }
+
+                    $(this).parent().animate({
+                        "width": "100%",
+                        "height": "100%"
+                    }, 500)
+                });
+
+
 						
         });
