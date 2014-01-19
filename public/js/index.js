@@ -308,6 +308,7 @@
 										$(".boardRight").prepend($latexEditor);
 										$("#latexInput").val(window.latexContent);
 										$("#latexRender").text(window.latexContent);
+										MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
 										$("#latexInput").keydown(function() {
 												$("#latexRender").text($(this).val());
 												MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
