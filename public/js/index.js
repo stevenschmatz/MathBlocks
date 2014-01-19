@@ -274,6 +274,14 @@
 							if($(this).attr('data-selected') == 'true') {
 								// do nothing
 							} else {
+								$(".switchLink").removeClass('small');
+								$(".switchLink").removeClass('round');
+								$(".switchLink").removeClass('button');
+								$(".switchLink").css("color", "");
+								$(this).addClass('small');
+								$(this).addClass('round');
+								$(this).addClass('button');
+								$(this).css('color', 'white');
 								window.context = $(this).attr('data-context');
 								if(window.context == 'latex') {
 									if($("#latexInput").length == 0) {
@@ -286,14 +294,6 @@
 											});
 										}
 									}
-									$(".switchLink").removeClass('small');
-									$(".switchLink").removeClass('round');
-									$(".switchLink").removeClass('button');
-									$(".switchLink").css("color", "");
-									$(this).addClass('small');
-									$(this).addClass('round');
-									$(this).addClass('button');
-									$(this).css('color', 'white');
 								}
 								if(window.context == 'graph') {
 									$("#latexInput").remove();
