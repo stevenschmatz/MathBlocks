@@ -249,6 +249,10 @@
 								window.latexContent = data['rawText'];
 							}
 						});
+						
+						socket.on('solutionChanged', function(data) {
+							$("#solution").val(data['summaryText']);
+						});
 
 						$("#invite").click(function() {
 							var $emailBar = $("<div class='callout panel' id='emailBar'><form id='emailForm'><p>Type each email, separated by a comma.</p><input type='text' id='emails' placeholder='Emails, separated by commas...'/></form></div>");
