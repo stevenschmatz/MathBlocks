@@ -83,11 +83,11 @@ app.get('/render', function(req, res) {
 	res.render('rendered.html', {'solution': solution, 'problem': problem});
 });
 
-app.post('/invite', function(req, res) {
-	var emails = req.query.emails.split(",");
-	var psetter = req.query.psetter;
-	var pName = req.query.problemName;
-	var link = req.query.link;
+app.postt('/invite', function(req, res) {
+	var emails = req.body.emails.split(",");
+	var psetter = req.body.psetter;
+	var pName = req.body.problemName;
+	var link = req.body.link;
 	sendgrid.send({
 		to: emails,
 		subject: 'Your invitation to ' + psetter + '\'s Mathelo problem',
