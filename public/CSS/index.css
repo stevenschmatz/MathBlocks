@@ -57,6 +57,8 @@
 			overflow:hidden;
         }
 
+
+
         #board, #wolfram, #chat {
             overflow:scroll !important;
         }
@@ -179,3 +181,12 @@
 					margin:10px;
 					margin-top:12px;
 				}
+
+        #latexRender .MathJax{
+            opacity: 1.0;
+            margin: 5px;
+            z-index: 10000000;
+            cursor: pointer;
+            border: 1px solid lightgray;
+        }
+

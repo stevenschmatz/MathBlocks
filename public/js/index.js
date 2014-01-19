@@ -135,6 +135,7 @@
 
             $(".close").click(function() {
                 $(this).parent().parent().hide();
+
             })
 
             $("#problem_text").hide();
@@ -258,7 +259,13 @@
 									$(this).css('color', 'white');
 								}
 						});
-						
+
+
+
+
+                        $('#board').draggable('disable');
+                        $("#latexRender").find(".MathJax").draggable('enable');
+
 						$("#save").click(function(e) {
 							e.preventDefault();
 							window.open('/render/?problem='+encodeURIComponent($("#problem_text").text())+'&solution='+encodeURIComponent($("#solution").val()));
