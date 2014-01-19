@@ -148,6 +148,7 @@
 
             $(".close").click(function() {
                 $(this).parent().parent().hide();
+
             })
 
             $("#problem_text").hide();
@@ -182,6 +183,8 @@
                       'min-width': '0px',
                       'position': 'fixed'
                 });
+
+
 
                 $(this).parent().animate({
                     "height": "40px",
@@ -311,10 +314,8 @@
 											});
 										}
 									}
-								}
-								if(window.context == 'graph') {
+								else if(window.context == 'graph') {
 									$("#latexInput").remove();
-									$("#wrapper").remove();
 									$("#graph").show();
 									if($("#graphInput").length == 0) {
 										var $graphEditor = $("<input type='text' id='graphInput' placeholder='Type your function here.'/>");
@@ -341,7 +342,6 @@
 										});
 									}
 								}
-						});
 						
 						// solution stuff
 						

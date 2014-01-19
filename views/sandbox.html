@@ -1,36 +1,31 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-
-    <link rel="stylesheet" type="text/css"
-          href="http://static.awwapp.com/plugin/1.0/aww.css"/>
-    <script type="text/javascript"
-            src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-    <script type="text/javascript"
-            src="http://static.awwapp.com/plugin/1.0/aww.min.js"></script>
-
-    <style type="text/css">
-        #wrapper {
-            border: 1px solid black;
-            width: 10%;
-            height: 300px;
-            margin: 0 auto;
+    <meta charset="utf-8">
+    <title>HTML</title>
+    <!--<style>
+        #editor {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
         }
-    </style>
+    </style>-->
 </head>
 <body>
-<h1>Hello whiteboard!</h1>
+<div id="editor">import math
+def function(x, y):
+    return math.sqrt(x**2 + y**2)
 
-<div id="wrapper"></div>
-<script type="text/javascript">
-    $('#wrapper').awwCanvas();
+#Enter some Python code to begin!
 
-    $(window).resize(function() {
-        $('#wrapper').awwCanvas().resize();
-    });
+</div>
+<script src="http://d1n0x3qji82z53.cloudfront.net/src-min-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    var editor = ace.edit("editor");
+    editor.setTheme("ace/theme/clouds");
+    editor.getSession().setMode("ace/mode/python");
 </script>
-
 </body>
 </html>
-
