@@ -194,7 +194,6 @@
             margin: 5px;
             z-index: 10000000;
             cursor: pointer;
-            border: 1px solid lightgray;
         }
 
 				#submitButton {
