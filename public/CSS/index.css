@@ -43,6 +43,8 @@
 
         #problem_text {
             text-align: center;
+            color: dodgerblue;
+            font-size: 25px;
         }
 
         .draggable {
