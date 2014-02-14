@@ -2,35 +2,29 @@
 <html>
 <head>
     <title>Mathelo</title>
-		<style>
-		@font-face {
-			font-family:"Merriweather";
-			src:url("/font/merriweather/Merriweather-Light.ttf");
-		}
-		body {
-			font-family:"Merriweather" !important;
-		}
-
-		h1, h2, h3, h4, h5, h6 {
-			font-family:"Merriweather" !important;
-		}
-		input[type='text'] {
-			font-family:"Merriweather";
-		}
-        #content {
-            margin: 50px;
-        }
-				.credits {
-					color:#AAAAAA;
-				}
-		</style>
+    
+        <!--Styles-->
 		<link rel="stylesheet" type="text/css" href="/foundation-5.0.3/css/foundation.css"/>
         <link rel="stylesheet" href="/CSS/styles.css"/>
+
+        <!--Shortcut icon-->
         <link rel="shortcut icon" href="/images/iconmonstr-3d-view-icon-16.png"/>
+
+        <!--JQuery-->
 		<script src="/js/jquery.js"></script>
+
+        <!--MathJax and MathJax config-->
         <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
         <script>
             MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+        </script>
+
+        <!--MathJax sizing options-->
+        <script type="text/javascript">
+            MathJax.Hub.Config({
+                extensions: ["tex2jax.js"],
+                "HTML-CSS": { scale: 200}
+            });
         </script>
 </head>
 <body>
@@ -41,7 +35,7 @@
                 <p class="overview">Mathelo is the best way to collaboratively tackle math problems.</p>
                 <p class="overview" id="type_a_problem">Type a problem below to begin. Plain text inputs and LaTeX inputs (if enclosed by $$) are accepted.</p>
                 <input type="text" class="overview" id="problem" name="problemText">
-                <p id="latexRender">this is the filler text</p>
+                <p id="latexRender" class="shiftLeft"></p>
             </form>
         </div>
 				<div class="row">
