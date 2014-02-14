@@ -28,6 +28,10 @@
         <link rel="stylesheet" href="/CSS/styles.css"/>
         <link rel="shortcut icon" href="/images/iconmonstr-3d-view-icon-16.png"/>
 		<script src="/js/jquery.js"></script>
+        <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script>
+            MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+        </script>
 </head>
 <body>
     <div id="content">
@@ -37,6 +41,7 @@
                 <p class="overview">Mathelo is the best way to collaboratively tackle math problems.</p>
                 <p class="overview" id="type_a_problem">Type a problem below to begin. Plain text inputs and LaTeX inputs (if enclosed by $$) are accepted.</p>
                 <input type="text" class="overview" id="problem" name="problemText">
+                <p id="latexRender">this is the filler text</p>
             </form>
         </div>
 				<div class="row">
@@ -44,11 +49,18 @@
                             href="http://www.stevenschmatz.com/">Steven Schmatz</a> for MHacks spring 2014.</p>
         <script>
             $(function() {
+                MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+
                 /*$(".overview").fadeOut(500)*/
                 $("#problem").keydown(function(e) {
                     if ($(this).val().length == 1) {
                         $("#type_a_problem").text("Press enter to submit");
                     }
+
+
+                    $("#latexRender").text($("#problem").val());
+                    MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+
                     if (e.keyCode == 13) {
                         e.preventDefault();
                         $(".overview").fadeOut(500);
