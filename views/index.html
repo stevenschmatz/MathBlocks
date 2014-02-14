@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Mathelo</title>
-    
+
         <!--Styles-->
 		<link rel="stylesheet" type="text/css" href="/foundation-5.0.3/css/foundation.css"/>
         <link rel="stylesheet" href="/CSS/styles.css"/>
@@ -35,12 +35,12 @@
                 <p class="overview">Mathelo is the best way to collaboratively tackle math problems.</p>
                 <p class="overview" id="type_a_problem">Type a problem below to begin. Plain text inputs and LaTeX inputs (if enclosed by $$) are accepted.</p>
                 <input type="text" class="overview" id="problem" name="problemText">
-                <p id="latexRender" class="shiftLeft"></p>
             </form>
         </div>
 				<div class="row">
 					<p class="overview credits">Designed and developed by <a href="http://www.amizrahi.com/">Amit Mizrahi</a> and <a
                             href="http://www.stevenschmatz.com/">Steven Schmatz</a> for MHacks spring 2014.</p>
+                    <p id="latexRender" class="problemLatex"></p>
         <script>
             $(function() {
                 MathJax.Hub.Queue(["Typeset", MathJax.Hub]);

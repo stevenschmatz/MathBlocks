@@ -19,3 +19,11 @@ input[type='text'] {
     color:#AAAAAA;
 }
 
+.problemLatex {
+    padding: 10px;
+    color: dodgerblue;
+    text-shadow: 1px 1px lightgray;
+    margin: 15%;
+    text-align: center;
+
+}
