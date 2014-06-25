@@ -1,224 +1,226 @@
-		@font-face {
-			font-family:"Merriweather";
-			src:url("/font/merriweather/Merriweather-Light.ttf");
-		}
-		@font-face {
-			font-family:"Merriweather Bold";
-			src:url("/font/merriweather/Merriweather-Bold.ttf");
-		}
-		body {
-			font-family:"Merriweather" !important;
-            height: 100%;
-		}
-        body, html {
-            height:125%;
-        }
-		#content {
-            float: right;
-            width: 80%;
-            margin:0;
-            padding:0;
-            height:100%;
-        }
-        .bottom {
-            height:600px;
-        }
-        #bigHeader {
-            width:125%;
-        }
+body {
+	font-family:"Merriweather" !important;
+	height: 100%;
+}
+body, html {
+	height:125%;
+}
 
-        h1, h2, h3, h4, h5, h6 {
-			font-family:"Merriweather" !important;
-		}
+#content {
+	float: right;
+	width: 80%;
+	margin:0;
+	padding:0;
+	height:100%;
+}
 
-		input[type='text'] {
-			font-family:"Merriweather";
-		}
-        .row {
-            position: relative;
-            top: 0;
-            width: 100%;
-            overflow: hidden;
-        }
+.bottom {
+	height:600px;
+}
 
-        #problem_text {
-            text-align: center;
-        }
+#bigHeader {
+	width:125%;
+}
 
-        .draggable {
-            padding: 0.5em;
-            border: 1px solid #555555;
-            border-radius: 5px;
-            height:200px;
-            min-height:150px;
-            min-width:150px;
-            width:200px;
-            background: #ffffff;
-			overflow:hidden;
-        }
+h1, h2, h3, h4, h5, h6 {
+	font-family:"Merriweather" !important;
+}
 
+input[type='text'] {
+	font-family:"Merriweather";
+}
 
+.row {
+	position: relative;
+	top: 0;
+	width: 100%;
+	overflow: hidden;
+}
 
+#problem_text {
+	text-align: center;
+}
 
-        #board, #wolfram, #chat, #tokbox {
-            overflow:scroll !important;
-        }
+.draggable {
+	padding: 0.5em;
+	border: 1px solid #555555;
+	border-radius: 5px;
+	height:200px;
+	min-height:150px;
+	min-width:150px;
+	width:200px;
+	background: #ffffff;
+	overflow:hidden;
+}
 
-        #board, #output {
-            height: 420px;
-        }
+#board, #wolfram, #chat, #tokbox {
+	overflow:scroll !important;
+}
 
-        .draggable .minimize {
-            font-family: Arial, Helvetica, sans-serif;
-            font-weight:bold;
-            font-size: 10pt;
-            text-align: right;
-            margin: -10px;
-        }
+#board, #output {
+	height: 420px;
+}
+
+.draggable .minimize {
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight:bold;
+	font-size: 10pt;
+	text-align: right;
+	margin: -10px;
+}
+
+#error {
+	font-weight:bold;
+	color:red;
+}
+
+#sidebar {
+	float: left;
+	width: 16%;
+	position: absolute;
+	height: 100%;
+	padding-left:0;
+	padding-right: 0;
+	padding-bottom: 0;
+	min-height: 700px;
+}
+
+#menu {
+	background-color: rgb(46, 46, 46);
+	position: absolute;
+	height:100%;
+	width:100%;
+	color: #46a9b2;
+	font-family: 'Lato', sans-serif;
+}
+
+#icon {
+	margin-left:auto;
+	margin-right:auto;
+}
+
+#menu {
+	padding: 10px;
+	padding-left:0px;
+	border: 0;
+}
+
+.menuList {
+	list-style-type:none;
+}
+
+.menuList li {
+	border-bottom: 1px solid white;
+	padding-top:20px;
+	padding-bottom:20px;
+	font-size:18px;
+}
+
+#dialog {
+	opacity:1.0;
+	z-index:999;
+}
+
+#sidebar_header {
+	font-family: 'Montserrat', sans-serif;
+	color: white;
+	font-weight: bold;
+	text-transform: uppercase;
+	font-size: 16pt;
+}
+
+.menuList li:first-of-type {
+	border-top: 1px solid white;
+}
+
+#open_panel_icon {
+	height: 50px;
+	width: 50px;
+	position: relative;
+	left: -400px;
+	background-color: rgb(46, 46, 46);
+	padding: 10px;
+	border:2px solid;
+	border-top-right-radius:2em;
+	border-bottom-right-radius:2em;
+	z-index: 1;
+}
+
+#output {
+	background-color:#CCCCCC;
+}
+
+.tagsinput {
+	width:80% !important;
+}
+
+#emails_tagsinput {
+	width:100% !important;
+	font-family:"Merriweather" !important;
+	height:70% !important;
+}
+
+.button {
+	padding:15px !important;
+}
+
+#result {
+	margin-bottom:10px;
+	font-weight:bold;
+	font-family:"Merriweather Bold";
+}
 				
-        #error {
-            font-weight:bold;
-            color:red;
-        }
+.boardLeft, .boardRight {
+	float:left;
+	width:50%;
+	margin-top:10px;
+}
 
-        #sidebar {
-            float: left;
-            width: 16%;
-            position: absolute;
-            height: 100%;
-            padding-left:0;
-            padding-right: 0;
-            padding-bottom: 0;
-            min-height: 700px;
-        }
+.menuList {
+	width:96%;
+	margin-right:0px;
+	margin-left:5px;
+}
 
-        #menu {
-            background-color: rgb(46, 46, 46);
-            position: absolute;
-            height:100%;
-            width:100%;
-            color: #46a9b2;
-            font-family: 'Lato', sans-serif;
-        }
+.minimize {
+	text-align:right;
+	float:right;
+	width:100%;
+	margin:10px;
+	margin-top:12px;
+}
 
-        #icon {
-            margin-left:auto;
-            margin-right:auto;
-        }
+#latexRender .MathJax{
+	opacity: 1.0;
+	margin: 5px;
+	z-index: 10000000;
+	cursor: pointer;
+}
 
-        #menu {
-            padding: 10px;
-            padding-left:0px;
-            border: 0;
-        }
+#submitButton {
+	margin-top:10px;
+}
 
-        .menuList {
-            list-style-type:none;
-        }
-        .menuList li {
-            border-bottom: 1px solid white;
-            padding-top:20px;
-            padding-bottom:20px;
-            font-size:18px;
-        }
-				#dialog {
-					opacity:1.0;
-					z-index:999;
-				}
-        #sidebar_header {
-            font-family: 'Montserrat', sans-serif;
-            color: white;
-            font-weight: bold;
-            text-transform: uppercase;
-            font-size: 16pt;
-					}
+#editor {
+	position: absolute;
+	top: 50%;
+	bottom: 0;
+	left: 50%;
+	right: 0;
+	margin:10px;
+}
 
-        .menuList li:first-of-type {
-            border-top: 1px solid white;
-        }
-
-        #open_panel_icon {
-            height: 50px;
-            width: 50px;
-            position: relative;
-            left: -400px;
-            background-color: rgb(46, 46, 46);
-            padding: 10px;
-            border:2px solid;
-            border-top-right-radius:2em;
-            border-bottom-right-radius:2em;
-            z-index: 1;
-        }
-
-				#output {
-					background-color:#CCCCCC;
-				}
-				.tagsinput {
-					width:80% !important;
-				}
-				#emails_tagsinput {
-					width:100% !important;
-					font-family:"Merriweather" !important;
-					height:70% !important;
-				}
-				.button {
-					padding:15px !important;
-				}
-				#result {
-					margin-bottom:10px;
-					font-weight:bold;
-					font-family:"Merriweather Bold";
-				}
-				.boardLeft, .boardRight {
-					float:left;
-					width:50%;
-					margin-top:10px;
-				}
-        .menuList {
-            width:96%;
-            margin-right:0px;
-            margin-left:5px;
-        }
-				.minimize {
-					text-align:right;
-                    float:right;
-					width:100%;
-					margin:10px;
-					margin-top:12px;
-				}
-
-        #latexRender .MathJax{
-            opacity: 1.0;
-            margin: 5px;
-            z-index: 10000000;
-            cursor: pointer;
-        }
-
-				#submitButton {
-					margin-top:10px;
-				}
-
-        #editor {
-            position: absolute;
-            top: 50%;
-            bottom: 0;
-            left: 50%;
-            right: 0;
-            margin:10px;
-
-        }
-
-        .boardLeft {
-            padding: 0px;
-            margin: 0px;
-        }
+.boardLeft {
+	padding: 0px;
+	margin: 0px;
+}
 				
-				#graphHistory li {
-					list-style-type:none;
-					padding:5px;
-				}
+#graphHistory li {
+	list-style-type:none;
+	padding:5px;
+}
 				
-				#graphHistory li:hover {
-					background-color:#CCCCCC;
-				}
+#graphHistory li:hover {
+	background-color:#CCCCCC;
+}
 				
