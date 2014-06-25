@@ -9,9 +9,13 @@ body, html {
 #content {
 	float: right;
 	width: 80%;
-	margin:0;
+	margin:50px;
 	padding:0;
 	height:100%;
+}
+
+.credits {
+	color:#AAAAAA;
 }
 
 .bottom {
