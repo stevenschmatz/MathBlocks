@@ -3,49 +3,54 @@
 <head>
     <title>Mathelo</title>
 
-				<!-- jquery -->
-        <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
-         <link rel="shortcut icon" href="/images/iconmonstr-3d-view-icon-16.png"/>
-        <link rel="stylesheet" href="/js/jQuery-Tags-Input-1.3.2/jquery.tagsinput.css">
-				<script type="text/javascript" src="/js/jquery.js"></script>
-				<script src="/js/jquery-ui.js"></script>
-				<script src="/js/jQuery-Tags-Input-1.3.2/jquery.tagsinput.js"></script>
-				<!-- fonts -->
-				<link href='http://fonts.googleapis.com/css?family=Lato:100' rel='stylesheet' type='text/css'>
-        <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-				<!-- opentok -->
-				<script src="http://static.opentok.com/webrtc/v2.0/js/TB.min.js" ></script>
-				<!-- socket.io -->
-				<script src="/socket.io/socket.io.js"></script>
-				<script>
-				var socket = io.connect('http://'+document.domain);
-				var roomID = "<%= sessionID %>";
-				socket.on('connect', function() {
-					socket.emit('room', roomID);
-				});
-				</script>
-				<!-- our stylesheets and js -->
-        <script src="/js/index.js"></script>
-				<link rel="stylesheet" href="/CSS/styles.css"/>
-				<link rel="stylesheet" type="text/css" href="/CSS/index.css"/>
-				<!-- foundation -->
-				<link rel="stylesheet" type="text/css" href="/foundation-5.0.3/css/foundation.css"/>
-				<!-- mathjax -->
-		    <script type="text/x-mathjax-config">
-		  	MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
-				</script>
-		    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+    <link rel="shortcut icon" href="/static/img/iconmonstr-3d-view-icon-16.png"/>
+    <link rel="stylesheet" href="/js/jQuery-Tags-Input-1.3.2/jquery.tagsinput.css">
+	
+    <script type="text/javascript" src="/static/js/jquery.js"></script>
+	<script src="/static/js/jquery-ui.js"></script>
+	<script src="/static/js/jQuery-Tags-Input-1.3.2/jquery.tagsinput.js"></script>
+
+	<link href='http://fonts.googleapis.com/css?family=Lato:100' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+
+	<script src="http://static.opentok.com/webrtc/v2.0/js/TB.min.js" ></script>
+
+	<script src="/socket.io/socket.io.js"></script>
+
+	<script>
+	var socket = io.connect('http://'+document.domain);
+	var roomID = "<%= sessionID %>";
+	socket.on('connect', function() {
+		socket.emit('room', roomID);
+	});
+	</script>
+
+    <script src="/static/js/index.js"></script>
+
+	<link rel="stylesheet" href="/static/CSS/styles.css"/>
+	<link rel="stylesheet" type="text/css" href="/static/CSS/index.css"/>
+
+	<link rel="stylesheet" type="text/css" href="/static/foundation-5.0.3/css/foundation.css"/>
+
+	<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+	</script>
+
+	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 		    </script>
-				<script>
-				  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-				  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-				  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-				  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-				  ga('create', 'UA-47318900-1', 'mathelo.herokuapp.com');
-				  ga('send', 'pageview');
+	<script>
+	
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-				</script>
+	ga('create', 'UA-47318900-1', 'mathelo.herokuapp.com');
+	ga('send', 'pageview');
+    
+    </script>
 </head>
 <body>
 	<div class="overlay">
@@ -56,25 +61,25 @@
         <div id="menu">
             <p style="text-align: right" id="sidebar_header">
                 Mathelo&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <img src="/images/iconmonstr-menu-icon-32.png" style="cursor:pointer;" alt="sidebar icon" id="icon"/>
+                <img src="/static/img/iconmonstr-menu-icon-32.png" style="cursor:pointer;" alt="sidebar icon" id="icon"/>
             </p>
             <p>
                 <table class="menuList">
                     <tr>
                         <td><a href="#" id="invite">Invite others</a></td>
-                        <td><img src="/images/iconmonstr-user-11-icon-32.png" alt="person"/></td>
+                        <td><img src="/static/img/iconmonstr-user-11-icon-32.png" alt="person"/></td>
                     </tr>
                     <tr>
                         <td><a href="#" id="save">Print solution</a></td>
-                        <td><img src="/images/iconmonstr-printer-icon-32.png" alt="person"/></td>
+                        <td><img src="/static/img/iconmonstr-printer-icon-32.png" alt="person"/></td>
                     </tr>
                     <tr>
                         <td><a href="/about">About</a></td>
-                        <td><img src="/images/iconmonstr-note-21-icon-32.png" alt="person"/></td>
+                        <td><img src="/static/img/iconmonstr-note-21-icon-32.png" alt="person"/></td>
                     </tr>
                     <tr>
                         <td><a href="/help">Help</a></td>
-                        <td><img src="/images/iconmonstr-help-2-icon-32.png" alt="person"/></td>
+                        <td><img src="/static/img/iconmonstr-help-2-icon-32.png" alt="person"/></td>
                     </tr>
 
                 </table>
@@ -82,7 +87,7 @@
         </div>
     </div>
     <div id="content">
-        <span><img src="/images/iconmonstr-menu-icon-32.png" alt="open menu" id="open_panel_icon"/></span>
+        <span><img src="/static/img/iconmonstr-menu-icon-32.png" alt="open menu" id="open_panel_icon"/></span>
         <div class="row panel" id="bigHeader">
             <h3 id="problem_text"><%= problemText %></h3>
         </div>
@@ -90,9 +95,9 @@
 
                 <div class="draggable ui-widget-content large-4 medium-4 small-4 columns" id="wolfram">
                             <p class="minimize">
-                                <img class = "miniz" src="/images/iconmonstr-minus-2-icon-16.png" alt="minus" height="10px" width="10px"/>
-                                <img class = "maxim" src="/images/iconmonstr-square-outline-icon-16.png" alt="square" height="10px" width="10px"/>
-                                <img class = "close" src="/images/iconmonstr-x-mark-icon-16.png" alt="x" height="10px" width="10px"/>
+                                <img class = "miniz" src="/static/img/iconmonstr-minus-2-icon-16.png" alt="minus" height="10px" width="10px"/>
+                                <img class = "maxim" src="/static/img/iconmonstr-square-outline-icon-16.png" alt="square" height="10px" width="10px"/>
+                                <img class = "close" src="/static/img/iconmonstr-x-mark-icon-16.png" alt="x" height="10px" width="10px"/>
                             </p>
                             <p>Calculator</p>
                             <input type="text" id="calc" placeholder="e.g. 2+2"/>
@@ -104,9 +109,9 @@
                         </div>
                         <div class="draggable ui-widget-content large-4 medium-4 small-4 columns" id="tokbox">
                             <p class="minimize">
-                                <img class = "miniz" src="/images/iconmonstr-minus-2-icon-16.png" alt="minus" height="10px" width="10px"/>
-                                <img class = "maxim" src="/images/iconmonstr-square-outline-icon-16.png" alt="square" height="10px" width="10px"/>
-                                <img class = "close" src="/images/iconmonstr-x-mark-icon-16.png" alt="x" height="10px" width="10px"/>
+                                <img class = "miniz" src="/static/img/iconmonstr-minus-2-icon-16.png" alt="minus" height="10px" width="10px"/>
+                                <img class = "maxim" src="/static/img/iconmonstr-square-outline-icon-16.png" alt="square" height="10px" width="10px"/>
+                                <img class = "close" src="/static/img/iconmonstr-x-mark-icon-16.png" alt="x" height="10px" width="10px"/>
                             </p>
                             <p>Video chat</p>
                             <div id="placeholder">
@@ -117,9 +122,9 @@
 
 	        <div class="draggable ui-widget-content large-4 medium-4 small-4 columns" id="chat">
 							<p class="minimize">
-                                <img class = "miniz" src="/images/iconmonstr-minus-2-icon-16.png" alt="minus" height="10px" width="10px"/>
-                                <img class = "maxim" src="/images/iconmonstr-square-outline-icon-16.png" alt="square" height="10px" width="10px"/>
-                                <img class = "close" src="/images/iconmonstr-x-mark-icon-16.png" alt="x" height="10px" width="10px"/>
+                                <img class = "miniz" src="/static/img/iconmonstr-minus-2-icon-16.png" alt="minus" height="10px" width="10px"/>
+                                <img class = "maxim" src="/static/img/iconmonstr-square-outline-icon-16.png" alt="square" height="10px" width="10px"/>
+                                <img class = "close" src="/static/img/iconmonstr-x-mark-icon-16.png" alt="x" height="10px" width="10px"/>
 							</p>
 							 <p>Chat</p>
 	             <ul id="chat-msgs">
@@ -131,9 +136,9 @@
 
                     <div class="ui-widget-content large-8 medium-8 small-8 columns" id="board">
 					 <p class="minimize">
-                            <img class = "miniz" src="/images/iconmonstr-minus-2-icon-16.png" alt="minus" height="10px" width="10px"/>
-                            <img class = "maxim" src="/images/iconmonstr-square-outline-icon-16.png" alt="square" height="10px" width="10px"/>
-                            <img class = "close" src="/images/iconmonstr-x-mark-icon-16.png" alt="x" height="10px" width="10px"/>
+                            <img class = "miniz" src="/static/img/iconmonstr-minus-2-icon-16.png" alt="minus" height="10px" width="10px"/>
+                            <img class = "maxim" src="/static/img/iconmonstr-square-outline-icon-16.png" alt="square" height="10px" width="10px"/>
+                            <img class = "close" src="/static/img/iconmonstr-x-mark-icon-16.png" alt="x" height="10px" width="10px"/>
 					 </p>
 						<div class="boardLeft">
 							<p><a class="switchLink" data-context="latex" href="#">LaTeX</a> &middot; <a class="switchLink" data-context="graph" href="#">Graphing</a></p>
@@ -145,9 +150,9 @@
 						</div>
 					<div class="draggable ui-widget-content large-4 medium-4 small-4 columns" id="output">
 						<p class="minimize">
-                            <img class = "miniz" src="/images/iconmonstr-minus-2-icon-16.png" alt="minus" height="10px" width="10px"/>
-                            <img class = "maxim" src="/images/iconmonstr-square-outline-icon-16.png" alt="square" height="10px" width="10px"/>
-                            <img class = "close" src="/images/iconmonstr-x-mark-icon-16.png" alt="x" height="10px" width="10px"/>
+                            <img class = "miniz" src="/static/img/iconmonstr-minus-2-icon-16.png" alt="minus" height="10px" width="10px"/>
+                            <img class = "maxim" src="/static/img/iconmonstr-square-outline-icon-16.png" alt="square" height="10px" width="10px"/>
+                            <img class = "close" src="/static/img/iconmonstr-x-mark-icon-16.png" alt="x" height="10px" width="10px"/>
 						</p>
 						<p>Solution</p>
 						<textarea id="solution"></textarea>
