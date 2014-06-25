@@ -1,8 +1,8 @@
 @font-face {
 	font-family:"Merriweather";
-	src:url("/font/merriweather/Merriweather-Light.ttf");
+	src:url("/static/font/merriweather/Merriweather-Light.ttf");
 }
 @font-face {
 	font-family:"Merriweather Bold";
-	src:url("/font/merriweather/Merriweather-Bold.ttf");
+	src:url("/static/font/merriweather/Merriweather-Bold.ttf");
 }

@@ -3,6 +3,7 @@
 <head>
     <title>Mathelo</title>
 		<link rel="stylesheet" type="text/css" href="/static/css/foundation.css"/>
+        <link rel="stylesheet" href="/static/css/fonts.css"/>
         <link rel="stylesheet" href="/static/css/index.css"/>
         <link rel="shortcut icon" href="/static/img/iconmonstr-3d-view-icon-16.png"/>
 		<script src="/js/jquery.js"></script>
@@ -40,7 +41,6 @@
                 "HTML-CSS": { scale: 100}
             });
         </script>
->>>>>>> 1c960ff049f02637a2786a14776f452b37bf2ac7
 </head>
 <body>
     <div id="content">
@@ -52,47 +52,11 @@
                 <input type="text" class="overview" id="problem" name="problemText">
             </form>
         </div>
-<<<<<<< HEAD
 		<div class="row">
 			<p class="overview credits">Designed and developed by 
                 <a href="http://www.amizrahi.com/">Amit Mizrahi</a> 
             and <a href="http://www.stevenschmatz.com/">Steven Schmatz</a> for MHacks spring 2014.</p>
         <script src="/homepage.js"></script>
-=======
-				<div class="row">
-					<p class="overview credits">Designed and developed by <a href="http://www.amizrahi.com/">Amit Mizrahi</a> and <a
-                            href="http://www.stevenschmatz.com/">Steven Schmatz</a> for MHacks spring 2014.</p>
-                    <p id="latexRender" class="problemLatex"></p>
-        <script>
-            $(function() {
-                MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
-
-                var transition_time = 500;
-                var transitioned = false;
-
-                /*$(".overview").fadeOut(500)*/
-                $("#problem").keydown(function(e) {
-                    if ((($(this).val().length == 1)) && (transitioned == false)) {
-                        $("#type_a_problem").fadeOut(transition_time/2);
-                        setTimeout(function() {$("#type_a_problem").text("Press enter to submit. The entry is previewed below.")},transition_time/2);
-                        $("#type_a_problem").fadeIn(transition_time/2);
-                        transitioned = true;
-                    }
-
-
-                    $("#latexRender").text($("#problem").val());
-                    MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
-
-                    if (e.keyCode == 13) {
-                        e.preventDefault();
-                        $("#content").fadeOut(500);
-                        setTimeout(function() { $("#problemForm").submit() }, 500);
-                    }
-                });
-            });
-
-        </script>
->>>>>>> 1c960ff049f02637a2786a14776f452b37bf2ac7
     </div>
 </body>
 </html>
