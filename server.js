@@ -9,10 +9,10 @@ var request = require('request');
 var sendgrid = require('sendgrid')('amitmhacks', 'stuff123');
 
 app.engine('html', require('ejs').renderFile);
-app.use(express.bodyParser());
-app.use(express.static(__dirname+'/public'));
-app.use(express.cookieParser());
-app.use(express.session({secret: 'f15463f8-7ff1-11e3-9b32-28cfe9511e3f'}));
+app.use(require('body-parser')());
+app.use(require('serve-static')(__dirname+'/public'));
+app.use(require('cookie-parser')());
+app.use(require('cookie-session')({secret: 'f15463f8-7ff1-11e3-9b32-28cfe9511e3f'}));
 
 global.idsToNames = {};
 global.idsToHistories = {};
@@ -171,4 +171,6 @@ io.configure(function () {
   io.set("polling duration", 10); 
 });
 
-server.listen(process.env.PORT || 80);
+server.listen(process.env.PORT || 5555);
+
+console.log("Server running on port 5555");
