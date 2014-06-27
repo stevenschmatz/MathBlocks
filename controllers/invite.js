@@ -20,7 +20,8 @@ exports.InviteController.prototype.invite = function(req, res) {
 		}
   		console.log(json);
 	});
-	return 'ok';
+	res.status(200);
+	res.end("OK");
 }
 
 exports.setup = function(app) {

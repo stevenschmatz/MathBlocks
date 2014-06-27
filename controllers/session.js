@@ -33,7 +33,8 @@ exports.sessionController.prototype.viewSession = function(req, res) {
 	
 	var id = req.params.id;
 	if(global.idsToNames[id] == undefined) {
-		res.send("No session exists with that name.");
+		res.status(500);
+		res.end("No session exists with that name.");
 	}
 	else {
 		res.render('session.html', {problemText: global.idsToNames[id], sessionID: id});

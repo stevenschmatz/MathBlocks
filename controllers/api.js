@@ -15,23 +15,33 @@ exports.ApiController.prototype.calc = function(req, res) {
 				if(xmlObj['queryresult']['pod'] != undefined) {
 					if(xmlObj['queryresult']['pod'][1] != undefined) {
 						if(xmlObj['queryresult']['pod'][1]['$']['title'] == 'Result') {
-							res.send('{"status": "ok", "result": ' + xmlObj['queryresult']['pod'][1]['subpod'][0]['plaintext'][0] + ', "exp": "' + math + '"}');
+							var responseObject = {"result": xmlObj['queryresult']['pod'][1]['subpod'][0]['plaintext'][0], "exp": math}
+							res.status(200);
+							res.end(responseObject);
 						}
 						else {
-							res.send('{"status": "bad", "error": "You must enter a valid numerical expression."}');
+							var responseObject = {"error": "You must enter a valid numerical expression."};
+							res.status(403);
+							res.end(responseObject);
 						}
 					}
 					else {
-						res.send('{"status": "bad", "error": "You must enter a valid numerical expression."}');
+						var responseObject = {"error": "You must enter a valid numerical expression."};
+						res.status(403);
+						res.end(responseObject);
 					}
          }
 				else {
-					res.send('{"status": "bad", "error": "You must enter a valid numerical expression."}');
+					var responseObject = {"error": "You must enter a valid numerical expression."};
+					res.status(403);
+					res.send(responseObject);
 				}
 			});
 		}
 		else {
-			res.send('{"status": "bad", "error": "There was an error."}');
+			var responseObject = {"error": "There was an error."};
+			res.status(500);
+			res.send(responseObject);
 		}
 	});
 }
@@ -46,27 +56,32 @@ exports.ApiController.prototype.plot = function(req, res) {
 				//console.dir(xmlObj);
 				if(xmlObj['queryresult']['pod'] != undefined) {
 					if(xmlObj['queryresult']['pod'][1] != undefined) {
-						console.dir(xmlObj['queryresult']['pod'][1]);
 						if(xmlObj['queryresult']['pod'][1]['$']['title'] == 'Plots' || xmlObj['queryresult']['pod'][1]['$']['title'] == 'Plot') {
-							console.dir(xmlObj['queryresult']['pod'][1]['subpod'][0]['img'][0]);
-							console.log('{"status": "ok", "result": ' + xmlObj['queryresult']['pod'][1]['subpod'][0]['img'][0]['$']['src'] + ', "funct": "' + funct + '"}')
-							res.send('{"status": "ok", "result": "' + xmlObj['queryresult']['pod'][1]['subpod'][0]['img'][0]['$']['src'] + '", "funct": "' + funct + '"}');
+							var responseObject = {"result": xmlObj['queryresult']['pod'][1]['subpod'][0]['img'][0]['$']['src'], "funct": funct};
+							res.status(200);
+							res.end(responseObject);
 						}
 						else {
-							console.dir(xmlObj['queryresult']['pod'][1]);
+							// ...
 						}
 					}
 					else {
-						res.send('{"status": "bad", "error": "You must enter a valid function."');
+						var responseObject = {"error": "You must enter a valid function."};
+						res.status(403);
+						res.end(responseObject);
 					}
 				}
 				else {
-					res.send('{"status": "bad", "error": "You must enter a valid function."');
+					var responseObject = {"error": "You must enter a valid function."};
+					res.status(403);
+					res.end(responseObject);
 				}
 			});
 		}
 		else {
-			res.send('{"status": "bad", "error": "You must enter a valid function."');
+			var responseObject = {"error": "You must enter a valid function."};
+			res.status(403);
+			res.end(responseObject);
 		}
 	});
 }
