@@ -88,8 +88,8 @@ exports.ApiController.prototype.plot = function(req, res) {
 
 exports.setup = function(app) {
 	var controller = new exports.ApiController();
-	var calcRoute = '/calc';
+	var calcRoute = '/api/calc';
 	app.post(calcRoute, controller.calc);
-	var plotRoute = '/plot';
+	var plotRoute = '/api/plot';
 	app.post(plotRoute, controller.plot);
 }
