@@ -1,7 +1,6 @@
 var express = require('express');
 var app = express();
 var http = require('http');
-
 var server = http.createServer(app);
 
 io = require('socket.io').listen(server, {log: true});
@@ -67,6 +66,6 @@ app.get('/session/:id', function(req, res) {
 	}
 });
 
-app.listen(process.env.PORT || 5555);
+server.listen(process.env.PORT || 5555);
 
 console.log("Server running on port 5555");
