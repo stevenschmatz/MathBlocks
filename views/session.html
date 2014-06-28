@@ -19,14 +19,26 @@
 	<script src="/socket.io/socket.io.js"></script>
 
 	<script>
-	var socket = io.connect('http://'+document.domain);
-	var roomID = "<%= sessionID %>";
+	window.socket = io.connect('http://'+document.domain);
+	window.roomID = "<%= sessionID %>";
 	socket.on('connect', function() {
 		socket.emit('room', roomID);
 	});
 	</script>
 
-    <script src="/static/js/index.js"></script>
+    <script src="/static/js/session/setup.js"></script>
+    <script src="/static/js/session/new_user.js"></script>
+    <script src="/static/js/session/tok.js"></script>
+    <script src="/static/js/session/chat.js"></script>
+    <script src="/static/js/session/sidebar.js"></script>
+    <script src="/static/js/session/display.js"></script>
+    <script src="/static/js/session/calc.js"></script>
+    <script src="/static/js/session/socket_events.js"></script>
+    <script src="/static/js/session/switch_contexts.js"></script>
+    <script src="/static/js/session/solution.js"></script>
+    <script src="/static/js/session/maximize.js"></script>
+    <script src="/static/js/session/minimize.js"></script>
+    <script src="/static/js/session/save_latex.js"></script>
 
     <link rel="stylesheet" type="text/css" href="/static/css/fonts.css"/>
 	<link rel="stylesheet" type="text/css" href="/static/css/index.css"/>
