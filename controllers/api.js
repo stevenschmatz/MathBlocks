@@ -1,6 +1,6 @@
 var request = require('request');
 var xml2js = require('xml2js');
-var csrfUtils = require('csrfUtils');
+var csrfUtils = require('../utils/csrfUtils');
 
 exports.ApiController = function() {
 	// ...
